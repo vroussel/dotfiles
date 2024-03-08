@@ -19,6 +19,7 @@ set title
 set timeoutlen=300
 set updatetime=500
 set hidden
+set clipboard=unnamedplus
 
 " autocompletion
 set wildmenu
