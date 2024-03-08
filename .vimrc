@@ -23,6 +23,7 @@ set hidden
 " autocompletion
 set wildmenu
 set wildmode=full
+set completeopt=menuone,noselect
 
 " indentation
 set autoindent smartindent
@@ -151,7 +152,6 @@ if has("persistent_undo")
 endif
 
 " Insert line in normal mode
-set completeopt=menuone,noselect
 nmap oo m`o<Esc>``
 nmap OO m`O<Esc>``
 
