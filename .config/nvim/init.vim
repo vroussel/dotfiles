@@ -454,7 +454,16 @@ require'lspconfig'.cmake.setup{
 
 require "nvim-treesitter.configs".setup { highlight = {enable = true } }
 
-require('telescope').load_extension('fzf')
+local telescope = require'telescope'
+local actions = require("telescope.actions")
+telescope.load_extension('fzf')
+telescope.setup({
+    defaults = {
+        preview = {
+            treesitter = false,
+        },
+    },
+})
 
 EOF
 "=====================
