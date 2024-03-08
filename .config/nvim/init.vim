@@ -515,7 +515,10 @@ require'lspconfig'.ansiblels.setup{
 require'lspconfig'.tailwindcss.setup{}
 
 
-require "nvim-treesitter.configs".setup { highlight = {enable = true } }
+require "nvim-treesitter.configs".setup {
+    ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'rust', 'help', 'vim' },
+    highlight = {enable = true }
+}
 
 local telescope = require'telescope'
 local actions = require("telescope.actions")
