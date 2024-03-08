@@ -6,6 +6,7 @@
   rotate_cw = None
   reset = None
   help = None
+  full_screen = None
 [profiles]
   [[default]]
     background_darkness = 0.1
