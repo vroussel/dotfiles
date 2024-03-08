@@ -56,9 +56,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'psf/black'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -203,7 +201,6 @@ augroup END
 call SmartRelativeNumber(1)
 
 
-let g:rustfmt_autosave = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_sort = 0
 
