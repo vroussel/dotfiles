@@ -27,11 +27,11 @@
 # Change $SCRIPT_DIR to the location of your scripts!
 SCRIPT_DIR=/home/valentin/.config/i3blocks/blocklets
 command=$SCRIPT_DIR/$BLOCK_NAME
-separator_block_width=15
-markup=none
+separator_block_width=20
+markup=pango
 
 [aur-update]
-markup=pango
+format=json
 interval=43200
 UPDATE_COLOR=red
 
@@ -40,12 +40,11 @@ UPDATE_COLOR=red
 #
 # The type defaults to "mem" if the instance is not specified.
 [memory]
-label=MEM 
+label=<b>MEM</b> 
 interval=10
-separator=false
 
 [memory]
-label=SWAP 
+label=<b>SWAP</b> 
 instance=swap
 interval=10
 
@@ -57,45 +56,45 @@ interval=10
 #IFACE=wlan0
 color=#00FF00
 interval=10
-separator=false
 
 [wifi]
 #INTERFACE=wlp3s0
-label=wifi:
+label= 
 interval=10
-separator=false
 
-[bandwidth]
-#INTERFACE=eth0
-interval=5
+[bandwidth2]
+command=$SCRIPT_DIR/bandwidth2 -t 5
+interval=persist
+markup=pango
+LABEL= 
 
 [cpu_usage2]
 markup=pango
 interval=persist
 #min_width=CPU 100.00%
 REFRESH_TIME=5
+LABEL=
 #LABEL=CPU
 #WARN_PERCENT=50
 #CRIT_PERCENT=80
 #DECIMALS=2
-separator=false
 
 [temperature]
-label=
+label= 
 interval=10
 
 [battery2]
 markup=pango
 interval=5
-separator=false
 
 [battery-draw]
 command=awk '{print $1*10^-6 " W"}' /sys/class/power_supply/BAT0/power_now
 interval=10
 
-[volume]
-interval=once
-signal=10
+[volume-pulseaudio]
+interval=persist
+SUBSCRIBE=1
+LONG_FORMAT="${SYMB}${VOL}%"
 
 # Date Time
 #
