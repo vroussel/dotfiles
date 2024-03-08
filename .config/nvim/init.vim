@@ -457,7 +457,8 @@ require'lspconfig'.clangd.setup{
 }
 require'lspconfig'.rust_analyzer.setup{
     on_attach = on_attach,
-    capabilities = capabilities
+    capabilities = capabilities,
+    cmd = { "rust-analyzer-temp" }
 }
 require'lspconfig'.cmake.setup{
     on_attach = on_attach,
