@@ -112,6 +112,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'yssl/QFEnter'
 Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'numToStr/Comment.nvim'
 "Plug 'nvim-treesitter/playground'
 call plug#end()
 "===================
@@ -133,6 +134,8 @@ require("lualine").setup({
 			}
 	}
 })
+
+require('Comment').setup()
 
 require('indent_blankline').setup {
   char = '┊',
