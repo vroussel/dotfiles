@@ -16,6 +16,10 @@ return {
 					filter_rules = {
 						autoselect_one = true,
 						include_current = false,
+						bo = {
+							-- if the file type is one of following, the window will be ignored
+							filetype = { "NvimTree", "neo-tree", "notify", "aerial" },
+						},
 					},
 				})
 			end,
