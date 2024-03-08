@@ -169,7 +169,6 @@ endfunction
 
 function! SmartRelativeNumber(val)
     let g:num_blacklist = ['nerdtree', 'tagbar']
-    echo g:num_blacklist
     if a:val == 1
         augroup relativenumbertoggle
             autocmd!
