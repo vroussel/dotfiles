@@ -5,8 +5,8 @@ set nocompatible
 set ttyfast
 set nopaste
 set cursorline
-set scrolloff=3
-set sidescrolloff=3
+set scrolloff=5
+set sidescrolloff=5
 set number relativenumber
 set foldmethod=indent
 set foldlevel=99
