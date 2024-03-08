@@ -266,8 +266,6 @@ end
 
 require'lspconfig'.pylsp.setup{on_attach = on_attach}
 require'lspconfig'.clangd.setup{
-    --cmd = {"clangd-11", "--background-index"}
-    cmd = {"clangd"},
     on_attach = on_attach
 }
 
