@@ -48,7 +48,7 @@ let mapleader=" "
 
 
 "===== Plugins =====
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 Plug 'https://github.com/nacitar/a.vim'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
