@@ -298,9 +298,5 @@ augroup END
 let g:fzf_layout = { 'down': '40%' }
 
 " folding
-" leader
 " check help for all plugins
-" switch buffers
-" resize
-" Debug mode indicator
 " split vimrc ?
