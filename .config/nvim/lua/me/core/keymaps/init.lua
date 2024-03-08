@@ -8,9 +8,7 @@ vim.g.mapleader = " "
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>m", "<cmd>Mason<cr>", { desc = "Open Mason" })
-vim.keymap.set("n", "<bs>", function()
-	vim.cmd("bprev")
-end)
+vim.keymap.set("n", "<bs>", "<c-^>")
 
 -- Insert lines before/after current without leaving normal mode
 vim.keymap.set("n", "]<leader>", function()
