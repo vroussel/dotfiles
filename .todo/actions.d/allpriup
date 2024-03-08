@@ -1,0 +1,3 @@
+#!/bin/bash
+
+perl -i -pe 's/(?<=\()([B-Z])(?=\))/chr(ord($1) - 1)/e' $TODO_FILE
