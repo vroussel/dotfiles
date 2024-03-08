@@ -128,7 +128,7 @@ nnoremap g<c-]> <c-]>
 vnoremap g<c-]> <c-]>
 
 " better grep
-command! -nargs=+ Sgrep execute "silent grep! -r --exclude='tags' --exclude-dir=.git --exclude-dir=build --binary-files=without-match <args> . " | botright copen 25 | redraw!
+"command! -nargs=+ Sgrep execute "silent grep! -r --exclude='tags' --exclude-dir=.git --exclude-dir=build --binary-files=without-match <args> . " | botright copen 25 | redraw!
 
 " hard mode
 noremap <Up> <NOP>
