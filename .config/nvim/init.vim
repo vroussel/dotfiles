@@ -111,6 +111,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'yssl/QFEnter'
 Plug 'numToStr/Comment.nvim'
+Plug 'ThePrimeagen/harpoon'
 "Plug 'nvim-treesitter/playground'
 call plug#end()
 "===================
@@ -243,6 +244,14 @@ nnoremap <leader>tr :Telescope resume<CR>
 nnoremap <leader>gs :G <CR>
 nnoremap <leader>df :diffget //2<CR>
 nnoremap <leader>dj :diffget //2<CR>
+
+" Harpoon
+nnoremap <leader>m :lua require("harpoon.mark").add_file()<CR>
+nnoremap <silent> <leader>h :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <silent> <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <silent> <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <silent> <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <silent> <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
 
 " Custom
 nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
