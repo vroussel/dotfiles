@@ -1,16 +1,10 @@
 "===== Settings =====
 " Misc
 syntax enable
-set nocompatible
-set ttyfast
-set nopaste
 set cursorline
 set scrolloff=5
 set sidescrolloff=5
 set number relativenumber
-set foldmethod=indent
-set foldlevel=99
-set foldenable
 set history=200
 set lazyredraw
 set splitright
@@ -19,6 +13,12 @@ set title
 set timeoutlen=300
 set updatetime=500
 set hidden
+set colorcolumn=100
+
+" folding
+set foldlevel=99
+set foldmethod=manual
+set foldexpr=nvim_treesitter#foldexpr()
 
 " autocompletion
 set wildmenu
@@ -40,6 +40,10 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+
+" Persistant undo history
+set undodir=~/.undodir/
+set undofile
 
 " leader
 nnoremap <SPACE> <NOP>
@@ -73,6 +77,107 @@ Plug 'dracula/vim'
 call plug#end()
 "===================
 
+
+"===== Theme =====
+set termguicolors
+colorscheme dracula
+lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y[%{&fileencoding?&fileencoding:&encoding}]    [%L,%3.p%%] %5.l:%-5.v'
+
+"=================
+
+
+"===== Plugins options =====
+" Tagbar
+let g:tagbar_autoclose = 1
+let g:tagbar_sort = 0
+let tagbar_map_showproto="K"
+
+" Fzf
+let g:fzf_layout = { 'down': '40%' }
+
+"===========================
+
+
+"===== Autocommands =====
+augroup format_on_save
+    autocmd!
+    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+augroup END
+
+augroup python formatting
+    autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
+    autocmd FileType python nnoremap <buffer> <Leader>foi :%!isort -<CR>
+augroup END
+
+augroup lightbulb
+    autocmd!
+    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
+augroup END
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+augroup trailing
+    autocmd!
+    autocmd BufNewFile,BufRead * :match ExtraWhitespace /\s\+$/
+augroup END
+"========================
+
+
+"===== Functions =====
+function! s:VSetSearch(cmdtype)
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+    let @s = temp
+endfunction
+
+"Disable relative numbers if not focused
+function! SmartRelativeNumber(val)
+    let g:num_blacklist = ['nerdtree', 'tagbar']
+    if a:val == 1
+        augroup relativenumbertoggle
+            autocmd!
+            autocmd BufEnter,FocusGained,InsertLeave * if index(g:num_blacklist,&ft) == -1 | set relativenumber
+            autocmd BufLeave,FocusLost,InsertEnter   * if index(g:num_blacklist,&ft) == -1 | set norelativenumber
+        augroup END
+    else
+        augroup relativenumbertoggle
+            autocmd!
+        augroup END
+        augroup! relativenumbertoggle
+    endif
+endfunction
+
+"Debug mode (enable mouse + disable relative line numbers)
+function! ToggleDebugMode()
+    if !exists("b:debugmode")
+        let b:debugmode = 0
+    endif
+    if b:debugmode == 0
+        call SmartRelativeNumber(0)
+        set norelativenumber
+        set mouse=a
+        let b:debugmode = 1
+    else
+        call SmartRelativeNumber(1)
+        set relativenumber
+        set mouse=""
+        let b:debugmode = 0
+    endif
+endfunction
+
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+"================
+
+
+"===== Mapping =====
+" Fzf
 nmap <leader><tab> <plug>(fzf-maps-n)
 nnoremap <C-P> :Files<CR>
 nnoremap <leader>fif :Ag<CR>
@@ -84,16 +189,11 @@ nnoremap <leader>o :History<CR>
 nnoremap <leader>/ :History/<CR>
 nnoremap <leader>: :History:<CR>
 
-"===== Mapping =====
-"Custom
-set termguicolors
-colorscheme dracula
-
-imap jk <Esc>
+" Custom
 nnoremap <F2> :call ToggleDebugMode()<CR>
 nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
+imap jk <Esc>
 
-"===== Mapping =====
 " Plugins
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
@@ -104,16 +204,8 @@ nmap ]f ]m
 
 " Trailing spaces
 nnoremap <leader>tr :%s/\s\+$//g<CR>
-highlight ExtraWhitespace ctermbg=red guibg=red
-au BufNewFile,BufRead * :match ExtraWhitespace /\s\+$/
 
 " Search for selected text in visual mode
-function! s:VSetSearch(cmdtype)
-    let temp = @s
-    norm! gv"sy
-    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
-    let @s = temp
-endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
@@ -127,19 +219,6 @@ vnoremap <c-]> g<c-]>
 nnoremap g<c-]> <c-]>
 vnoremap g<c-]> <c-]>
 
-" better grep
-"command! -nargs=+ Sgrep execute "silent grep! -r --exclude='tags' --exclude-dir=.git --exclude-dir=build --binary-files=without-match <args> . " | botright copen 25 | redraw!
-
-" hard mode
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-
 " switch pane without ctrl-w
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -151,12 +230,6 @@ nnoremap <C-A-k> <C-w>5+
 nnoremap <C-A-j> <C-w>5-
 nnoremap <C-A-h> <C-w>10<
 nnoremap <C-A-l> <C-w>10>
-
-" Persistant undo history
-if has("persistent_undo")
-    set undodir=~/.undodir/
-    set undofile
-endif
 
 " Insert line in normal mode
 nmap oo m`o<Esc>``
@@ -189,49 +262,10 @@ nnoremap <leader>tc :tabclose<CR>
 
 " Opposite of J, split line
 nnoremap S i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^
-
-"Debug mode (enable mouse + disable relative line numbers)
-function! ToggleDebugMode()
-    if !exists("b:debugmode")
-        let b:debugmode = 0
-    endif
-    if b:debugmode == 0
-        call SmartRelativeNumber(0)
-        set norelativenumber
-        set mouse=a
-        let b:debugmode = 1
-    else
-        call SmartRelativeNumber(1)
-        set relativenumber
-        set mouse=""
-        let b:debugmode = 0
-    endif
-endfunction
-
-function! SmartRelativeNumber(val)
-    let g:num_blacklist = ['nerdtree', 'tagbar']
-    if a:val == 1
-        augroup relativenumbertoggle
-            autocmd!
-            autocmd BufEnter,FocusGained,InsertLeave * if index(g:num_blacklist,&ft) == -1 | set relativenumber
-            autocmd BufLeave,FocusLost,InsertEnter   * if index(g:num_blacklist,&ft) == -1 | set norelativenumber
-        augroup END
-    else
-        augroup relativenumbertoggle
-            autocmd!
-        augroup END
-        augroup! relativenumbertoggle
-    endif
-endfunction
-
-call SmartRelativeNumber(1)
+"===================
 
 
-let g:tagbar_autoclose = 1
-let g:tagbar_sort = 0
-
-let tagbar_map_showproto="K"
-
+"===== LSP STUFF =====
 lua << EOF
 require'compe'.setup {
   enabled = true;
@@ -322,44 +356,16 @@ inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 inoremap <silent><expr> <C-e>     compe#close('<C-e>')
 inoremap <silent><expr> <C-u>     compe#scroll({ 'delta': +4 })
 inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+"=====================
 
-augroup format_on_save
-    autocmd!
-    autocmd BufWritePre *.py,*.rs,CMakeLists.txt lua vim.lsp.buf.formatting_sync(nil, 1000)
-augroup END
-
-augroup python formatting
-    autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
-    autocmd FileType python nnoremap <buffer> <Leader>foi :%!isort -<CR>
-augroup END
+call SmartRelativeNumber(1)
 
 
-augroup lightbulb
-    autocmd!
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
-augroup END
-
-let g:fzf_layout = { 'down': '40%' }
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-endfunction
-
-lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y[%{&fileencoding?&fileencoding:&encoding}]    [%L,%3.p%%] %5.l:%-5.v'
-set colorcolumn=100
-
-" folding
 " check help for all plugins
 " split vimrc ?
 " user guide
 " blogs
 " telescope?
-" clean up lsp / compe stuff
 " configure formatters (clang, python, etc)
 
 "lua << EOF
