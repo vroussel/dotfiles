@@ -3,12 +3,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-#ITF specific stuff
-if [ -f ~/.bashrc_itf ]; then
-    . ~/.bashrc_itf
-fi
-
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -23,8 +17,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=15000
+HISTFILESIZE=200000
+HISTIGNORE="ls:ll:fg"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -86,9 +81,6 @@ unset color_prompt force_color_prompt
 #    ;;
 #esac
 
-# colored GCC warnings and errors
-export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -102,19 +94,8 @@ if ! shopt -oq posix; then
 fi
 
 
-# JAVA
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-export PATH=$JAVA_HOME/bin:$PATH
-
-#~/bin
-export PATH=~/bin:~/.local/bin/:$PATH
-
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
-
-HISTSIZE=15000
-HISTFILESIZE=200000
-HISTIGNORE="ls:ll:fg"
 
 source ~/.git-prompt.sh
 
