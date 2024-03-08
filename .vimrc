@@ -142,10 +142,10 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " Window resizing
-nnoremap <leader>k <C-w>5+
-nnoremap <leader>j <C-w>5-
-nnoremap <leader>h <C-w>10<
-nnoremap <leader>l <C-w>10>
+nnoremap <C-A-k> <C-w>5+
+nnoremap <C-A-j> <C-w>5-
+nnoremap <C-A-h> <C-w>10<
+nnoremap <C-A-l> <C-w>10>
 
 " Persistant undo history
 if has("persistent_undo")
