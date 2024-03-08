@@ -109,13 +109,13 @@ alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
 alias todo=todo.sh
 
 #source /usr/share/doc/fzf/examples/key-bindings.bash
-export FZF_DEFAULT_COMMAND='fdfind --type f'
+export FZF_DEFAULT_COMMAND='fd --type f'
 
 ## FZF
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/home/valentin/.vim/plugged/fzf/shell/completion.bash" 2> /dev/null
+[[ $- == *i* ]] && source "/usr/share/fzf/completion.bash" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/home/valentin/.vim/plugged/fzf/shell/key-bindings.bash"
+source "/usr/share/fzf/key-bindings.bash"
