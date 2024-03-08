@@ -123,7 +123,7 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # Key bindings
 # ------------
 source "/usr/share/fzf/key-bindings.bash"
-source "/usr/share/bash-completion/completions/todo"
+source "/usr/share/bash-completion/completions/todo.sh"
 complete -F _todo t
 
 stty -ixon
