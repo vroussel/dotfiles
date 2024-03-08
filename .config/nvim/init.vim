@@ -99,7 +99,6 @@ Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'smbl64/vim-black-macchiato'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'kana/vim-textobj-user'
@@ -176,7 +175,6 @@ augroup format_on_save
 augroup END
 
 augroup python formatting
-    autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
     autocmd FileType python nnoremap <buffer> <Leader>fi :%!isort -<CR>
 augroup END
 
