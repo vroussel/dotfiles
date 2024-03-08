@@ -222,6 +222,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
+nnoremap <F10> :lua require('incline').toggle()<CR>
 
 " Trailing spaces
 nnoremap <leader>ts :%s/\s\+$//g<CR>
