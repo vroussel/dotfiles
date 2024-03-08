@@ -164,7 +164,7 @@ function cd()
     DIR="$1"
   fi
 
-  builtin pushd "${DIR}" > /dev/null
+  builtin pushd "${DIR}" > /dev/null || return $?
   dedup
 }
 
