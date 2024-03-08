@@ -57,3 +57,6 @@ vim.keymap.set("n", "<c-q>", function()
 		vim.cmd("copen")
 	end
 end)
+
+vim.keymap.set("c", "<c-n>", "<down>")
+vim.keymap.set("c", "<c-p>", "<up>")
