@@ -9,10 +9,8 @@ set cursorlineopt=number
 highlight CursorLineNr ctermfg=yellow cterm=bold
 
 set scrolloff=5
-set sidescrolloff=5
 set number relativenumber
 set history=200
-set lazyredraw
 set splitright
 set splitbelow
 set title
@@ -182,6 +180,7 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
 EOF
 "=================
 
@@ -263,7 +262,6 @@ nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>ntf :NvimTreeFindFile<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <C-/> :UndotreeToggle<CR>
-nnoremap <leader>se :LuaSnipEdit<CR>
 nnoremap <F10> :lua require('incline').toggle()<CR>
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
@@ -466,7 +464,6 @@ local on_attach = function(client, bufnr)
       extra_trigger_chars = {"(", ","},
       floating_window = false,
       toggle_key = '<C-h>',
-      hint_prefix = " ",
       hi_parameter = 'IncSearch'
   })
 
