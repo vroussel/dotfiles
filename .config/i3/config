@@ -175,5 +175,5 @@ bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
 
 bindsym $mod+minus scratchpad show
-exec i3-sensible-terminal -T scratch
+exec --no-startup-id i3-sensible-terminal -T scratch
 for_window [title="^scratch"] move scratchpad
