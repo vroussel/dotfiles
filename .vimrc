@@ -206,6 +206,8 @@ let g:tagbar_sort = 0
 
 let tagbar_map_showproto="K"
 
+let g:fzf_layout = { 'down': '40%' }
+
 " folding
 " leader
 " check help for all plugins
