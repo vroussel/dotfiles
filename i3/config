@@ -73,7 +73,7 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+z split h
+bindsym $mod+n split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -122,8 +122,8 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-bindsym $mod+comma workspace next
-bindsym $mod+m workspace prev
+bindsym $mod+greater workspace next
+bindsym $mod+less workspace prev
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
