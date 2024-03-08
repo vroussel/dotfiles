@@ -517,7 +517,7 @@ require'lspconfig'.tailwindcss.setup{}
 
 
 require "nvim-treesitter.configs".setup {
-    ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'rust', 'help', 'vim' },
+    ensure_installed = { 'bash', 'c', 'cpp', 'lua', 'python', 'rust', 'help', 'vim', 'yaml', 'cmake' },
     highlight = {enable = true }
 }
 
