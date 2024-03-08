@@ -320,13 +320,7 @@ cmp.setup({
       ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(function()
-          if luasnip.choice_active() then
-              require("luasnip.extras.select_choice")()
-          else
-              cmp.mapping.complete()
-          end
-      end, { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
       ['<C-y>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
@@ -348,11 +342,6 @@ cmp.setup({
       ["<C-l>"] = cmp.mapping(function()
         if luasnip.choice_active() then
           luasnip.change_choice(1)
-        end
-      end, { "i", "s" }),
-      ["<C-h>"] = cmp.mapping(function()
-        if luasnip.choice_active() then
-          luasnip.change_choice(-1)
         end
       end, { "i", "s" }),
       ['<C-s>'] = cmp.mapping.complete({
