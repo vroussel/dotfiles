@@ -57,6 +57,7 @@ Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'psf/black'
 call plug#end()
 "===================
 
@@ -161,3 +162,8 @@ function! ToggleDebugMode()
         set mouse=""
     endif
 endfunction
+
+augroup pythonfile
+    autocmd!
+    autocmd BufWritePre *.py Black
+augroup END
