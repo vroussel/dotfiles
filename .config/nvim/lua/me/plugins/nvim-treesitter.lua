@@ -33,6 +33,7 @@ return {
 				"python",
 				"rust",
 				"vimdoc",
+				"regex",
 			},
 			-- incremental_selection = {
 			-- 	enable = true,
