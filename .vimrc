@@ -1,7 +1,6 @@
 "===== Settings =====
 " Misc
 syntax enable
-colorscheme gruvbox
 set nocompatible
 set ttyfast
 set nopaste
@@ -66,6 +65,8 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
 call plug#end()
 "===================
+
+colorscheme gruvbox
 
 imap jk <Esc>
 nnoremap <F2> :call ToggleDebugMode()<CR>
