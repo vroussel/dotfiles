@@ -204,6 +204,11 @@ nnoremap <leader>/ :Telescope search_history<CR>
 nnoremap <leader>: :Telescope command_history<CR>
 nnoremap <leader>tr :Telescope resume<CR>
 
+" conflig resolving with fugitive
+nnoremap <leader>gs :G <CR>
+nnoremap <leader>df :diffget //2<CR>
+nnoremap <leader>dj :diffget //2<CR>
+
 " Custom
 nnoremap <F2> :call ToggleDebugMode()<CR>
 nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
