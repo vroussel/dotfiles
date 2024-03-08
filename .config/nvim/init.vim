@@ -4,6 +4,10 @@ if !exists('g:syntax_on') "Avoid weird brackets in nerdtree when resourcing conf
     syntax enable
 endif
 set cursorline
+" Only highligh line number
+set cursorlineopt=number
+highlight CursorLineNr ctermfg=yellow cterm=bold
+
 set scrolloff=5
 set sidescrolloff=5
 set number relativenumber
@@ -12,7 +16,7 @@ set lazyredraw
 set splitright
 set splitbelow
 set title
-set timeoutlen=300
+set timeoutlen=500
 set updatetime=50
 set hidden
 set colorcolumn=100
@@ -35,6 +39,7 @@ set shiftwidth=4
 set expandtab
 set tabstop=4
 set softtabstop=4
+set breakindent
 
 " encoding
 set encoding=utf-8
@@ -58,7 +63,7 @@ let mapleader=" "
 "===== Plugins =====
 call plug#begin(stdpath('data') . '/plugged')
 " Telescope
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
@@ -113,17 +118,23 @@ call plug#end()
 "===== Theme =====
 set termguicolors
 colorscheme dracula
-highlight IndentBlanklineSpaceChar guifg=#666666 gui=nocombine
-highlight IndentBlanklineChar guifg=#666666 gui=nocombine
 lua << EOF
 require('incline').setup()
 require("lualine").setup({
+    options = {
+        theme = 'dracula',
+    },
 	sections = {
 			lualine_c = {
                 { 'filename', path = 3}
 			}
 	}
 })
+
+require('indent_blankline').setup {
+  char = '┊',
+}
+
 require'treesitter-context'.setup{
     enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
     max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
@@ -393,7 +404,8 @@ sources = cmp.config.sources({
 })
 })
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys 
@@ -431,7 +443,7 @@ local on_attach = function(client, bufnr)
       extra_trigger_chars = {"(", ","},
       floating_window = false,
       toggle_key = '<C-h>',
-      hint_prefix = "ﮧ ",
+      hint_prefix = " ",
       hi_parameter = 'IncSearch'
   })
 
