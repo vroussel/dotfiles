@@ -53,12 +53,12 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
-Plug 'https://github.com/Valloric/YouCompleteMe'
+"Plug 'https://github.com/Valloric/YouCompleteMe'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'rhysd/vim-clang-format'
-Plug 'neomake/neomake'
-Plug 'Houl/repmo-vim'
+"Plug 'neomake/neomake'
+"Plug 'Houl/repmo-vim'
 call plug#end()
 "===================
 
@@ -143,18 +143,6 @@ nmap OO m`O<Esc>``
 noremap <Leader>p "0p
 noremap <Leader>P "0P<Paste>
 
-" repmo plugin
-noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
-noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
-map <expr> j repmo#Key('gj', 'gk')|sunmap j
-map <expr> k repmo#Key('gk', 'gj')|sunmap k
-map <expr> ; repmo#LastKey(';')|sunmap ;
-map <expr> , repmo#LastRevKey(',')|sunmap ,
-noremap <expr> f repmo#ZapKey('f')|sunmap f
-noremap <expr> F repmo#ZapKey('F')|sunmap F
-noremap <expr> t repmo#ZapKey('t')|sunmap t
-noremap <expr> T repmo#ZapKey('T')|sunmap T
-
 "Debug mode (enable mouse + disable relative line numbers)
 function! ToggleDebugMode()
     if exists('#relativenumbertoggle')
@@ -174,3 +162,5 @@ function! ToggleDebugMode()
         set mouse=""
     endif
 endfunction
+
+imap jk <Esc>
