@@ -60,6 +60,7 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'smbl64/vim-black-macchiato'
+Plug 'tpope/vim-abolish'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
