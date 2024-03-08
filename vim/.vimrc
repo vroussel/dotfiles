@@ -18,6 +18,7 @@ set splitright
 set splitbelow
 set title
 set timeoutlen=300
+set hidden
 
 " autocompletion
 set wildmenu
