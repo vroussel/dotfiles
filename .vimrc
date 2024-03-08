@@ -49,7 +49,6 @@ let mapleader=" "
 "===== Plugins =====
 call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/nacitar/a.vim'
-Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/mbbill/undotree'
@@ -60,12 +59,25 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'psf/black'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
 call plug#end()
 "===================
 
+nmap <leader><tab> <plug>(fzf-maps-n)
+nnoremap <C-P> :Files<CR>
+nnoremap <leader>fif :Ag<CR>
+nnoremap <leader>fib :Lines<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>o :History<CR>
+nnoremap <leader>/ :History/<CR>
+nnoremap <leader>: :History:<CR>
+
+"===== Mapping =====
+"Custom
 colorscheme gruvbox
 
 imap jk <Esc>
