@@ -169,3 +169,7 @@ bindsym $mod+r exec $HOME/.i3/i3_rename_workspace.sh
 
 exec--no-startup-id setxkbmap us,fr -option "grp:switch" -option "shift:both_capslock"
 exec --no-startup-id picom -b
+
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus -l 1 -P 'Goto: '
+bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
