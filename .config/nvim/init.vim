@@ -549,6 +549,28 @@ require("luasnip.loaders.from_vscode").lazy_load({paths = "./snippets"})
 require("luasnip.loaders.from_lua").lazy_load({paths = "./snippets"})
 vim.api.nvim_create_user_command("LuaSnipEdit", 'lua require("luasnip.loaders").edit_snippet_files()', {})
 
+function _G.toggle_warnings()
+  if vim.g.warnings_active or vim.g.warnings_active == nil then
+    vim.diagnostic.config({
+        virtual_text = { severity = "Error" },
+        underline = { severity = "Error" }
+    })
+    if vim.g.warnings_active ~= nil then
+        vim.api.nvim_echo({{"Warnings OFF", "normal"}}, false, {})
+    end
+    vim.g.warnings_active = false
+  else
+    vim.diagnostic.config({
+        virtual_text = true,
+        underline = true
+    })
+    vim.api.nvim_echo({{"Warnings ON", "normal"}}, false, {})
+    vim.g.warnings_active = true
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<leader>tw', ':call v:lua.toggle_warnings()<CR>',  {noremap = true, silent = true})
+_G.toggle_warnings()
 
 EOF
 "=====================
