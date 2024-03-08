@@ -85,7 +85,7 @@ return {
 			require("lsp_signature").on_attach({
 				toggle_key = "<C-h>",
 				floating_window = false,
-				hint_prefix = " ",
+				hint_prefix = "󰅏",
 			}, bufnr)
 		end
 
