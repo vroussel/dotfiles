@@ -74,6 +74,8 @@ call plug#end()
 nmap <leader><tab> <plug>(fzf-maps-n)
 nnoremap <C-P> :Files<CR>
 nnoremap <leader>fif :Ag<CR>
+nnoremap <leader>fw :Ag <c-r><c-w><CR>
+nnoremap <leader>f<S-w> :Ag <c-r><c-a><CR>
 nnoremap <leader>fib :Lines<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>o :History<CR>
@@ -157,7 +159,11 @@ nmap OO m`O<Esc>``
 
 " Paste last yanked item
 noremap <Leader>p "0p
-noremap <Leader>P "0P<Paste>
+noremap <Leader>P "0P
+
+" Fix Y
+nnoremap Y y$
+
 
 "Debug mode (enable mouse + disable relative line numbers)
 function! ToggleDebugMode()
