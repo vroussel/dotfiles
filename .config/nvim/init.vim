@@ -222,6 +222,7 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
+nnoremap <leader>se :LuaSnipEdit<CR>
 nnoremap <F10> :lua require('incline').toggle()<CR>
 
 " Trailing spaces
@@ -307,7 +308,13 @@ cmp.setup({
       ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(function()
+          if luasnip.choice_active() then
+              require("luasnip.extras.select_choice")()
+          else
+              cmp.mapping.complete()
+          end
+      end, { 'i', 'c' }),
       ['<C-y>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
@@ -317,9 +324,9 @@ cmp.setup({
         c = cmp.mapping.close(),
       }),
       ["<C-j>"] = cmp.mapping(function()
-         if luasnip.expand_or_jumpable() then
-           luasnip.expand_or_jump()
-         end
+        if luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        end
        end, { "i", "s" }),
       ["<C-k>"] = cmp.mapping(function()
         if luasnip.jumpable(-1) then
@@ -329,6 +336,11 @@ cmp.setup({
       ["<C-l>"] = cmp.mapping(function()
         if luasnip.choice_active() then
           luasnip.change_choice(1)
+        end
+      end, { "i", "s" }),
+      ["<C-h>"] = cmp.mapping(function()
+        if luasnip.choice_active() then
+          luasnip.change_choice(-1)
         end
       end, { "i", "s" }),
       ['<C-s>'] = cmp.mapping.complete({
@@ -381,16 +393,6 @@ sources = cmp.config.sources({
   { name = 'cmdline' }
 })
 })
-
-luasnip.config.set_config {
-    history = true,
-    updateevents = "TextChanged,TextChangedI",
-    region_check_events = "InsertEnter",
-	delete_check_events = "TextChanged,InsertLeave",
-}
-
-require("luasnip/loaders/from_vscode").lazy_load()
-
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local nvim_lsp = require('lspconfig')
@@ -481,6 +483,19 @@ telescope.setup({
     },
 })
 
+-- Snippets
+luasnip.config.set_config {
+    history = true,
+    updateevents = "TextChanged,TextChangedI",
+    region_check_events = "InsertEnter",
+	delete_check_events = "TextChanged,InsertLeave"
+}
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_vscode").lazy_load({paths = "./snippets"})
+require("luasnip.loaders.from_lua").lazy_load({paths = "./snippets"})
+vim.api.nvim_create_user_command("LuaSnipEdit", 'lua require("luasnip.loaders").edit_snippet_files()', {})
+
+
 EOF
 "=====================
 
@@ -491,7 +506,6 @@ EOF
 " configure formatters (clang, python, etc)
 " snippets
 " TJ videos
-" shade
 " diaglist
 " https://github.com/rockerBOO/awesome-neovim#neovim-lua-development
 " https://neovimcraft.com/
