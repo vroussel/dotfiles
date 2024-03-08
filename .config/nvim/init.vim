@@ -101,9 +101,11 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'smbl64/vim-black-macchiato'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'yssl/QFEnter'
 "Plug 'nvim-treesitter/playground'
 call plug#end()
 "===================
@@ -224,6 +226,10 @@ nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
 nnoremap <leader>se :LuaSnipEdit<CR>
 nnoremap <F10> :lua require('incline').toggle()<CR>
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
 
 " Trailing spaces
 nnoremap <leader>ts :%s/\s\+$//g<CR>
