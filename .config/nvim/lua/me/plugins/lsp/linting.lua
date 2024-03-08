@@ -5,6 +5,12 @@ return {
 	config = function()
 		local lint = require("lint")
 
+        local ansible_lint = lint.linters.ansible_lint
+        ansible_lint.args = {
+            '-p',
+            '--nocolor'
+        }
+
 		lint.linters_by_ft = {
 			sh = { "shellcheck" },
 			python = { "mypy" },
