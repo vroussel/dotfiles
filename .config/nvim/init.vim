@@ -111,10 +111,6 @@ lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y
 let g:tagbar_autoclose = 1
 let g:tagbar_sort = 0
 let tagbar_map_showproto="K"
-
-" Fzf
-let g:fzf_layout = { 'down': '40%' }
-
 "===========================
 
 
@@ -219,8 +215,6 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
-nmap [f [m
-nmap ]f ]m
 
 " Trailing spaces
 nnoremap <leader>tr :%s/\s\+$//g<CR>
@@ -258,9 +252,6 @@ nmap OO m`O<Esc>``
 " Paste last yanked item
 noremap <Leader>p "0p
 noremap <Leader>P "0P
-
-" Fix Y
-nnoremap Y y$
 
 " Backspace for previous buffer
 nnoremap <bs> <c-^>
