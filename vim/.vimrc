@@ -56,6 +56,7 @@ Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 "===================
 
