@@ -13,6 +13,7 @@ Yet another dotfiles repo
  - git/.gitconfig       => ~/.gitconfig
  - i3blocks/config      => ~/.config/i3blocks/config
  - i3blocks/blocklets   => ~/.config/i3blocks/blocklets
+ - xmodmap/.Xmodmap     => ~/.Xmodmap
 
 ## Share Vim and Neovim conf
 $ ln -s ~/.vim ~/.local/share/nvim/site
