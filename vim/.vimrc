@@ -63,11 +63,12 @@ Plug 'rhysd/vim-clang-format'
 call plug#end()
 "===================
 
+imap jk <Esc>
+nnoremap <F2> :call ToggleDebugMode()<CR>
+nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 
 "===== Mapping =====
 " Plugins
-nnoremap <F2> :call ToggleDebugMode()<CR>
-nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <S-u> :UndotreeToggle<CR>
@@ -163,5 +164,3 @@ function! ToggleDebugMode()
         set mouse=""
     endif
 endfunction
-
-imap jk <Esc>
