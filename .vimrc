@@ -311,3 +311,7 @@ lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y
 " folding
 " check help for all plugins
 " split vimrc ?
+" user guide
+" blogs
+" telescope?
+" clean up lsp / compe stuff
