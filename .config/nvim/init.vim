@@ -71,8 +71,14 @@ Plug 'Julian/vim-textobj-variable-segment'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
 
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'neovim/nvim-lspconfig'
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'kosayoda/nvim-lightbulb'
 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -82,14 +88,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'saadparwaiz1/cmp_luasnip'
 
-
-Plug 'ray-x/lsp_signature.nvim'
-Plug 'kosayoda/nvim-lightbulb'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'
-Plug 'onsails/lspkind-nvim'
 
 Plug 'dracula/vim'
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 "===================
 
@@ -351,6 +355,7 @@ cmp.setup({
             nvim_lua = "[api]",
             path = "[path]",
             luasnip = "[snip]",
+            cmdline = "[cmd]"
         },
       })
     }
@@ -446,9 +451,16 @@ require'lspconfig'.rust_analyzer.setup{
     on_attach = on_attach,
     capabilities = capabilities
 }
-require'lspconfig'.cmake.setup{on_attach = on_attach}
+require'lspconfig'.cmake.setup{
+    on_attach = on_attach,
+    capabilities = capabilities
+}
+
 
 require "nvim-treesitter.configs".setup { highlight = {enable = true } }
+
+require('telescope').load_extension('fzf')
+
 EOF
 "=====================
 
