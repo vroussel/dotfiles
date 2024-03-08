@@ -32,6 +32,7 @@ return {
 				"cpp",
 				"python",
 				"rust",
+				"vimdoc",
 			},
 			-- incremental_selection = {
 			-- 	enable = true,
