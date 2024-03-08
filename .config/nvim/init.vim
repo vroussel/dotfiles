@@ -252,6 +252,10 @@ nmap OO m`O<Esc>``
 noremap <Leader>p "0p
 noremap <Leader>P "0P
 
+" Paste from system clipboard
+noremap <Leader><Leader>p "+p
+noremap <Leader><Leader>P "+P
+
 " Backspace for previous buffer
 nnoremap <bs> <c-^>
 
