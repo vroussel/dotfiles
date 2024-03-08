@@ -48,7 +48,7 @@ let mapleader=" "
 
 "===== Plugins =====
 call plug#begin('~/.vim/plugged')
-Plug 'https://github.com/vim-scripts/a.vim'
+Plug 'https://github.com/nacitar/a.vim'
 Plug 'https://github.com/ctrlpvim/ctrlp.vim'
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
