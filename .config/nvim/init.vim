@@ -72,6 +72,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
+Plug 'j-hui/fidget.nvim'
 
 " Completion
 Plug 'hrsh7th/nvim-cmp'
@@ -446,6 +447,8 @@ local on_attach = function(client, bufnr)
       hint_prefix = " ",
       hi_parameter = 'IncSearch'
   })
+
+  require('fidget').setup()
 
 end
 
