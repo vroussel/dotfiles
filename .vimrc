@@ -314,6 +314,7 @@ augroup END
 
 augroup python formatting
     autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
+    autocmd FileType python nnoremap <buffer> <Leader>foi :%!isort -<CR>
 augroup END
 
 
