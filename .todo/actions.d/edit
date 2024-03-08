@@ -1,0 +1,10 @@
+#!/bin/bash
+
+[ "$action" = "usage" ] && {
+    echo "edit"
+    echo " Open todo.txt file in neovim"
+    echo ""
+    echo
+}
+
+nvim ${TODO_FILE}
