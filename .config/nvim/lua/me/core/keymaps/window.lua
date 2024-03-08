@@ -10,10 +10,10 @@ vim.keymap.set("n", "<A-q>", "<C-w>q")
 vim.keymap.set("n", "<A-o>", "<C-w>o")
 
 -- resize
-vim.keymap.set("n", "<A-S-k>", "<C-w>5+")
-vim.keymap.set("n", "<A-S-j>", "<C-w>5-")
-vim.keymap.set("n", "<A-S-h>", "<C-w>10<")
-vim.keymap.set("n", "<A-S-l>", "<C-w>10>")
+vim.keymap.set("n", "<A-C-k>", "<C-w>5+")
+vim.keymap.set("n", "<A-C-j>", "<C-w>5-")
+vim.keymap.set("n", "<A-C-h>", "<C-w>10<")
+vim.keymap.set("n", "<A-C-l>", "<C-w>10>")
 vim.keymap.set("n", "<A-m>", "<C-w>_<C-w>|")
 vim.keymap.set("n", "<A-=>", "<C-w>=")
 
