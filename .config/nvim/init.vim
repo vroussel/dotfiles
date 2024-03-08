@@ -197,7 +197,7 @@ let tagbar_map_showproto="K"
 "===== Autocommands =====
 augroup format_on_save
     autocmd!
-    autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+    autocmd BufWritePre *.rs lua vim.lsp.buf.format()
 augroup END
 
 augroup python formatting
