@@ -14,6 +14,7 @@ set timeoutlen=300
 set updatetime=500
 set hidden
 set colorcolumn=100
+set signcolumn=yes
 
 " folding
 set foldlevel=99
@@ -23,7 +24,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 " autocompletion
 set wildmenu
 set wildmode=full
-set completeopt=menuone,noselect
+set completeopt=menu,menuone,noselect
 
 " indentation
 set autoindent smartindent
@@ -66,11 +67,21 @@ Plug 'junegunn/fzf.vim'
 Plug 'smbl64/vim-black-macchiato'
 Plug 'tpope/vim-abolish'
 
+
 Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
-Plug 'nvim-treesitter/nvim-treesitter', { 'branch': '0.5-compat', 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'
 
 Plug 'dracula/vim'
@@ -106,7 +117,7 @@ augroup END
 
 augroup python formatting
     autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
-    autocmd FileType python nnoremap <buffer> <Leader>foi :%!isort -<CR>
+    autocmd FileType python nnoremap <buffer> <Leader>iso :%!isort -<CR>
 augroup END
 
 augroup lightbulb
@@ -267,30 +278,75 @@ nnoremap S i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^
 
 "===== LSP STUFF =====
 lua << EOF
-require'compe'.setup {
-  enabled = true;
-  autocomplete = false;
-  debug = false;
-  min_length = 1;
-  preselect = 'enable';
-  throttle_time = 80;
-  source_timeout = 200;
-  incomplete_delay = 400;
-  max_abbr_width = 100;
-  max_kind_width = 100;
-  max_menu_width = 100;
-  documentation = true;
 
-  source = {
-    path = true;
-    buffer = true;
-    calc = true;
-    nvim_lsp = true;
-    nvim_lua = true;
-    --vsnip = true;
-    --ultisnips = true;
-  };
+-- Setup nvim-cmp.
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local cmp = require'cmp'
+local luasnip = require("luasnip")
+
+cmp.setup({
+    completion = {
+        autocomplete = false
+    },
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    mapping = {
+      ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = false }),
+      ["<Tab>"] = cmp.mapping(function(fallback)
+         if luasnip.expand_or_jumpable() then
+           luasnip.expand_or_jump()
+         end
+       end, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end, { "i", "s" })
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+       { name = 'luasnip' }, -- For luasnip users.
+    }, {
+      { name = 'buffer' },
+    })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline('/', {
+sources = {
+  { name = 'buffer' }
 }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+sources = cmp.config.sources({
+  { name = 'path' }
+}, {
+  { name = 'cmdline' }
+})
+})
+
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+require("luasnip/loaders/from_vscode").load()
+
+
 
 local nvim_lsp = require('lspconfig')
 
@@ -324,7 +380,10 @@ local on_attach = function(client, bufnr)
   end
 
   require'lsp_signature'.on_attach({
-      extra_trigger_chars = {"(", ","}
+      extra_trigger_chars = {"(", ","},
+      floating_window = true,
+      toggle_key = '<C-h>',
+      hi_parameter = 'IncSearch'
   })
 
 end
@@ -339,23 +398,22 @@ require'lspconfig'.pylsp.setup{
             }
         }
     },
-    on_attach = on_attach
-
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 
 require'lspconfig'.clangd.setup{
     on_attach = on_attach
+    capabilities = capabilities
+}
+require'lspconfig'.rust_analyzer.setup{
+    on_attach = on_attach,
+    capabilities = capabilities
 }
 require'lspconfig'.cmake.setup{on_attach = on_attach}
 
 require "nvim-treesitter.configs".setup { highlight = {enable = true } }
 EOF
-
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-u>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 "=====================
 
 call SmartRelativeNumber(1)
@@ -367,6 +425,7 @@ call SmartRelativeNumber(1)
 " blogs
 " telescope?
 " configure formatters (clang, python, etc)
+" snippets
 
 "lua << EOF
 "vim.lsp.set_log_level("debug")
