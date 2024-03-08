@@ -18,6 +18,7 @@ set splitright
 set splitbelow
 set title
 set timeoutlen=300
+set updatetime=500
 set hidden
 
 " autocompletion
@@ -70,8 +71,9 @@ nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 "===== Mapping =====
 " Plugins
 nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <leader>ntf :NERDTreeFind<CR>
 nnoremap <C-\> :TagbarToggle<CR>
-nnoremap <S-u> :UndotreeToggle<CR>
+nnoremap <F11> :UndotreeToggle<CR>
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Trailing spaces
@@ -121,15 +123,12 @@ nmap <C-l> <C-w>l
 " Window resizing
 nnoremap <leader>k <C-w>5+
 nnoremap <leader>j <C-w>5-
-nnoremap <leader>h <C-w>5<
-nnoremap <leader>l <C-w>5>
-nnoremap <leader>kk <C-w>20+
-nnoremap <leader>jj <C-w>20-
-nnoremap <leader>hh <C-w>20<
-nnoremap <leader>ll <C-w>20>
-nnoremap <leader>= <C-w>=
-nnoremap <leader>\| <C-w>\|
-nnoremap <leader>_ <C-w>_
+nnoremap <leader>h <C-w>10<
+nnoremap <leader>l <C-w>10>
+"nnoremap <leader>kk <C-w>20+
+"nnoremap <leader>jj <C-w>20-
+"nnoremap <leader>hh <C-w>20<
+"nnoremap <leader>ll <C-w>20>
 
 " Persistant undo history
 if has("persistent_undo")
@@ -148,21 +147,36 @@ noremap <Leader>P "0P<Paste>
 
 "Debug mode (enable mouse + disable relative line numbers)
 function! ToggleDebugMode()
-    if exists('#relativenumbertoggle')
+    if !exists("b:debugmode")
+        let b:debugmode = 0
+    endif
+    if b:debugmode == 0
+        call SmartRelativeNumber(0)
+        set norelativenumber
+        set mouse=a
+        let b:debugmode = 1
+    else
+        call SmartRelativeNumber(1)
+        set relativenumber
+        set mouse=""
+        let b:debugmode = 0
+    endif
+endfunction
+
+function! SmartRelativeNumber(val)
+    let g:num_blacklist = ['nerdtree', 'tagbar']
+    echo g:num_blacklist
+    if a:val == 1
+        augroup relativenumbertoggle
+            autocmd!
+            autocmd BufEnter,FocusGained,InsertLeave * if index(g:num_blacklist,&ft) == -1 | set relativenumber
+            autocmd BufLeave,FocusLost,InsertEnter   * if index(g:num_blacklist,&ft) == -1 | set norelativenumber
+        augroup END
+    else
         augroup relativenumbertoggle
             autocmd!
         augroup END
         augroup! relativenumbertoggle
-        set norelativenumber
-        set mouse=a
-    else
-        augroup relativenumbertoggle
-            autocmd!
-            autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-            autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-        augroup END
-        set relativenumber
-        set mouse=""
     endif
 endfunction
 
@@ -171,4 +185,19 @@ augroup pythonfile
     autocmd BufWritePre *.py Black
 augroup END
 
+call SmartRelativeNumber(1)
+
+
 let g:rustfmt_autosave = 1
+let g:tagbar_autoclose = 1
+let g:tagbar_sort = 0
+
+let tagbar_map_showproto="K"
+
+" folding
+" leader
+" check help for all plugins
+" switch buffers
+" resize
+" Debug mode indicator
+" split vimrc ?
