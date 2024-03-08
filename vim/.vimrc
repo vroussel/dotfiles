@@ -54,12 +54,8 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
-"Plug 'https://github.com/Valloric/YouCompleteMe'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'rhysd/vim-clang-format'
-"Plug 'neomake/neomake'
-"Plug 'Houl/repmo-vim'
 call plug#end()
 "===================
 
