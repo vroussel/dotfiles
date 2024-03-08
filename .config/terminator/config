@@ -4,6 +4,8 @@
   title_font = DejaVu Sans Mono 9
 [keybindings]
   rotate_cw = None
+  reset = None
+  help = None
 [profiles]
   [[default]]
     background_darkness = 0.1
