@@ -182,3 +182,5 @@ bind '"\ej": menu-complete'
 bind '"\ek": menu-complete-backward'
 bind '"\e[5~": history-search-backward'
 bind '"\e[6~": history-search-forward'
+stty susp undef
+bind -x '"\C-z":"fg >/dev/null 2>&1"'
