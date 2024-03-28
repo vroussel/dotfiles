@@ -20,6 +20,7 @@
   "incline.nvim": { "branch": "main", "commit": "a3df527789289016b561c4ad3c891490169d1d6b" },
   "indent-blankline.nvim": { "branch": "master", "commit": "821a7acd88587d966f7e464b0b3031dfe7f5680c" },
   "lazy.nvim": { "branch": "main", "commit": "83493db50a434a4c5c648faf41e2ead80f96e478" },
+  "lsp_lines.nvim": { "branch": "main", "commit": "6f3defec73f7c87939e800e9afa5d0571b19b401" },
   "lsp_signature.nvim": { "branch": "master", "commit": "e92b4e7073345b2a30a56b20db3d541a9aa2771e" },
   "lspkind.nvim": { "branch": "master", "commit": "1735dd5a5054c1fb7feaf8e8658dbab925f4f0cf" },
   "lualine.nvim": { "branch": "master", "commit": "8b56462bfb746760465264de41b4907310f113ec" },
