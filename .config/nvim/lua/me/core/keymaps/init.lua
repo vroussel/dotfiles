@@ -60,3 +60,9 @@ end)
 
 vim.keymap.set("c", "<c-n>", "<down>")
 vim.keymap.set("c", "<c-p>", "<up>")
+
+vim.keymap.set("n", "<leader>il", function()
+	vim.cmd("tabnew")
+	vim.cmd("tcd ~/.config/nvim/")
+	vim.cmd("Neotree focus")
+end)
