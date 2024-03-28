@@ -23,6 +23,7 @@ return {
 				"stylua",
 				"black",
 				"isort",
+				"prettierd",
 
 				-- linters
 				"ansible-lint", -- used by ansiblels
