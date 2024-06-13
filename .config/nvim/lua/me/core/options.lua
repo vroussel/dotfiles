@@ -26,7 +26,7 @@ vim.o.colorcolumn = "100"
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 
-vim.o.signcolumn="yes"
+vim.o.signcolumn = "yes"
 
 vim.o.laststatus = 3
 
@@ -34,3 +34,4 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 vim.o.termguicolors = true
+vim.o.showmode = false
