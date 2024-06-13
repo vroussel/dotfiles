@@ -204,8 +204,9 @@ for_window [title="^scratch"] move scratchpad
 bindsym $mod+equal [title="^(?!^scratch$|.*Zeal|^todolist).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
 
-bindsym $mod+g exec $HOME/.i3/vim_scratch.sh
-for_window [class=Xfce4-terminal title="^__vim_scratch"] floating enable
+bindsym $mod+g exec $HOME/.i3/vim_scratch.sh primary
+bindsym $mod+Shift+g exec $HOME/.i3/vim_scratch.sh clipboard
+for_window [title="^__vim_scratch"] floating enable
 
 bindsym $mod+z [title="^.*Zeal$"] scratchpad show
 exec --no-startup-id zeal
