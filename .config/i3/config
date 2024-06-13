@@ -216,3 +216,9 @@ bindsym $mod+t [title="^todolist$"] scratchpad show
 exec --no-startup-id i3-sensible-terminal -T todolist -x bash -c 'todo.sh ls; exec bash'
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
+
+gaps inner 5
+smart_gaps on
+smart_borders on
+default_border normal 5
+for_window [all] title_window_icon padding 3px
