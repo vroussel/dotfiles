@@ -187,5 +187,7 @@ return {
 				},
 			},
 		})
+
+		require("lspconfig").perlnavigator.setup({})
 	end,
 }
