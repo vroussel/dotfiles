@@ -76,6 +76,11 @@ return {
 				end, opts)
 			end
 
+			opts.desc = "Toggle inlay hints"
+			keymap.set("n", "<leader>th", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			end, opts)
+
 			-- opts.desc = "Format buffer or selection"
 			-- keymap.set({"n", "v"}, "<leader>fo", function() vim.lsp.buf.format { async = true } end, opts)
 
