@@ -69,6 +69,16 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
+
+window_title="pwd=\$PWD"
+if [ -n "$SSH_USER" ]; then
+    ssh_user=${SUDO_USER:=$USER}
+    window_title+=" ssh=${ssh_user}@\h"
+fi
+if [ -n "$SUDO_USER" ] && [ "$SUDO_USER" != "$USER" ]; then
+    window_title+=" sudo=${USER}"
+fi
+PS1="\[\033]0;${window_title}\a\]$PS1" #window title
 unset color_prompt
 
 ################

@@ -76,6 +76,12 @@ else
 fi
 unset color_prompt force_color_prompt
 
+#dynamic window title
+if ! [ "${FIXED_WINDOW_TITLE}" == "1" ]; then
+    window_title="pwd=\$PWD"
+    PS1="\[\033]0;${window_title}\a\]$PS1" #window title
+fi
+
 ## If this is an xterm set the title to user@host:dir
 #case "$TERM" in
 #xterm*|rxvt*)
