@@ -84,6 +84,23 @@ nmap ]<space> m`O<Esc>``
 noremap <Leader>p "0p
 noremap <Leader>P "0P
 
+" Copy to system clipboard through ssh
+"map <Leader><Leader>y "ay | :call system("copy_osc52", getreg('@"'))
+nmap  <leader><leader>y :set opfunc=Ssh_yank<CR>g@
+vmap  <leader><leader>y :<C-U>call Ssh_yank(visualmode(), 1)<CR>
+
+function! Ssh_yank(type, ...)
+	  if a:0  " Invoked from Visual mode, use gv command.
+	    silent exe "normal! gvy"
+	  elseif a:type == 'line'
+	    silent exe "normal! '[V']y"
+	  else
+	    silent exe "normal! `[v`]y"
+	  endif
+
+    call system("printf $'\\e]52;c;%s\\a' \"$(cat | base64)\" >> /dev/tty",getreg('@"'))
+endfunction
+
 " Backspace for previous buffer
 nnoremap <bs> <c-^>
 
