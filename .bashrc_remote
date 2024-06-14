@@ -148,6 +148,15 @@ function cd()
   dedup
 }
 
+function sudo()
+{
+    if [ $# -eq 2 ] && [ "$1" == '-su' ]; then
+        /usr/bin/sudo tmp_bashrc="$tmp_bashrc" tmp_vimrc="$tmp_vimrc" -u "$2" /bin/bash --rcfile $tmp_bashrc
+    else
+        /usr/bin/sudo "$@"
+    fi
+}
+
 function yank()
 {
     base64 -w 0 | xargs printf $'\e]52;c;%s\a' > /dev/tty
