@@ -8,7 +8,7 @@
 # window's PID.
 id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
 class_string=$(xprop -id $id | awk '/WM_CLASS\(STRING\)/' | cut -d'=' -f2 | cut -d',' -f1)
-if [ $class_string != '"urxvt"' ]
+if [ $class_string != '"xfce4-terminal"' ]
     then
         pid=$(xprop -id $id | awk '/_NET_WM_PID\(CARDINAL\)/' | cut -d'=' -f2)
         cwd=$(pwdx $pid | cut -d':' -f2 | cut -d' ' -f2)
@@ -26,7 +26,7 @@ if [ -n "$_ssh" ]; then
         pre_cmd+="sudo tmp_bashrc=\"\\\${tmp_bashrc}\" tmp_vimrc=\"\\\${tmp_vimrc}\" -u $_sudo /bin/bash --rcfile \\\${tmp_bashrc};"
     fi
     pre_cmd+="cd $cwd"
-    urxvt -e bash -c "SSHS_BASH_CMD=\"$pre_cmd\" sshs $_ssh; bash"
+    xfce4-terminal -x bash -c "SSHS_BASH_CMD=\"$pre_cmd\" sshs $_ssh; bash"
 else
-    urxvt -cd "$cwd"
+    xfce4-terminal --working-directory "$cwd"
 fi

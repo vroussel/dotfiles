@@ -1,3 +1,0 @@
-#!/bin/bash
-
-FIXED_WINDOW_TITLE=1 urxvt "$@"
