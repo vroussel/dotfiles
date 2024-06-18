@@ -20,7 +20,7 @@ URxvt.matcher.button:     C-1
 
 ! TokyoNight colors for Xresources
 
-URxvt*font: xft:JetBrainsMonoNL NFM:style=Regular:size=11:antialias=true
+URxvt*font: xft:JetBrainsMonoNL NFM:style=Regular:size=10:antialias=true
 URxvt*externalBorder: 0
 URxvt*internalBorder: 4
 URxvt*scrollBar: false
