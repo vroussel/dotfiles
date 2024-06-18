@@ -1,3 +1,4 @@
+set fish_greeting
 set -gx SHELL /bin/fish
 
 source ~/.aliases
