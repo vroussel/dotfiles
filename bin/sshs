@@ -9,8 +9,18 @@ cmd+="export tmp_bashrc=\"$TMP_BASHRC\";"
 cmd+="export tmp_vimrc=\"$TMP_VIMRC\";"
 cmd+="echo \"${VIMRC_DATA}\" | base64 --decode | gunzip > \${tmp_vimrc};"
 cmd+="echo \"${BASHRC_DATA}\" | base64 --decode | gunzip > \${tmp_bashrc};"
-if [ -n "$SSHS_BASH_CMD" ]; then
-    cmd+="$SSHS_BASH_CMD;"
+
+bash_cmd=""
+if [ -n "$SSHS_CWD" ]; then
+    bash_cmd+="cd $SSHS_CWD;"
 fi
-cmd+="bash --rcfile \${tmp_bashrc}"
+
+bash_cmd+="bash --rcfile \${tmp_bashrc}"
+
+if [ -n "$SSHS_SUDO_USER" ]; then
+    cmd+="sudo tmp_bashrc=\"\\\${tmp_bashrc}\" tmp_vimrc=\"\\\${tmp_vimrc}\" -u $SSHS_SUDO_USER /bin/sh -c \"$bash_cmd\""
+else
+    cmd+="$bash_cmd"
+fi
+
 /bin/ssh -t "$@" "$cmd"
