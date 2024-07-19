@@ -14,6 +14,7 @@ return {
 			"NeogitCommitSelectView",
 			"NeogitRebaseTodo",
 			"DressingInput",
+			"blame",
 		},
 	},
 }
