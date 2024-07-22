@@ -120,9 +120,17 @@ return {
 			on_attach = on_attach,
 		})
 
-		lspconfig["cmake"].setup({
+		lspconfig["neocmake"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			init_options = {
+				format = {
+					enable = false,
+				},
+				lint = {
+					enable = false,
+				},
+			},
 		})
 
 		lspconfig["tailwindcss"].setup({

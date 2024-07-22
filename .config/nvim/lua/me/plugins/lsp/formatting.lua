@@ -8,6 +8,7 @@ return {
 				lua = { "stylua" },
 				python = { "isort", "black" },
 				vue = { "prettierd" },
+				cmake = { "gersemi" },
 			},
 		})
 
