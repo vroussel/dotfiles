@@ -2,7 +2,6 @@ return {
 	"FabijanZulj/blame.nvim",
 	config = function()
 		require("blame").setup()
-		vim.keymap.set("n", "<c-a>", "<cmd>BlameToggle<CR>")
 
 		vim.api.nvim_create_autocmd("User", {
 			pattern = "BlameViewOpened",
