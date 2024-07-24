@@ -7,19 +7,21 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
+		"dcampos/nvim-snippy",
+		"dcampos/cmp-snippy",
+		"honza/vim-snippets",
 		"onsails/lspkind.nvim",
-		"rafamadriz/friendly-snippets",
 	},
 	config = function()
 		local cmp = require("cmp")
 
-		local luasnip = require("luasnip")
-
 		local lspkind = require("lspkind")
 
-		require("luasnip.loaders.from_vscode").lazy_load()
+		local snippy = require("snippy")
+		vim.keymap.set({ "i", "s" }, "<tab>", snippy.mapping.next("<tab>"))
+		vim.keymap.set({ "i", "s" }, "<s-tab>", snippy.mapping.previous("<s-tab>"))
+		vim.keymap.set({ "x", "n" }, "<leader><tab>", snippy.mapping.cut_text, { remap = true })
+		vim.keymap.set({ "n" }, "<leader><tab><tab>", "^<leader><tab>$", { remap = true })
 
 		cmp.setup({
 			completion = {
@@ -27,7 +29,7 @@ return {
 			},
 			snippet = {
 				expand = function(args)
-					luasnip.lsp_expand(args.body)
+					snippy.expand_snippet(args.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
@@ -39,7 +41,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
+				{ name = "snippy" },
 				{ name = "buffer" },
 				{ name = "path" },
 			}),

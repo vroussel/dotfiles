@@ -37,7 +37,7 @@ return {
 		telescope.load_extension("fzf")
 		telescope.load_extension("undo")
 
-		vim.keymap.set("n", "<leader><tab>", "<cmd>Telescope keymaps<CR>")
+		vim.keymap.set("n", "<leader>km", "<cmd>Telescope keymaps<CR>")
 		vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>")
 		vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<CR>")
 		vim.keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<CR>")
