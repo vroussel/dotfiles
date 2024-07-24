@@ -36,6 +36,7 @@ return {
 				"vue",
 				"javascript",
 				"regex",
+				"just",
 			},
 			-- incremental_selection = {
 			-- 	enable = true,
