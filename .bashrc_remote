@@ -70,7 +70,7 @@ else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 
-window_title="pwd=\$PWD"
+window_title="cwd=\$PWD"
 if [ -n "$SSH_USER" ]; then
     ssh_user=${SUDO_USER:=$USER}
     window_title+=" ssh=${ssh_user}@\h"
