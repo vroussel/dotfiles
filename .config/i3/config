@@ -215,6 +215,10 @@ exec --no-startup-id i3-sensible-terminal -T todolist -x bash -c 'todo.sh ls; ex
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
 
+for_window [class="Blueman-manager"] floating enable
+for_window [class="iwgtk"] floating enable
+for_window [class="pavucontrol"] floating enable
+
 gaps inner 5
 smart_gaps on
 smart_borders on
