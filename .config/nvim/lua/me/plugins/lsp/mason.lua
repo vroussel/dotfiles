@@ -21,8 +21,6 @@ return {
 			ensure_installed = {
 				-- formatters
 				"stylua",
-				"black",
-				"isort",
 				"prettierd",
 				"gersemi",
 

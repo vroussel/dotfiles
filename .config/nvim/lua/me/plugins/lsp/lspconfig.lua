@@ -160,7 +160,7 @@ return {
 		-- 	on_attach = on_attach,
 		-- })
 
-		lspconfig["ruff_lsp"].setup({
+		lspconfig["ruff"].setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			init_options = {
@@ -179,8 +179,10 @@ return {
 					plugins = {
 						-- I use black for formatting:
 						autopep8 = { enabled = false },
+						mccabe = { enabled = false },
+						pycodestyle = { enabled = false },
+						pyflakes = { enabled = false },
 						yapf = { enabled = false },
-						rope_autoimport = { enabled = true },
 					},
 				},
 			},
