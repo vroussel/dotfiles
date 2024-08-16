@@ -41,7 +41,7 @@ icons[cancel]="\u00d7"
 declare -A actions
 actions[lockscreen]="exec xscreensaver-command --lock"
 #actions[switchuser]="???"
-actions[logout]="i3-msg exit"
+actions[logout]="pkill X"
 actions[suspend]="systemctl suspend"
 actions[hibernate]="systemctl hibernate"
 actions[reboot]="systemctl reboot"
