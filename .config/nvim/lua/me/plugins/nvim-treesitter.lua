@@ -14,6 +14,7 @@ return {
 		treesitter.setup({
 			highlight = {
 				enable = true,
+				additional_vim_regex_highlighting = { "python" },
 			},
 			-- indent = { enable = true },
 			ensure_installed = {
