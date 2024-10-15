@@ -5,6 +5,11 @@ os:
 
 promptToReturnFromSubprocess: false
 
+git:
+  paging:
+    colorArg: always
+    pager: delta --diff-so-fancy --dark --paging=never
+
 customCommands:
   - key: b
     command: tig blame -- {{.SelectedFile.Name}}
