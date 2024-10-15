@@ -65,9 +65,9 @@ GREEN="$(echo -e "\033[1;32m")"
 BLUE="$(echo -e "\033[1;34m")"
 RESET="$(echo -e "\033[0m")"
 if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[${GREEN}\]\u@\h\[${RESET}\]:\[${BLUE}\]\w\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$ \[${RESET}\]"
+    PS1="${debian_chroot:+($debian_chroot)}\[${GREEN}\]\u@\h\[${RESET}\]:\[${BLUE}\]\w\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$\[${RESET}\]"
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$'
 fi
 
 window_title="cwd=\$PWD"
@@ -78,6 +78,7 @@ fi
 if [ -n "$SUDO_USER" ] && [ "$SUDO_USER" != "$USER" ]; then
     window_title+=" sudo=${USER}"
 fi
+PS1="$PS1 " #\u2005, special space in order to be able to jump to previous/next prompt
 PS1="\[\033]0;${window_title}\a\]$PS1" #window title
 unset color_prompt
 

@@ -57,5 +57,6 @@ function fish_prompt --description 'Write out the prompt'
     echo -n $prompt_status
     set_color normal
 
-    echo -n "$suffix "
+    echo -n "$suffix"
+    echo -n ' ' #\u2005, special space in order to be able to jump to previous/next prompt
 end
