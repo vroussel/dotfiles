@@ -1,0 +1,9 @@
+[env]
+WINIT_X11_SCALE_FACTOR = "1"
+
+[font]
+size = 9.0
+
+[font.normal]
+family = "JetBrainsMonoNL Nerd Font"
+style = "Regular"

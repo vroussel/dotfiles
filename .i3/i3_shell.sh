@@ -15,7 +15,7 @@ fi
 
 cwd=${_cwd:-$HOME}
 if [ -n "$_ssh" ]; then
-    xfce4-terminal -x bash -c "SSHS_CWD=\"$cwd\" SSHS_SUDO_USER=\"$_sudo\" sshs $_ssh; bash"
+    alacritty.sh -e bash -c "SSHS_CWD=\"$cwd\" SSHS_SUDO_USER=\"$_sudo\" sshs $_ssh; bash"
 else
-    xfce4-terminal --working-directory "$cwd"
+    alacritty.sh --working-directory "$cwd"
 fi

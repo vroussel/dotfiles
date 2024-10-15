@@ -1,0 +1,30 @@
+import = [
+"~/.config/alacritty/tokyonight_storm.toml",
+"~/.config/alacritty/hints.toml",
+"~/.config/alacritty/font.toml",
+]
+
+[scrolling]
+history = 100000
+
+[keyboard]
+bindings = [
+    { key = "PageUp", action = "ScrollLineUp" },
+    { key = "PageDown", action = "ScrollLineDown" },
+
+    { key = "P",      mods = "Control|Shift", mode = "~Vi|~Search",  action = "ToggleViMode" },
+    { key = "P",      mods = "Control|Shift", mode = "~Vi|~Search",  action = "SearchForward" },
+    { key = "P",      mods = "Control|Shift", mode = "~Vi|~Search",  chars = "\u2005" },
+    { key = "P",      mods = "Control|Shift", mode = "~Vi|~Search",  action = "SearchConfirm" },
+    { key = "P",      mods = "Control|Shift", mode = "~Vi|~Search",  action = "SearchFocusPrevious" },
+
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "ToggleLineSelection" },
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "SearchNext" },
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "Up" },
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "Copy" },
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "ToggleLineSelection" },
+    { key = "Y",      mods = "Control|Shift", mode = "Vi",  action = "SearchPrevious" },
+]
+
+[env]
+TERM = "xterm-256color"
