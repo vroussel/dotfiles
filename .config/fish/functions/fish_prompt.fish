@@ -49,7 +49,8 @@ function fish_prompt --description 'Write out the prompt'
     echo -n (prompt_pwd)
     set_color normal
 
-    printf '%s ' (fish_vcs_prompt)
+    printf '%s' (fish_vcs_prompt)
+    echo -n ' ' #\u2005, special space in order to be able to jump to previous/next prompt
 
     set -l status_color (set_color $fish_color_status)
     set -l statusb_color (set_color --bold $fish_color_status)
@@ -57,6 +58,5 @@ function fish_prompt --description 'Write out the prompt'
     echo -n $prompt_status
     set_color normal
 
-    echo -n "$suffix"
-    echo -n ' ' #\u2005, special space in order to be able to jump to previous/next prompt
+    echo -n "$suffix "
 end
