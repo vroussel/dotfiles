@@ -31,10 +31,5 @@ return {
 				"mypy",
 			},
 		})
-
-		-- local update_deps = function()
-		-- 	vim.api.nvim_cmd(vim.api.nvim_parse_cmd("PylspInstall python-lsp-ruff pylsp-mypy", {}), { output = true })
-		-- end
-		-- vim.api.nvim_create_user_command("UpdatePythonDeps", update_deps, {})
 	end,
 }
