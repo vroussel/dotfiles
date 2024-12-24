@@ -26,65 +26,39 @@ return {
 		})
 
 		local lspconfig = require("lspconfig")
-		local keymap = vim.keymap
 
-		local map_opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
-			map_opts.buffer = bufnr
-
-			-- set keybinds
-			map_opts.desc = "Show LSP references"
-			keymap.set("n", "gr", vim.lsp.buf.references, map_opts)
-
-			map_opts.desc = "Go to declaration"
-			keymap.set("n", "gD", vim.lsp.buf.declaration, map_opts)
-
-			map_opts.desc = "Show LSP definitions"
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", map_opts)
-
-			map_opts.desc = "Show LSP implementations"
-			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", map_opts)
-
-			map_opts.desc = "Show LSP type definitions"
-			keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", map_opts)
-
-			map_opts.desc = "See available code actions"
-			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, map_opts)
-
-			map_opts.desc = "Smart rename"
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, map_opts)
-
-			map_opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
-
-			if client.name == "clangd" then
-				map_opts.buffer = bufnr
-
-				map_opts.desc = "Go to source/header"
-				keymap.set("n", "<leader>aa", function()
-					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, map_opts)
-
-				map_opts.desc = "Go to source/header in vertical split"
-				keymap.set("n", "<leader>av", function()
-					vim.cmd("vsplit")
-					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, map_opts)
-
-				map_opts.desc = "Go to source/header in horizontal split"
-				keymap.set("n", "<leader>ax", function()
-					vim.cmd("split")
-					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, map_opts)
+			local function map(mode, l, r, desc)
+				vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
 			end
 
-			map_opts.desc = "Toggle inlay hints"
-			keymap.set("n", "<leader>th", function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			end, map_opts)
+			map("n", "gr", vim.lsp.buf.references, "Show LSP references")
+			map("n", "gd", vim.lsp.buf.declaration, "Go to declaration")
+			map("n", "gi", vim.lsp.buf.implementation, "Show LSP implementations")
+			map("n", "gD", vim.lsp.buf.type_definition, "Show LSP type definitions")
+			map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "See available code actions")
+			map("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
+			map("n", "K", vim.lsp.buf.hover, "Show documentation")
 
-			map_opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", map_opts)
+			if client.name == "clangd" then
+				map("n", "<leader>aa", function()
+					vim.api.nvim_command("ClangdSwitchSourceHeader")
+				end, "Go to source/header")
+
+				map("n", "<leader>av", function()
+					vim.cmd("vsplit")
+					vim.api.nvim_command("ClangdSwitchSourceHeader")
+				end, "Go to source/header in vertical split")
+
+				map("n", "<leader>ax", function()
+					vim.cmd("split")
+					vim.api.nvim_command("ClangdSwitchSourceHeader")
+				end, "Go to source/header in horizontal split")
+			end
+
+			map("n", "<leader>tih", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			end, "Toggle inlay hints")
 		end
 
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
