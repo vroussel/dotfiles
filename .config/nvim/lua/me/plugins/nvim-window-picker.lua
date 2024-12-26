@@ -14,7 +14,7 @@ return {
                 bo = {
                     -- if the file type is one of following, the window will be ignored
                     filetype = { "NvimTree", "neo-tree", "notify", "aerial", "TelescopePrompt", "fidget" },
-                    buftype = { "prompt" },
+                    buftype = { "prompt", "nofile" },
                 },
             },
         })
