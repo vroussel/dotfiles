@@ -3,7 +3,7 @@ return {
     config = function()
         local ibl = require("ibl")
         ibl.setup({
-            enabled = false,
+            enabled = true,
             indent = {
                 char = "┊",
             },
