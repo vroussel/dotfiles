@@ -2,8 +2,6 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
-        "RRethy/nvim-treesitter-textsubjects",
-        "nvim-treesitter/nvim-treesitter-textobjects",
         "nvim-treesitter/nvim-treesitter-context",
     },
     build = ":TSUpdate",
