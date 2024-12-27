@@ -1,20 +1,20 @@
 return {
-	"m4xshen/hardtime.nvim",
-	dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-	opts = {
-		disabled_filetypes = {
-			"qf",
-			"netrw",
-			"NvimTree",
-			"lazy",
-			"mason",
-			"neo-tree",
-			"neo-tree-popup",
-			"NeogitStatus",
-			"NeogitCommitSelectView",
-			"NeogitRebaseTodo",
-			"DressingInput",
-			"blame",
-		},
-	},
+    "m4xshen/hardtime.nvim",
+    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+    opts = {
+        disabled_filetypes = {
+            "qf",
+            "netrw",
+            "NvimTree",
+            "lazy",
+            "mason",
+            "neo-tree",
+            "neo-tree-popup",
+            "NeogitStatus",
+            "NeogitCommitSelectView",
+            "NeogitRebaseTodo",
+            "DressingInput",
+            "blame",
+        },
+    },
 }

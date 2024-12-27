@@ -1,6 +1,6 @@
 return {
-	"antoinemadec/FixCursorHold.nvim",
-	config = function()
-		vim.g.cursorhold_updatetime = 50
-	end,
+    "antoinemadec/FixCursorHold.nvim",
+    config = function()
+        vim.g.cursorhold_updatetime = 50
+    end,
 }
