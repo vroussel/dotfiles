@@ -33,6 +33,7 @@ local virtual_text = false
 local underline = true
 local signs = true
 local only_errors = false
+local virtual_lines = false
 
 local diag_option_value = function(state)
     if not state then
@@ -49,6 +50,7 @@ local update_diag_conf = function()
         virtual_text = diag_option_value(virtual_text),
         signs = diag_option_value(signs),
         underline = diag_option_value(underline),
+        virtual_lines = virtual_lines,
     })
 end
 
@@ -57,6 +59,12 @@ vim.keymap.set("n", "<leader>tdv", function()
     virtual_text = not virtual_text
     update_diag_conf()
 end, { desc = "Toggle virtual text" })
+--
+-- toggle diag virtual (multiline)
+vim.keymap.set("n", "<leader>tdV", function()
+    virtual_lines = not virtual_lines
+    require("lsp_lines").toggle()
+end, { desc = "Toggle virtual text (multiline)" })
 
 -- toggle diag underline
 vim.keymap.set("n", "<leader>tdu", function()
