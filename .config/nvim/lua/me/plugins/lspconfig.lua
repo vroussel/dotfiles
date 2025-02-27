@@ -174,5 +174,6 @@ return {
         })
 
         lspconfig["perlnavigator"].setup({})
+        lspconfig["dockerls"].setup({})
     end,
 }
