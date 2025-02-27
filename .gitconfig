@@ -13,8 +13,13 @@
     pager = delta --diff-so-fancy
 
 [alias]
-	co = checkout
     st = status
+    co = checkout
+    ci = commit
+    sw = switch
+    rs = restore
+    pl = pull
+    ps = push
 
 #delta
 [include]
