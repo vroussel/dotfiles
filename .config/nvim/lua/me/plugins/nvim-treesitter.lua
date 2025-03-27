@@ -36,6 +36,8 @@ return {
                 "javascript",
                 "regex",
                 "just",
+                "query",
+                "sql",
             },
             disable = function(lang, buf)
                 local max_filesize = 100 * 1024 -- 100 KB
