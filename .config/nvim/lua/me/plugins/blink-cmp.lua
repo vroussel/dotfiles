@@ -26,15 +26,15 @@ return {
         },
         completion = {
             menu = {
-                border = "single",
+                border = "rounded",
             },
             documentation = {
-                window = { border = "single" },
+                window = { border = "rounded" },
             },
         },
         signature = {
             enabled = true,
-            window = { border = "single" },
+            window = { border = "rounded" },
         },
     },
     opts_extend = { "sources.default" },
