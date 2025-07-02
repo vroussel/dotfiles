@@ -160,15 +160,22 @@ return {
         })
 
         lspconfig["lua_ls"].setup({
-            on_attach = on_attach,
             capabilities = capabilities,
+            on_attach = on_attach,
             settings = {
                 Lua = {
                     workspace = {
-                        checkThirdParty = false,
+                        checkThirdParty = "ApplyInMemory",
+                        userThirdParty = { "/home/valentin/lib/luals_addons" },
                     },
                     runtime = {
                         version = "LuaJIT",
+                    },
+                    completion = {
+                        callSnippet = "Replace",
+                    },
+                    hint = {
+                        enable = true,
                     },
                 },
             },
