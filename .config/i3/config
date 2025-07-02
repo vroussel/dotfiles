@@ -249,8 +249,6 @@ for_window [class="Blueman-manager"] floating enable
 for_window [class="iwgtk"] floating enable
 for_window [class="pavucontrol"] floating enable
 
-gaps inner 5
-smart_gaps on
 smart_borders on
 default_border normal 5
 for_window [all] title_window_icon padding 3px
