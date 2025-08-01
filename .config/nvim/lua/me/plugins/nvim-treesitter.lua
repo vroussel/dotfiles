@@ -3,42 +3,18 @@ return {
     "nvim-treesitter/nvim-treesitter",
     dependencies = {
         "nvim-treesitter/nvim-treesitter-context",
+        "OXY2DEV/markview.nvim",
     },
+    branch = "main",
     build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
     config = function()
         vim.g._ts_force_sync_parsing = true
-        local treesitter = require("nvim-treesitter.configs")
+        local treesitter = require("nvim-treesitter")
 
         treesitter.setup({
             highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = { "python" },
-            },
-            -- indent = { enable = true },
-            ensure_installed = {
-                "json",
-                "yaml",
-                "html",
-                "css",
-                "markdown",
-                "markdown_inline",
-                "bash",
-                "lua",
-                "vim",
-                "dockerfile",
-                "gitignore",
-                "c",
-                "cpp",
-                "python",
-                "rust",
-                "vimdoc",
-                "vue",
-                "javascript",
-                "regex",
-                "just",
-                "query",
-                "sql",
             },
             disable = function(lang, buf)
                 local max_filesize = 100 * 1024 -- 100 KB
@@ -47,16 +23,39 @@ return {
                     return true
                 end
             end,
-            -- incremental_selection = {
-            -- 	enable = true,
-            -- 	keymaps = {
-            -- 		init_selection = false,
-            -- 		node_incremental = "<cr>",
-            -- 		scope_incremental = false,
-            -- 		node_decremental = "<bs>",
-            -- 	},
-            -- },
         })
+
+        local ensure_installed = {
+            "json",
+            "yaml",
+            "html",
+            "css",
+            "markdown",
+            "markdown_inline",
+            "bash",
+            "lua",
+            "vim",
+            "dockerfile",
+            "gitignore",
+            "c",
+            "cpp",
+            "python",
+            "rust",
+            "vimdoc",
+            "vue",
+            "javascript",
+            "regex",
+            "just",
+            "query",
+            "sql",
+        }
+        local alreadyInstalled = treesitter.get_installed()
+        local parsersToInstall = vim.iter(ensure_installed)
+            :filter(function(parser)
+                return not vim.tbl_contains(alreadyInstalled, parser)
+            end)
+            :totable()
+        treesitter.install(parsersToInstall)
 
         vim.keymap.set("n", "<leader>ttc", function()
             vim.api.nvim_command("TSContextToggle")
