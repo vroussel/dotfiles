@@ -1,6 +1,7 @@
 return {
     "williamboman/mason.nvim",
     dependencies = {
+        "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
@@ -15,8 +16,24 @@ return {
             },
         })
 
-        local mason_tool_installer = require("mason-tool-installer")
+        local mason_lspconfig = require("mason-lspconfig")
+        mason_lspconfig.setup({
+            ensure_installed = {
+                "rust_analyzer",
+                "lua_ls",
+                "perlnavigator",
+                "dockerls",
+                "neocmake",
+                "ansiblels",
+                "clangd",
+                "tailwindcss",
+                "volar",
+                "ruff",
+                "pylsp",
+            },
+        })
 
+        local mason_tool_installer = require("mason-tool-installer")
         mason_tool_installer.setup({
             ensure_installed = {
                 -- formatters
