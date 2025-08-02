@@ -27,9 +27,10 @@ return {
                 "ansiblels",
                 "clangd",
                 "tailwindcss",
-                "volar",
+                "vue_ls",
                 "ruff",
                 "pylsp",
+                "html",
             },
         })
 
