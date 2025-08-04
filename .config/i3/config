@@ -234,7 +234,6 @@ bindsym $mod+Shift+equal move scratchpad
 
 bindsym $mod+g exec $HOME/bin/vim_scratch.sh primary
 bindsym $mod+Shift+g exec $HOME/bin/vim_scratch.sh clipboard
-for_window [title="^__vim_scratch"] floating enable
 
 bindsym $mod+z [title="^.*Zeal$"] scratchpad show
 exec --no-startup-id zeal
@@ -245,10 +244,14 @@ exec --no-startup-id i3-sensible-terminal -T todolist -e bash -c 'todo.sh ls; ex
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
 
+smart_borders on
+default_border normal 5
+for_window [all] title_window_icon padding 3px
+
+# Always floating
+for_window [title="^__vim_scratch"] floating enable
+for_window [class="feh"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="iwgtk"] floating enable
 for_window [class="pavucontrol"] floating enable
 
-smart_borders on
-default_border normal 5
-for_window [all] title_window_icon padding 3px
