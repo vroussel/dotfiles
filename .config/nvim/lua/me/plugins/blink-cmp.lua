@@ -27,6 +27,9 @@ return {
         signature = {
             enabled = true,
         },
+
+        completion = {
+            menu = { auto_show = false },
+        },
     },
-    opts_extend = { "sources.default" },
 }
