@@ -22,3 +22,8 @@ vim.keymap.set("n", "<leader>cf", function()
     vim.cmd("tabnew ~/.config/fish/config.fish")
     vim.cmd("tcd ~/.config/fish")
 end, { desc = "fish conf" })
+
+vim.keymap.set("n", "<leader>ct", function()
+    vim.cmd("tabnew ~/.config/tmux/tmux.conf")
+    vim.cmd("tcd ~/.config/tmux")
+end, { desc = "tmux conf" })
