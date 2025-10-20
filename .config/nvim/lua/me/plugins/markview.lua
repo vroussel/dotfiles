@@ -6,4 +6,11 @@ return {
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
+
+    opts = {
+        preview = {
+            filetypes = { "markdown", "codecompanion" },
+            ignore_buftypes = {},
+        },
+    },
 }
