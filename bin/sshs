@@ -10,12 +10,32 @@ cmd+="export tmp_vimrc=\"$TMP_VIMRC\";"
 cmd+="echo \"${VIMRC_DATA}\" | base64 --decode | gunzip > \${tmp_vimrc};"
 cmd+="echo \"${BASHRC_DATA}\" | base64 --decode | gunzip > \${tmp_bashrc};"
 
+#ssh command parsing
+sep_index=-1
+for ((i = 1; i <= $#; i++)); do
+    if [ "${!i}" == "--" ]; then
+        sep_index=$i
+        break
+    fi
+done
+
+if [ "$sep_index" -ge 0 ]; then
+    ssh_opts_and_host=( "${@:1:sep_index-1}" )
+    remote_cmd=( "${@:sep_index+1}" )
+else
+    ssh_opts_and_host=( "$@" )
+    remote_cmd=()
+fi
+
 bash_cmd=""
 if [ -n "$SSHS_CWD" ]; then
     bash_cmd+="cd $SSHS_CWD;"
 fi
 
 bash_cmd+="bash --rcfile \${tmp_bashrc}"
+if [ ${#remote_cmd[@]} -ne 0 ]; then
+    bash_cmd+=" -c ${remote_cmd[*]}"
+fi
 
 if [ -n "$SSHS_SUDO_USER" ]; then
     cmd+="sudo tmp_bashrc=\"\\\${tmp_bashrc}\" tmp_vimrc=\"\\\${tmp_vimrc}\" -u $SSHS_SUDO_USER /bin/sh -c \"$bash_cmd\""
@@ -23,4 +43,4 @@ else
     cmd+="$bash_cmd"
 fi
 
-exec /bin/ssh -t "$@" "$cmd"
+exec /bin/ssh -t "${ssh_opts_and_host[@]}" "$cmd"
