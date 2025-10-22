@@ -4,12 +4,13 @@ set -e
 get_extra_env() {
     cmd="$1"
     ret=""
-    PROMPT_PATTERN=" " #\u2005, special space
+    MAGIC_PROMPT_CHAR=" " #\u2005, special space
+    SSH_PROMPT_PATTERN='^\w+@\w+:.* '
 
     x=$(tmux capture-pane -p -S '-' -J)
-    last_prompt=$(echo "$x" | tac | grep --max-count 1 "$PROMPT_PATTERN")
+    last_prompt=$(echo "$x" | tac | grep -P --max-count 1 "$SSH_PROMPT_PATTERN") || exit 0
     user=$(echo "$last_prompt" | cut -d@ -f 1)
-    path=$(echo "$last_prompt" | grep -Po "(?<=:).*(?=$PROMPT_PATTERN)")
+    path=$(echo "$last_prompt" | grep -Po "(?<=:).*(?=$MAGIC_PROMPT_CHAR)")
 
     ret+="SSHS_CWD=$path"
     if ! [[ "$cmd" =~ (-l\ $user)|($user@) ]]; then
