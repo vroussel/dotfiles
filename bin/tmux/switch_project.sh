@@ -1,8 +1,8 @@
 #!/bin/bash
 
-WS_DIR="$HOME/workspace"
+WS_DIR="$HOME/ws"
 
-repo=$(find "$WS_DIR" -maxdepth 1 -type d -exec test -d '{}/.git' ';' -printf "%f\n" | sort | fzf --border --border-label "Switch project" --tmux --tac) || exit 0
+repo=$(cd "$WS_DIR" && find . -type d -name .git -prune -printf "%h\n" | cut -c 3- | sort | fzf --border --border-label "Switch project" --tmux --tac) || exit 0
 session="$repo"
 path="$WS_DIR/$repo"
 
