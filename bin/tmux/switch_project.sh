@@ -7,7 +7,12 @@ session="$repo"
 path="$WS_DIR/$repo"
 
 if ! tmux has-session -t "$session"; then
-    tmux new-session -d -c "$path" -s "$session" -n code && tmux send-keys -t "$session:code" 'nvim' C-m
+    temp_dir=$(mktemp -d /tmp/nvim.XXXXX)
+    pipe="$temp_dir/pipe"
+    tmux new-session -d -c "$path" -s "$session" -n nvim -e "NVIM=$pipe" \
+        && tmux send-keys -t "$session:nvim" "nvim --listen \$NVIM" C-m
+    tmux new-window -d -c "$path" -n term -t "$session:" -n lazygit \
+        && tmux send-keys -t "$session:lazygit" 'lazygit --use-config-file ~/.config/lazygit/config.tmux_project.yml' C-m
     tmux new-window -d -c "$path" -n term -t "$session:"
 fi
 
