@@ -38,5 +38,5 @@ elif [[ "$name" == "/bin/bash" && "${args[0]}" == "-c" && "${args[1]}" =~ ^/home
     extra_env=$(get_extra_env "${cmd[*]}")
     tmux "$@" env $extra_env /bin/bash -c "${args[*]:1}"
 else
-    tmux "$@" -c "$dir" "${cmd[*]}"
+    tmux "$@" -c "$dir"
 fi
