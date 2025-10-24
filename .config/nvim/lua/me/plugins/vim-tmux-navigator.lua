@@ -8,10 +8,14 @@ return {
         "TmuxNavigateRight",
     },
     keys = {
-        { "<A-h>", "<cmd>TmuxNavigateLeft<cr>" },
-        { "<A-j>", "<cmd>TmuxNavigateDown<cr>" },
-        { "<A-k>", "<cmd>TmuxNavigateUp<cr>" },
-        { "<A-l>", "<cmd>TmuxNavigateRight<cr>" },
+        { mode = "n", "<A-h>", "<cmd>TmuxNavigateLeft<cr>" },
+        { mode = "n", "<A-j>", "<cmd>TmuxNavigateDown<cr>" },
+        { mode = "n", "<A-k>", "<cmd>TmuxNavigateUp<cr>" },
+        { mode = "n", "<A-l>", "<cmd>TmuxNavigateRight<cr>" },
+        { mode = "t", "<A-h>", "<cmd>TmuxNavigateLeft<cr>" },
+        { mode = "t", "<A-j>", "<cmd>TmuxNavigateDown<cr>" },
+        { mode = "t", "<A-k>", "<cmd>TmuxNavigateUp<cr>" },
+        { mode = "t", "<A-l>", "<cmd>TmuxNavigateRight<cr>" },
     },
     init = function()
         vim.g.tmux_navigator_no_mappings = 1
