@@ -9,5 +9,5 @@ fi
 if [ -z "$user_input" ]; then
     i3-msg "rename workspace to \"$WS\""
 else
-    i3-msg "rename workspace to \"$WS: <big><b>${user_input^^}</b></big>\""
+    i3-msg "rename workspace to \"$WS: <b>${user_input}</b>\""
 fi
