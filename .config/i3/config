@@ -44,6 +44,8 @@ bindsym XF86Favorites exec --no-startup-id shuf -e ~/wallpapers/* -n 1 | xargs f
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+workspace_layout tabbed
+
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal -e tmux
 
