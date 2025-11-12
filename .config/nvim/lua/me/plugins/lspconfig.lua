@@ -108,7 +108,7 @@ return {
                 Lua = {
                     workspace = {
                         checkThirdParty = "ApplyInMemory",
-                        userThirdParty = { "/home/valentin/lib/luals_addons" },
+                        userThirdParty = { "/home/valentin/ws/luals_addons" },
                     },
                     runtime = {
                         version = "LuaJIT",
