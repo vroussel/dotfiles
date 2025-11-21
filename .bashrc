@@ -70,7 +70,7 @@ fi
 # Git
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
-source ~/bin/git-prompt.sh
+source "$HOME/scripts/git-prompt.sh"
 
 RED="$(echo -en "\033[1;31m")"
 GREEN="$(echo -en "\033[1;32m")"

@@ -25,7 +25,7 @@ font pango:Roboto Mono 8
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/.i3/i3lock_pixel.sh --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $HOME/scripts/i3/i3lock_pixel.sh --nofork
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -127,15 +127,15 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+Shift+greater workspace next
 bindsym $mod+Shift+less workspace prev
-bindsym $mod+greater exec $HOME/bin/i3/focus_tab.sh right
-bindsym $mod+less exec $HOME/bin/i3/focus_tab.sh left
+bindsym $mod+greater exec $HOME/scripts/i3/focus_tab.sh right
+bindsym $mod+less exec $HOME/scripts/i3/focus_tab.sh left
 
 # reload the configuration file
 bindsym $mod+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+c restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec rofi -show p -modi p:$HOME/bin/i3/rofi-power-menu -width 20 -lines 6
+bindsym $mod+Shift+e exec rofi -show p -modi p:$HOME/scripts/i3/rofi-power-menu -width 20 -lines 6
 
 bindsym --whole-window $mod+button2 floating toggle
 # Switch window/workspace with mod+scroll and mod+shift scroll
@@ -147,15 +147,15 @@ bindsym --whole-window $mod+shift+button5 workspace next
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-        bindsym h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 10 px or 1 ppt
-        bindsym k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 10 px or 1 ppt
-        bindsym j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 10 px or 1 ppt
-        bindsym l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 10 px or 1 ppt
+        bindsym h exec --no-startup-id /$HOME/scripts/i3/resize_window.sh left 10 px or 1 ppt
+        bindsym k exec --no-startup-id /$HOME/scripts/i3/resize_window.sh up 10 px or 1 ppt
+        bindsym j exec --no-startup-id /$HOME/scripts/i3/resize_window.sh down 10 px or 1 ppt
+        bindsym l exec --no-startup-id /$HOME/scripts/i3/resize_window.sh right 10 px or 1 ppt
 
-        bindsym Ctrl+h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 100 px or 10 ppt
-        bindsym Ctrl+k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 100 px or 10 ppt
-        bindsym Ctrl+j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 100 px or 10 ppt
-        bindsym Ctrl+l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 100 px or 10 ppt
+        bindsym Ctrl+h exec --no-startup-id /$HOME/scripts/i3/resize_window.sh left 100 px or 10 ppt
+        bindsym Ctrl+k exec --no-startup-id /$HOME/scripts/i3/resize_window.sh up 100 px or 10 ppt
+        bindsym Ctrl+j exec --no-startup-id /$HOME/scripts/i3/resize_window.sh down 100 px or 10 ppt
+        bindsym Ctrl+l exec --no-startup-id /$HOME/scripts/i3/resize_window.sh right 100 px or 10 ppt
 
         # change focus
         bindsym $mod+h focus left
@@ -216,11 +216,11 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id autorandr --change
 exec --no-startup-id dex --autostart --search-paths $HOME/.config/autostart
 exec --no-startup-id picom -b
-exec_always --no-startup-id ~/bin/i3/init_kb_layout.sh
+exec_always --no-startup-id $HOME/scripts/i3/init_kb_layout.sh
 
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
-bindsym $mod+Shift+r exec $HOME/bin/i3/rename_workspace.sh
-bindsym $mod+r exec $HOME/bin/i3/rename_window.sh
+bindsym $mod+Shift+r exec $HOME/scripts/i3/rename_workspace.sh
+bindsym $mod+r exec $HOME/scripts/i3/rename_window.sh
 
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
@@ -233,8 +233,8 @@ for_window [title="^scratch"] move scratchpad
 bindsym $mod+equal [title="^(?!^scratch$|.*Zeal|^todolist).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
 
-bindsym $mod+g exec $HOME/bin/vim_scratch.sh primary
-bindsym $mod+Shift+g exec $HOME/bin/vim_scratch.sh
+bindsym $mod+g exec $HOME/scripts/vim_scratch.sh primary
+bindsym $mod+Shift+g exec $HOME/scripts/vim_scratch.sh
 
 bindsym $mod+z [title="^.*Zeal$"] scratchpad show
 exec --no-startup-id zeal

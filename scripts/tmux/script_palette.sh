@@ -15,7 +15,7 @@ trim() {
     awk '{$1=$1};1' || exit 0
 }
 
-SCRIPTS_PATH="$HOME/bin/tmux/scripts/"
+SCRIPTS_PATH="$HOME/scripts/tmux/scripts/"
 
 pick=$(find "$SCRIPTS_PATH" -mindepth 1 | xargs -L 1 basename | menu "Script palette") || exit 0
 "$SCRIPTS_PATH/$pick"
