@@ -1,5 +1,5 @@
 export PATH="$HOME/bin:$HOME/.cargo/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
-export TERMINAL="alacritty.sh"
+export TERMINAL="alacritty"
 export EDITOR=/usr/bin/nvim
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export PAGER=/sbin/less
