@@ -42,6 +42,7 @@ vim.keymap.set("x", "<leader>jq", ":!jq .<CR>")
 -- open/close tabs
 vim.keymap.set("n", "<leader>tn", "<cmd>tabnew<cr>")
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>")
+vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 
 -- Opposite of J, split line
 vim.keymap.set("n", "S", [[i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^]])
