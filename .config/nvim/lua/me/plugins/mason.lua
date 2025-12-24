@@ -24,7 +24,6 @@ return {
                 "perlnavigator",
                 "dockerls",
                 "neocmake",
-                "ansiblels",
                 "clangd",
                 "tailwindcss",
                 "vue_ls",
@@ -48,6 +47,7 @@ return {
                 "shellcheck",
                 "mypy",
                 "markdownlint",
+                "ansible-lint",
             },
         })
     end,
