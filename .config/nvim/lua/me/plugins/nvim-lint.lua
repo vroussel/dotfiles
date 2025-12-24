@@ -13,7 +13,7 @@ return {
         lint.linters_by_ft = {
             sh = { "shellcheck" },
             python = { "mypy" },
-            markdown = { "markdownlint" },
+            markdown = { "rumdl" },
             ["yaml.ansible"] = { "ansible_lint" },
         }
 
