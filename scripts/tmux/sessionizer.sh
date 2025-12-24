@@ -92,11 +92,15 @@ conf() {
 
 }
 
-type=$(menu 'Choose kind' << EOF | trim
-    workspace
-    conf
-EOF
-) || exit 0
+if [ $# -eq 0 ]; then
+    type=$(menu 'Choose kind' << "    EOF" | trim
+        workspace
+        conf
+    EOF
+    ) || exit 0
+else
+    type="$1"
+fi
 
 
 case "$type" in
