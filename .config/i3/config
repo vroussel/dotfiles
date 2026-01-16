@@ -246,6 +246,8 @@ exec --no-startup-id i3-sensible-terminal -T todolist -e bash -c 'todo.sh ls; ex
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
 
+bindsym $mod+p exec $HOME/scripts/script_palette.sh $HOME/scripts/i3/palette rofi
+
 smart_borders on
 default_border normal 5
 for_window [all] title_window_icon padding 3px
