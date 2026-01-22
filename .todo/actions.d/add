@@ -32,3 +32,5 @@ if "$TODO_SH" command add "$@"; then
     [ $PRIORITY != false ] && "$TODO_SH" command pri "$line" $PRIORITY
     $DO && "$TODO_SH" command do "$line"
 fi
+
+exit 0
