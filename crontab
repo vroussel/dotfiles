@@ -1,3 +1,5 @@
 0 10 * * * $HOME/scripts/notify_todo_reminders.sh day
 0 * * * * $HOME/scripts/notify_todo_reminders.sh hour
 * * * * * $HOME/scripts/notify_todo_reminders.sh minute
+
+* 11 * * * crontab -l > $HOME/crontab
