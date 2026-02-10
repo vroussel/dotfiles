@@ -86,7 +86,7 @@ def partition_for_path(path: str) -> Optional[Partition]:
 
 
 def sanitize(str):
-    t = str.maketrans({"/": "_", ":": ".", "?": ""})
+    t = str.maketrans({"/": "_", ":": ".", "?": "", '"': "_", "*": "_"})
     return str.translate(t)
 
 
@@ -148,40 +148,44 @@ if __name__ == "__main__":
 
     for f in source_files:
         with taglib.File(f) as song:
-            grouping = song.tags.get("WORK")
-            if grouping:
-                if len(grouping) > 1:
-                    raise RuntimeError(f"More than one grouping for file {f}")
+            try:
+                grouping = song.tags.get("WORK")
+                if grouping:
+                    if len(grouping) > 1:
+                        raise RuntimeError(f"More than one grouping for file {f}")
+                    else:
+                        grouping = grouping[0]
+
+                artist = sanitize(song.tags["ALBUMARTIST"][0])
+                year = song.tags["ORIGINALYEAR"][0]
+                album = sanitize(song.tags["ALBUM"][0])
+                track, track_count = song.tags["TRACKNUMBER"][0].split("/")
+                title = sanitize(song.tags["TITLE"][0])
+                ext = f.suffix
+                disc = song.tags.get("DISCNUMBER")
+                if grouping == "Soundtracks":
+                    path = Path(
+                        "Soundtracks",
+                        f"{album} ({artist} - {year})",
+                        f"{track.zfill(len(track_count))} - {title}{ext}",
+                    )
+                elif grouping is None or grouping == "Albums":
+                    path = Path(
+                        "Albums",
+                        artist,
+                        f"{year} - {album}",
+                        f"Disc {disc}" if disc else "",
+                        f"{track.zfill(len(track_count))} - {title}{ext}",
+                    )
                 else:
-                    grouping = grouping[0]
+                    raise RuntimeError(f"Unknown grouping {grouping} for file {f}")
 
-            artist = sanitize(song.tags["ALBUMARTIST"][0])
-            year = song.tags["ORIGINALYEAR"][0]
-            album = sanitize(song.tags["ALBUM"][0])
-            track, track_count = song.tags["TRACKNUMBER"][0].split("/")
-            title = sanitize(song.tags["TITLE"][0])
-            ext = f.suffix
-            disc = song.tags.get("DISCNUMBER")
-            if grouping == "Soundtracks":
-                path = Path(
-                    "Soundtracks",
-                    f"{album} ({artist} - {year})",
-                    f"{track.zfill(len(track_count))} - {title}{ext}",
-                )
-            elif grouping is None:
-                path = Path(
-                    "Albums",
-                    artist,
-                    f"{year} - {album}",
-                    f"Disc {disc}" if disc else "",
-                    f"{track.zfill(len(track_count))} - {title}{ext}",
-                )
-            else:
-                raise RuntimeError(f"Unknown grouping {grouping} for file {f}")
-
-            dest = Path(dest_dir, path)
-            os.makedirs(os.path.dirname(dest), exist_ok=True)
-            copy_func(f, dest)
+                dest = Path(dest_dir, path)
+                os.makedirs(os.path.dirname(dest), exist_ok=True)
+                copy_func(f, dest)
+            except Exception:
+                logging.error("Error on %s", f)
+                raise
 
     if args.wipe_target_dir:
         for x in Path(args.target_dir).glob("*"):
