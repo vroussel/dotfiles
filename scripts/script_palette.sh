@@ -21,10 +21,6 @@ rofi_menu() {
         "$@"
 }
 
-trim() {
-    awk '{$1=$1};1' || exit 0
-}
-
 scripts_dir="$1"
 menu_type="$2"
 
@@ -40,5 +36,17 @@ case "$menu_type" in
         ;;
 esac
 
-pick=$(find "$scripts_dir" -mindepth 1 -executable | xargs -L 1 basename | "$menu" "Script palette") || exit 0
-"$scripts_dir/$pick"
+scripts=$(find "$scripts_dir" -mindepth 1 -executable)
+declare -A map
+for s in $scripts; do
+    pretty_name="$(basename "${s%.*}" | tr '\-_' ' ')"
+    echo "$s"
+    echo "$pretty_name"
+    map["$pretty_name"]="$s"
+done
+
+
+pick=$(printf "%s\n" "${!map[@]}" | "$menu" "Script palette") || exit 0
+script="${map["$pick"]}"
+echo "$script"
+"$script"
