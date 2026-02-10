@@ -116,7 +116,7 @@ function cd()
 function sudo()
 {
     if [ $# -eq 2 ] && [ "$1" == '-su' ]; then
-        /usr/bin/sudo tmp_bashrc="$tmp_bashrc" tmp_vimrc="$tmp_vimrc" -u "$2" /bin/bash --rcfile $tmp_bashrc
+        /usr/bin/sudo --preserve-env=tmp_vimrc,tmp_bashrc -u "$2" /bin/bash --rcfile $tmp_bashrc
     else
         /usr/bin/sudo "$@"
     fi
