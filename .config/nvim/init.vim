@@ -146,6 +146,17 @@ require'treesitter-context'.setup{
         },
     },
 }
+require('nvim-lightbulb').setup({
+    autocmd = {
+        enabled = true,
+        -- see :help autocmd-pattern
+        pattern = {"*"},
+        -- see :help autocmd-events
+        events = {"CursorHold", "CursorHoldI"}
+    }
+})
+vim.cmd[[highlight LightbulbSignYellow guifg=Yellow ctermfg=Yellow]]
+vim.fn.sign_define('LightBulbSign', { text = "", texthl = "LightbulbSignYellow", linehl="", numhl="" })
 EOF
 "=================
 
@@ -167,11 +178,6 @@ augroup END
 augroup python formatting
     autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
     autocmd FileType python nnoremap <buffer> <Leader>fi :%!isort -<CR>
-augroup END
-
-augroup lightbulb
-    autocmd!
-    autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()
 augroup END
 
 highlight ExtraWhitespace ctermbg=red guibg=red
