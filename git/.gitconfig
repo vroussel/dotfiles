@@ -1,0 +1,8 @@
+[url "https://aur.archlinux.org/"]
+    insteadOf = aur:
+
+[url "https://github.com/"]
+    insteadOf = gh:
+[user]
+	name = Valentin Roussel
+	email = valentin.rssl@gmail.com
