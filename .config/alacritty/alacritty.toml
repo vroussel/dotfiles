@@ -1,7 +1,3 @@
-
-[scrolling]
-history = 100000
-
 [keyboard]
 bindings = [
     { key = "PageUp", action = "ScrollLineUp" },
