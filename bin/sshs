@@ -43,4 +43,4 @@ else
     cmd+="$bash_cmd"
 fi
 
-exec /bin/ssh -t "${ssh_opts_and_host[@]}" "$cmd"
+/bin/ssh -t "${ssh_opts_and_host[@]}" "$cmd"
