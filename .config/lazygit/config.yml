@@ -9,6 +9,8 @@ git:
   paging:
     colorArg: always
     pager: delta --diff-so-fancy --paging=never
+  merging:
+    args: "--no-ff"
 
 customCommands:
   - key: b
