@@ -88,7 +88,6 @@ Plug 'rafamadriz/friendly-snippets'
 " Visual stuff
 Plug 'dracula/vim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'b0o/incline.nvim'
@@ -111,7 +110,6 @@ Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'yssl/QFEnter'
-Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'numToStr/Comment.nvim'
 "Plug 'nvim-treesitter/playground'
 call plug#end()
