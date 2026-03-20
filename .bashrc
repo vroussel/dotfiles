@@ -211,7 +211,8 @@ bind -x '"\C-z":"fg >/dev/null 2>&1"'
 
 
 # Run fish
-if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && -z ${debian_chroot} ]]
+command -v fish > /dev/null
+if [[ $? == 0 && $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && -z ${debian_chroot} ]]
 then
 	exec fish
 fi
