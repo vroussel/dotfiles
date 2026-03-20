@@ -65,10 +65,10 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-RED="$(echo -e "\033[1;31m")"
-GREEN="$(echo -e "\033[1;32m")"
-BLUE="$(echo -e "\033[1;34m")"
-RESET="$(echo -e "\033[0m")"
+RED="$(echo -en "\033[1;31m")"
+GREEN="$(echo -en "\033[1;32m")"
+BLUE="$(echo -en "\033[1;34m")"
+RESET="$(echo -en "\033[0m")"
 if [ "$color_prompt" = yes ]; then
     PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\w\[${RESET}\]\$(__git_ps1)\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$ \[${RESET}\]"
 else
