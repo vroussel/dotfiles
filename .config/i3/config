@@ -46,7 +46,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec $HOME/.i3/i3_shell.sh
+bindsym $mod+Shift+Return exec $HOME/bin/i3/i3_shell.sh
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -142,15 +142,15 @@ bindsym --whole-window $mod+button2 floating toggle
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-        bindsym h exec --no-startup-id /$HOME/.i3/i3_resize.sh left 1
-        bindsym k exec --no-startup-id /$HOME/.i3/i3_resize.sh up 1
-        bindsym j exec --no-startup-id /$HOME/.i3/i3_resize.sh down 1
-        bindsym l exec --no-startup-id /$HOME/.i3/i3_resize.sh right 1
+        bindsym h exec --no-startup-id /$HOME/bin/i3/i3_resize.sh left 1
+        bindsym k exec --no-startup-id /$HOME/bin/i3/i3_resize.sh up 1
+        bindsym j exec --no-startup-id /$HOME/bin/i3/i3_resize.sh down 1
+        bindsym l exec --no-startup-id /$HOME/bin/i3/i3_resize.sh right 1
 
-        bindsym Ctrl+h exec --no-startup-id /$HOME/.i3/i3_resize.sh left 10
-        bindsym Ctrl+k exec --no-startup-id /$HOME/.i3/i3_resize.sh up 10
-        bindsym Ctrl+j exec --no-startup-id /$HOME/.i3/i3_resize.sh down 10
-        bindsym Ctrl+l exec --no-startup-id /$HOME/.i3/i3_resize.sh right 10
+        bindsym Ctrl+h exec --no-startup-id /$HOME/bin/i3/i3_resize.sh left 10
+        bindsym Ctrl+k exec --no-startup-id /$HOME/bin/i3/i3_resize.sh up 10
+        bindsym Ctrl+j exec --no-startup-id /$HOME/bin/i3/i3_resize.sh down 10
+        bindsym Ctrl+l exec --no-startup-id /$HOME/bin/i3/i3_resize.sh right 10
 
         # change focus
         bindsym $mod+h focus left
@@ -186,10 +186,10 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id autorandr --change
 exec --no-startup-id dex --autostart --search-paths $HOME/.config/autostart
 exec --no-startup-id picom -b
-exec_always --no-startup-id ~/.i3/kb_layout.sh
+exec_always --no-startup-id ~/bin/i3/kb_layout.sh
 
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
-bindsym $mod+r exec $HOME/.i3/i3_rename_workspace.sh
+bindsym $mod+r exec $HOME/bin/i3/i3_rename_workspace.sh
 
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
@@ -202,8 +202,8 @@ for_window [title="^scratch"] move scratchpad
 bindsym $mod+equal [title="^(?!^scratch$|.*Zeal|^todolist).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
 
-bindsym $mod+g exec $HOME/.i3/vim_scratch.sh primary
-bindsym $mod+Shift+g exec $HOME/.i3/vim_scratch.sh clipboard
+bindsym $mod+g exec $HOME/bin/i3/vim_scratch.sh primary
+bindsym $mod+Shift+g exec $HOME/bin/i3/vim_scratch.sh clipboard
 for_window [title="^__vim_scratch"] floating enable
 
 bindsym $mod+z [title="^.*Zeal$"] scratchpad show
