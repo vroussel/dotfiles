@@ -66,9 +66,7 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
 
-
-Plug 'arcticicestudio/nord-vim'
-Plug 'gruvbox-community/gruvbox'
+Plug 'dracula/vim'
 call plug#end()
 "===================
 
@@ -85,7 +83,8 @@ nnoremap <leader>: :History:<CR>
 
 "===== Mapping =====
 "Custom
-colorscheme gruvbox
+set termguicolors
+colorscheme dracula
 
 imap jk <Esc>
 nnoremap <F2> :call ToggleDebugMode()<CR>
