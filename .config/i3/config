@@ -128,6 +128,10 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+greater workspace next
 bindsym $mod+less workspace prev
+bindsym --whole-window --border $mod+button4 focus up
+bindsym --whole-window --border $mod+button5 focus down
+bindsym --whole-window --border $mod+button6 workspace prev_on_output
+bindsym --whole-window --border $mod+button7 workspace next_on_output
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
