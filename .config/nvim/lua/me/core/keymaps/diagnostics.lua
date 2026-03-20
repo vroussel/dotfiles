@@ -19,12 +19,12 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
 opts.desc = "Go to previous error"
 vim.keymap.set("n", "[e", function()
-	vim.diagnostic.goto_prev({ severity = "Error" })
+	vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
 end, opts)
 
 opts.desc = "Go to next error"
 vim.keymap.set("n", "]e", function()
-	vim.diagnostic.goto_next({ severity = "Error" })
+	vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
 end, opts)
 
 -- Toggle diagnostic appearance
