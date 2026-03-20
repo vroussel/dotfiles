@@ -54,8 +54,10 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'psf/black'
 call plug#end()
@@ -70,6 +72,7 @@ nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <S-u> :UndotreeToggle<CR>
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Trailing spaces
 nnoremap <leader>t :%s/\s\+$//g<CR>
@@ -167,3 +170,5 @@ augroup pythonfile
     autocmd!
     autocmd BufWritePre *.py Black
 augroup END
+
+let g:rustfmt_autosave = 1
