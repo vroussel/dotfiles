@@ -367,7 +367,7 @@ luasnip.config.set_config {
 	delete_check_events = "TextChanged,InsertLeave",
 }
 
-require("luasnip/loaders/from_vscode").load()
+require("luasnip/loaders/from_vscode").lazy_load()
 
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
