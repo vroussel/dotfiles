@@ -6,10 +6,15 @@ if [[ $# -gt 1 ]]; then
     echo "  $(basename "$0") [TERM]"
     echo "   Increment all tasks' priority."
     echo "   If TERM is specified, only apply to tasks containing TERM."
+    echo "   If TERM starts with -, only apply to tasks NOT containing TERM."
 fi
+
+term="$1"
 
 if [[ -z "$1" ]]; then
     perl -i -pe 's/(?<=\()([B-Z])(?=\))/chr(ord($1) - 1)/e' $TODO_FILE
+elif [[ "${term:0:1}" == "-" ]]; then
+    perl -i -pe 's/(?<=\()([A-Y])(?=\)(?!.*'"${term:1}"'))/chr(ord($1) - 1)/e' $TODO_FILE
 else
-    perl -i -pe "s/(?<=\()([B-Z])(?=\).*$1)/chr(ord(\$1) - 1)/e" $TODO_FILE
+    perl -i -pe 's/(?<=\()([A-Y])(?=\).*'"${term}"')/chr(ord($1) - 1)/e' $TODO_FILE
 fi
