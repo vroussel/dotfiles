@@ -123,10 +123,8 @@ bindsym $mod+Shift+8 move container to workspace number 8
 bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
-bindsym $mod+greater exec $HOME/bin/i3/focus_tab.sh right
-bindsym $mod+less exec $HOME/bin/i3/focus_tab.sh left
-bindsym $mod+Shift+greater workspace next
-bindsym $mod+Shift+less workspace prev
+bindsym $mod+greater workspace next
+bindsym $mod+less workspace prev
 
 # reload the configuration file
 bindsym $mod+c reload
@@ -217,8 +215,7 @@ exec --no-startup-id picom -b
 exec_always --no-startup-id ~/bin/i3/init_kb_layout.sh
 
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
-bindsym $mod+r exec $HOME/bin/i3/rename_window.sh
-bindsym $mod+shift+r exec $HOME/bin/i3/rename_workspace.sh
+bindsym $mod+r exec $HOME/bin/i3/rename_workspace.sh
 
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
