@@ -58,7 +58,7 @@ conf() {
         ["alacritty"]="$CONF_DIR/alacritty/alacritty.toml"
         ["bashrc"]="$HOME/.bashrc"
         ["fish"]="$CONF_DIR/fish/config.fish"
-        ["home scripts"]="$HOME/bin/"
+        ["home scripts"]="$HOME/scripts/"
         ["remote bashrc"]="$HOME/.bashrc_remote"
         ["remote vimrc"]="$HOME/.vimrc_remote"
     )
