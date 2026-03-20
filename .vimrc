@@ -297,6 +297,17 @@ augroup END
 
 let g:fzf_layout = { 'down': '40%' }
 
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y[%{&fileencoding?&fileencoding:&encoding}]    [%L,%3.p%%] %5.l:%-5.v'
+
 " folding
 " check help for all plugins
 " split vimrc ?
