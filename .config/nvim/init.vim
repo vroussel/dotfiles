@@ -1,7 +1,7 @@
 "===== Settings =====
 " Misc
 if !exists('g:syntax_on') "Avoid weird brackets in nerdtree when resourcing conf
-	syntax enable
+    syntax enable
 endif
 set cursorline
 set scrolloff=5
@@ -402,7 +402,7 @@ sources = cmp.config.sources({
 })
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys 
