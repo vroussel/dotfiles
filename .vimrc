@@ -65,6 +65,8 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
+Plug 'nvim-treesitter/nvim-treesitter', { 'branch': '0.5-compat', 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/playground'
 
 Plug 'dracula/vim'
 call plug#end()
@@ -274,7 +276,7 @@ require'lspconfig'.clangd.setup{
 }
 require'lspconfig'.cmake.setup{on_attach = on_attach}
 
-
+require "nvim-treesitter.configs".setup { highlight = {enable = true } }
 EOF
 
 inoremap <silent><expr> <C-Space> compe#complete()
