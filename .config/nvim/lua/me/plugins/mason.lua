@@ -23,11 +23,8 @@ return {
                 "lua_ls",
                 "neocmake",
                 "clangd",
-                "tailwindcss",
-                "vue_ls",
                 "ruff",
                 "pylsp",
-                "html",
             },
         })
 
@@ -36,12 +33,10 @@ return {
             ensure_installed = {
                 -- formatters
                 "stylua",
-                "prettierd",
                 "gersemi",
                 "clang-format",
 
                 -- linters
-                "ansible-lint", -- used by ansiblels
                 "shellcheck",
                 "mypy",
                 "rumdl",
