@@ -1,6 +1,6 @@
 os:
-  edit: 'tmux select-window -t :nvim; echo {{filename}} | xargs realpath --relative-to=. | xargs nvim --server "$NVIM" --remote-tab'
-  editAtLine: 'tmux select-window -t :nvim; echo {{filename}} | xargs realpath --relative-to=. | xargs nvim --server "$NVIM" --remote-tab {{filename}}; [ -z "$NVIM" ] || nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
+  edit: 'tmux select-window -t :nvim; echo {{filename}} | xargs realpath --relative-to="$NVIM_PATH" | xargs nvim --server "$NVIM" --remote-tab'
+  editAtLine: 'tmux select-window -t :nvim; echo {{filename}} | xargs realpath --relative-to="$NVIM_PATH" | xargs nvim --server "$NVIM" --remote-tab; nvim --server "$NVIM" --remote-send ":{{line}}<CR>"'
   editAtLineAndWait: 'nvim +{{line}} {{filename}}'
 promptToReturnFromSubprocess: false
 git:

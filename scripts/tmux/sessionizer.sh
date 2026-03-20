@@ -35,7 +35,7 @@ workspace() {
     if ! tmux has-session -t "$session"; then
         temp_dir=$(mktemp -d /tmp/nvim.XXXXX)
         pipe="$temp_dir/pipe"
-        tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe"
+        tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe" -e "NVIM_PATH=$path"
         tmux new-window -d -c "$path" -n nvim -t "$session:" \
             && tmux send-keys -t "$session:nvim" "nvim --listen \$NVIM" C-m
         tmux new-window -d -c "$path" -n lazygit -t "$session:" \
@@ -75,7 +75,7 @@ conf() {
     if ! tmux has-session -t "$session"; then
         temp_dir=$(mktemp -d /tmp/nvim.XXXXX)
         pipe="$temp_dir/pipe"
-        tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe"
+        tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe" -e "NVIM_PATH=$path"
         tmux new-window -d -c "$path" -n nvim -t "$session:" \
             && tmux send-keys -t "$session:nvim" "nvim --listen \$NVIM $target" C-m
         tmux new-window -d -n lazygit -t "$session:" \
