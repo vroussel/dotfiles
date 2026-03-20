@@ -56,25 +56,10 @@ nmap h <C-w>h
 nmap j <C-w>j
 nmap k <C-w>k
 nmap l <C-w>l
-"-
-nmap v <C-w>v
-nmap x <C-w>s
-nmap q <C-w>q
-nmap o <C-w>o
-"-
-nmap <c-k> <C-w>5+
-nmap <c-j> <C-w>5-
-nmap <c-h> <C-w>10<
-nmap <c-l> <C-w>10>
-nmap m <C-w>_<C-w>|
-nmap = <C-w>=
-"-
-nmap H <c-w>H
-nmap J <c-w>J
-nmap K <c-w>K
-nmap L <c-w>L
-nmap T <c-w>T
-
+nmap H <C-w>5+
+nmap J <C-w>5-
+nmap K <C-w>10<
+nmap L <C-w>10>
 
 " Insert line in normal mode
 nmap ]<space> m`o<Esc>``
@@ -85,7 +70,6 @@ noremap <Leader>p "0p
 noremap <Leader>P "0P
 
 " Copy to system clipboard through ssh
-"map <Leader><Leader>y "ay | :call system("copy_osc52", getreg('@"'))
 nmap  <leader><leader>y :set opfunc=Ssh_yank<CR>g@
 vmap  <leader><leader>y :<C-U>call Ssh_yank(visualmode(), 1)<CR>
 
