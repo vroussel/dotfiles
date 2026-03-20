@@ -11,6 +11,7 @@ return {
 		"dcampos/cmp-snippy",
 		"honza/vim-snippets",
 		"onsails/lspkind.nvim",
+		{ "folke/lazydev.nvim", config = true, ft = "lua" },
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -40,6 +41,7 @@ return {
 				["<C-y>"] = cmp.mapping.confirm({ select = true }),
 			}),
 			sources = cmp.config.sources({
+				{ name = "lazydev" },
 				{ name = "nvim_lsp" },
 				{ name = "snippy" },
 				{ name = "buffer" },

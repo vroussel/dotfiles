@@ -5,7 +5,6 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
-		{ "folke/neodev.nvim", config = true },
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"ray-x/lsp_signature.nvim",
