@@ -166,6 +166,29 @@ noremap <Leader>P "0P
 " Fix Y
 nnoremap Y y$
 
+" Backspace for previous buffer
+nnoremap <bs> <c-^>
+
+" Turn off fucking ex mode
+nnoremap Q @q
+
+" xml formatting
+nnoremap <leader>xml :.!xmlstarlet fo<CR>
+vnoremap <leader>xml :!xmlstarlet fo<CR>
+
+" json formatting
+nnoremap <leader>jq :.!jq .<CR>
+vnoremap <leader>jq :!jq .<CR>
+
+" clear search highlighting with redraw
+noremap <C-L> :nohls<CR><C-L>
+
+" Open / close tabs
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>tc :tabclose<CR>
+
+" Opposite of J, split line
+nnoremap S i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^
 
 "Debug mode (enable mouse + disable relative line numbers)
 function! ToggleDebugMode()
