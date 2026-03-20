@@ -27,7 +27,7 @@
 # Change $SCRIPT_DIR to the location of your scripts!
 SCRIPT_DIR=/home/valentin/.config/i3blocks/blocklets
 command=$SCRIPT_DIR/$BLOCK_NAME
-separator_block_width=20
+separator_block_width=15
 markup=pango
 
 [aur-update]
@@ -41,11 +41,6 @@ UPDATE_COLOR=red
 # The type defaults to "mem" if the instance is not specified.
 [memory]
 label=<b>MEM</b> 
-interval=10
-
-[memory]
-label=<b>SWAP</b> 
-instance=swap
 interval=10
 
 # Network interface monitoring
