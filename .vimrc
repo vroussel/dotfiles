@@ -316,3 +316,8 @@ set colorcolumn=100
 " blogs
 " telescope?
 " clean up lsp / compe stuff
+" configure formatters (clang, python, etc)
+
+"lua << EOF
+"vim.lsp.set_log_level("debug")
+"EOF
