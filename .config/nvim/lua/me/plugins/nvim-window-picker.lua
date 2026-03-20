@@ -39,13 +39,13 @@ return {
             callback = function()
                 vim.keymap.set("n", "<c-v>", function()
                     open_qf_item("vsplit")
-                end)
+                end, { buffer = true })
                 vim.keymap.set("n", "<c-x>", function()
                     open_qf_item("split")
-                end)
+                end, { buffer = true })
                 vim.keymap.set("n", "<cr>", function()
                     open_qf_item(nil)
-                end)
+                end, { buffer = true })
             end,
         })
     end,
