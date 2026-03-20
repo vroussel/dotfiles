@@ -57,12 +57,10 @@ let mapleader=" "
 
 "===== Plugins =====
 call plug#begin(stdpath('data') . '/plugged')
-" Telescope / fzf
+" Telescope
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
 
 " LSP / completion
 Plug 'neovim/nvim-lspconfig'
@@ -200,11 +198,10 @@ endfunction
 
 
 "===== Mapping =====
-" Telescope / fzf
+" Telescope
 nnoremap <leader><tab> :Telescope keymaps<CR>
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
-nnoremap <leader>fz :Rg<CR>
 nnoremap <leader>fw :Telescope grep_string<CR>
 nnoremap <leader>b :Telescope buffers<CR>
 nnoremap <leader>o :Telescope oldfiles<CR>
