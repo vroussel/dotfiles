@@ -24,6 +24,7 @@ return {
 				"black",
 				"isort",
 				"prettierd",
+				"gersemi",
 
 				-- linters
 				"ansible-lint", -- used by ansiblels
