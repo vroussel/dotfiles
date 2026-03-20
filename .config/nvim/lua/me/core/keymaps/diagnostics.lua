@@ -30,6 +30,7 @@ end, opts)
 -- Toggle diagnostic appearance
 
 local virtual_text = false
+local virtual_lines = false
 local underline = true
 local signs = true
 local only_errors = false
@@ -49,12 +50,23 @@ local update_diag_conf = function()
 		virtual_text = diag_option_value(virtual_text),
 		signs = diag_option_value(signs),
 		underline = diag_option_value(underline),
+		virtual_lines = virtual_lines,
 	})
 end
 
 -- toggle diag virtual
 vim.keymap.set("n", "<leader>tdv", function()
-	virtual_text = not virtual_text
+	if not virtual_text and not virtual_lines then
+		virtual_text = true
+		virtual_lines = false
+	elseif virtual_text then
+		virtual_text = false
+		virtual_lines = true
+	elseif virtual_lines then
+		virtual_text = false
+		virtual_lines = false
+	end
+
 	update_diag_conf()
 end, { desc = "Toggle virtual text" })
 
