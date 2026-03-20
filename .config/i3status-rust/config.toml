@@ -7,6 +7,20 @@ theme = "dracula"
 alternating_tint_bg="#111111"
 
 [[block]]
+block = "custom"
+command = "$HOME/scripts/routine.sh print_current"
+json = true
+interval = 1
+signal = 4
+hide_when_empty = true
+[[block.click]]
+button = "left"
+cmd = "$HOME/scripts/i3/routine.sh next"
+[[block.click]]
+button = "right"
+cmd = "$HOME/scripts/i3/routine.sh stop"
+
+[[block]]
 block = "packages"
 package_manager = ["pacman", "aur"]
 interval = 600
