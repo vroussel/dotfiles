@@ -11,7 +11,7 @@ return {
 		"dcampos/cmp-snippy",
 		"honza/vim-snippets",
 		"onsails/lspkind.nvim",
-		{ "folke/lazydev.nvim", config = true, ft = "lua" },
+		"folke/lazydev.nvim",
 	},
 	config = function()
 		local cmp = require("cmp")

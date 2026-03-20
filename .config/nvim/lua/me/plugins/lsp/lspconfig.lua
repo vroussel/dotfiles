@@ -8,6 +8,7 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		"ray-x/lsp_signature.nvim",
+		"folke/lazydev.nvim",
 	},
 	config = function()
 		-- vim.lsp.set_log_level(0)
@@ -194,6 +195,9 @@ return {
 				Lua = {
 					workspace = {
 						checkThirdParty = false,
+					},
+					runtime = {
+						version = "LuaJIT",
 					},
 				},
 			},
