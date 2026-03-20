@@ -1,0 +1,16 @@
+#!/bin/bash
+
+BASHRC_DATA=`cat ~/.bashrc_remote | gzip| base64 -w 0`
+VIMRC_DATA=`cat ~/.vimrc_remote | gzip | base64 -w 0`
+TMP_VIMRC="/tmp/vimrc_\${SSH_USER}_\${SUDO_USER:=\$USER}"
+TMP_BASHRC="/tmp/bashrc_\${SSH_USER}_\${SUDO_USER:=\$USER}"
+cmd=""
+cmd+="export tmp_bashrc=\"$TMP_BASHRC\";"
+cmd+="export tmp_vimrc=\"$TMP_VIMRC\";"
+cmd+="echo \"${VIMRC_DATA}\" | base64 --decode | gunzip > \${tmp_vimrc};"
+cmd+="echo \"${BASHRC_DATA}\" | base64 --decode | gunzip > \${tmp_bashrc};"
+if [ -n "$SSHS_BASH_CMD" ]; then
+    cmd+="$SSHS_BASH_CMD;"
+fi
+cmd+="bash --rcfile \${tmp_bashrc}"
+/bin/ssh -t "$@" "$cmd"
