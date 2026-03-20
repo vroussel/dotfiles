@@ -274,6 +274,7 @@ require'lspconfig'.pylsp.setup{on_attach = on_attach}
 require'lspconfig'.clangd.setup{
     on_attach = on_attach
 }
+require'lspconfig'.cmake.setup{on_attach = on_attach}
 
 
 EOF
@@ -286,7 +287,7 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 
 augroup format_on_save
     autocmd!
-    autocmd BufWritePre *.py,*.rs lua vim.lsp.buf.formatting_sync(nil, 1000)
+    autocmd BufWritePre *.py,*.rs,CMakeLists.txt lua vim.lsp.buf.formatting_sync(nil, 1000)
 augroup END
 
 augroup lightbulb
