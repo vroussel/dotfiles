@@ -57,13 +57,15 @@ end
 -- toggle diag virtual
 vim.keymap.set("n", "<leader>tdv", function()
     virtual_text = not virtual_text
+    virtual_lines = false
     update_diag_conf()
 end, { desc = "Toggle virtual text" })
 --
 -- toggle diag virtual (multiline)
 vim.keymap.set("n", "<leader>tdV", function()
     virtual_lines = not virtual_lines
-    require("lsp_lines").toggle()
+    virtual_text = false
+    update_diag_conf()
 end, { desc = "Toggle virtual text (multiline)" })
 
 -- toggle diag underline
