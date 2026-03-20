@@ -36,3 +36,5 @@ vim.o.smartcase = true
 
 vim.o.termguicolors = true
 vim.o.showmode = false
+
+vim.o.winborder = "rounded"
