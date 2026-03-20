@@ -121,7 +121,6 @@ PROMPT_COMMAND='[ -d "${XDG_RUNTIME_DIR}" ] && pwd > "${XDG_RUNTIME_DIR}/.cwd"'
 # Set GCC option to color output
 export GCC_COLORS='error=01;31:warning=01;33:note=01;34:caret=05;32:locus=0;32:quote=0;92'
 
-alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
 alias t=todo.sh
 
 #source /usr/share/doc/fzf/examples/key-bindings.bash
@@ -137,6 +136,10 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 source "/usr/share/fzf/key-bindings.bash"
 source "/usr/share/bash-completion/completions/todo.sh"
 complete -F _todo t
+if [ -f "$HOME/.aliases" ]; then
+    source "$HOME/.aliases"
+fi
+
 
 stty -ixon
 shopt -s checkjobs
