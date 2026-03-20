@@ -238,6 +238,8 @@ noremap <Leader>p "0p
 noremap <Leader>P "0P
 
 " Paste from system clipboard
+noremap <Leader><Leader>y "+y
+vnoremap <Leader><Leader>y "+y
 noremap <Leader><Leader>p "+p
 noremap <Leader><Leader>P "+P
 
