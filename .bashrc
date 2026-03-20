@@ -125,3 +125,4 @@ PROMPT_COMMAND='[ -d "${XDG_RUNTIME_DIR}" ] && pwd > "${XDG_RUNTIME_DIR}/.cwd"'
 export GCC_COLORS='error=01;31:warning=01;33:note=01;34:caret=05;32:locus=0;32:quote=0;92'
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
+alias todo=todo.sh
