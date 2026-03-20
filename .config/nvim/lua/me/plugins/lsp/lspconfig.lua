@@ -27,63 +27,63 @@ return {
 		local lspconfig = require("lspconfig")
 		local keymap = vim.keymap
 
-		local opts = { noremap = true, silent = true }
+		local map_opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
-			opts.buffer = bufnr
+			map_opts.buffer = bufnr
 
 			-- set keybinds
-			opts.desc = "Show LSP references"
-			keymap.set("n", "gr", vim.lsp.buf.references, opts)
+			map_opts.desc = "Show LSP references"
+			keymap.set("n", "gr", vim.lsp.buf.references, map_opts)
 
-			opts.desc = "Go to declaration"
-			keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+			map_opts.desc = "Go to declaration"
+			keymap.set("n", "gD", vim.lsp.buf.declaration, map_opts)
 
-			opts.desc = "Show LSP definitions"
-			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
+			map_opts.desc = "Show LSP definitions"
+			keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", map_opts)
 
-			opts.desc = "Show LSP implementations"
-			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", opts)
+			map_opts.desc = "Show LSP implementations"
+			keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", map_opts)
 
-			opts.desc = "Show LSP type definitions"
-			keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", opts)
+			map_opts.desc = "Show LSP type definitions"
+			keymap.set("n", "gy", "<cmd>Telescope lsp_type_definitions<CR>", map_opts)
 
-			opts.desc = "See available code actions"
-			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+			map_opts.desc = "See available code actions"
+			keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, map_opts)
 
-			opts.desc = "Smart rename"
-			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+			map_opts.desc = "Smart rename"
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, map_opts)
 
-			opts.desc = "Show documentation for what is under cursor"
-			keymap.set("n", "K", vim.lsp.buf.hover, opts)
+			map_opts.desc = "Show documentation for what is under cursor"
+			keymap.set("n", "K", vim.lsp.buf.hover, map_opts)
 
 			if client.name == "clangd" then
-				opts.buffer = bufnr
+				map_opts.buffer = bufnr
 
-				opts.desc = "Go to source/header"
+				map_opts.desc = "Go to source/header"
 				keymap.set("n", "<leader>aa", function()
 					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, opts)
+				end, map_opts)
 
-				opts.desc = "Go to source/header in vertical split"
+				map_opts.desc = "Go to source/header in vertical split"
 				keymap.set("n", "<leader>av", function()
 					vim.cmd("vsplit")
 					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, opts)
+				end, map_opts)
 
-				opts.desc = "Go to source/header in horizontal split"
+				map_opts.desc = "Go to source/header in horizontal split"
 				keymap.set("n", "<leader>ax", function()
 					vim.cmd("split")
 					vim.api.nvim_command("ClangdSwitchSourceHeader")
-				end, opts)
+				end, map_opts)
 			end
 
-			opts.desc = "Toggle inlay hints"
+			map_opts.desc = "Toggle inlay hints"
 			keymap.set("n", "<leader>th", function()
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-			end, opts)
+			end, map_opts)
 
-			opts.desc = "Restart LSP"
-			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
+			map_opts.desc = "Restart LSP"
+			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", map_opts)
 		end
 
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
