@@ -77,11 +77,13 @@ GREEN="$(echo -en "\033[1;32m")"
 BLUE="$(echo -en "\033[1;34m")"
 RESET="$(echo -en "\033[0m")"
 if [ "$color_prompt" = yes ]; then
-    PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\w\[${RESET}\]\$(__git_ps1)\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$ \[${RESET}\]"
+    PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\w\[${RESET}\]\$(__git_ps1)\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$\[${RESET}\]"
 else
-    PS1='${debian_chroot:+($debian_chroot)}\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\w\$'
 fi
 unset color_prompt force_color_prompt
+
+PS1="$PS1 " #\u2005, special space in order to be able to jump to previous/next prompt
 
 #dynamic window title
 window_title="cwd=\$PWD"
