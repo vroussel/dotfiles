@@ -1,0 +1,2 @@
+#!/bin/sh
+shuf -e ~/wallpapers/* -n 1 | xargs feh --bg-fill
