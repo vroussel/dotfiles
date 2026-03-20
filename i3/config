@@ -160,7 +160,7 @@ bar {
         status_command i3status
 }
 
-exec setxkbmap us,fr -option "grp:lswitch" -option "shift:both_capslock"
+exec--no-startup-id setxkbmap us,fr -option "grp:switch" -option "shift:both_capslock"
 
 bindsym $mod+r exec $HOME/.i3/i3_rename_workspace.sh
 exec --no-startup-id picom -b
