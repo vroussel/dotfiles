@@ -13,11 +13,11 @@ vim.keymap.set("n", "<bs>", "<c-^>")
 
 -- Insert lines before/after current without leaving normal mode
 vim.keymap.set("n", "]<leader>", function()
-	return "m`" .. vim.v.count .. "o<Esc>``"
+    return "m`" .. vim.v.count .. "o<Esc>``"
 end, { expr = true })
 
 vim.keymap.set("n", "[<leader>", function()
-	return "m`" .. vim.v.count .. "O<Esc>``"
+    return "m`" .. vim.v.count .. "O<Esc>``"
 end, { expr = true })
 
 -- Paste last yanked item
@@ -46,15 +46,15 @@ vim.keymap.set("n", "S", [[i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^]])
 
 -- Toggle quickfix list
 vim.keymap.set("n", "<c-q>", function()
-	local qf_exists = false
-	for _, win in pairs(vim.fn.getwininfo()) do
-		if win["quickfix"] == 1 then
-			qf_exists = true
-		end
-	end
-	if qf_exists == true then
-		vim.cmd("cclose")
-	else
-		vim.cmd("copen")
-	end
+    local qf_exists = false
+    for _, win in pairs(vim.fn.getwininfo()) do
+        if win["quickfix"] == 1 then
+            qf_exists = true
+        end
+    end
+    if qf_exists == true then
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
+    end
 end)
