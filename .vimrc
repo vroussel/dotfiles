@@ -143,10 +143,6 @@ nnoremap <leader>k <C-w>5+
 nnoremap <leader>j <C-w>5-
 nnoremap <leader>h <C-w>10<
 nnoremap <leader>l <C-w>10>
-"nnoremap <leader>kk <C-w>20+
-"nnoremap <leader>jj <C-w>20-
-"nnoremap <leader>hh <C-w>20<
-"nnoremap <leader>ll <C-w>20>
 
 " Persistant undo history
 if has("persistent_undo")
