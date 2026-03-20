@@ -2,7 +2,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
@@ -25,7 +25,6 @@ return {
 		})
 
 		local lspconfig = require("lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local keymap = vim.keymap
 
 		local opts = { noremap = true, silent = true }
@@ -88,15 +87,9 @@ return {
 
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
-
-			require("lsp_signature").on_attach({
-				toggle_key = "<C-h>",
-				floating_window = false,
-				hint_prefix = "󰅏",
-			}, bufnr)
 		end
 
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		-- (not in youtube nvim video)
