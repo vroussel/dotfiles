@@ -188,8 +188,7 @@ bar {
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
 bindsym $mod+r exec $HOME/.i3/i3_rename_workspace.sh
 
-exec_always --no-startup-id setxkbmap us,fr -option "grp:switch" -option "shift:both_capslock"
-exec_always --no-startup-id /usr/bin/xmodmap $HOME/.Xmodmap
+exec_always --no-startup-id ~/.i3/kb_layout.sh
 exec --no-startup-id picom -b
 
 bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
