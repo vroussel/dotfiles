@@ -1,14 +1,18 @@
 return {
     "folke/lazydev.nvim",
-    ft = "lua", -- only load on lua files
+    ft = "lua",
+    dependencies = {
+        {
+            "Bilal2453/luvit-meta",
+            lazy = true,
+        },
+    },
     opts = {
         library = {
-            -- See the configuration section for more details
-            -- Load luvit types when the `vim.uv` word is found
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+            { path = "luvit-meta/library", words = { "vim%.uv" } },
         },
         enabled = function(root_dir)
-            return string.match(root_dir, ".config/nvim")
+            return string.match(root_dir, "nvim")
         end,
     },
 }
