@@ -116,6 +116,94 @@ let s:TYPE = {
 let s:loaded = get(s:, 'loaded', {})
 let s:triggers = get(s:, 'triggers', {})
 
+function! s:is_powershell(shell)
+  return a:shell =~# 'powershell\(\.exe\)\?$' || a:shell =~# 'pwsh\(\.exe\)\?$'
+endfunction
+
+function! s:isabsolute(dir) abort
+  return a:dir =~# '^/' || (has('win32') && a:dir =~? '^\%(\\\|[A-Z]:\)')
+endfunction
+
+function! s:git_dir(dir) abort
+  let gitdir = s:trim(a:dir) . '/.git'
+  if isdirectory(gitdir)
+    return gitdir
+  endif
+  if !filereadable(gitdir)
+    return ''
+  endif
+  let gitdir = matchstr(get(readfile(gitdir), 0, ''), '^gitdir: \zs.*')
+  if len(gitdir) && !s:isabsolute(gitdir)
+    let gitdir = a:dir . '/' . gitdir
+  endif
+  return isdirectory(gitdir) ? gitdir : ''
+endfunction
+
+function! s:git_origin_url(dir) abort
+  let gitdir = s:git_dir(a:dir)
+  let config = gitdir . '/config'
+  if empty(gitdir) || !filereadable(config)
+    return ''
+  endif
+  return matchstr(join(readfile(config)), '\[remote "origin"\].\{-}url\s*=\s*\zs\S*\ze')
+endfunction
+
+function! s:git_revision(dir) abort
+  let gitdir = s:git_dir(a:dir)
+  let head = gitdir . '/HEAD'
+  if empty(gitdir) || !filereadable(head)
+    return ''
+  endif
+
+  let line = get(readfile(head), 0, '')
+  let ref = matchstr(line, '^ref: \zs.*')
+  if empty(ref)
+    return line
+  endif
+
+  if filereadable(gitdir . '/' . ref)
+    return get(readfile(gitdir . '/' . ref), 0, '')
+  endif
+
+  if filereadable(gitdir . '/packed-refs')
+    for line in readfile(gitdir . '/packed-refs')
+      if line =~# ' ' . ref
+        return matchstr(line, '^[0-9a-f]*')
+      endif
+    endfor
+  endif
+
+  return ''
+endfunction
+
+function! s:git_local_branch(dir) abort
+  let gitdir = s:git_dir(a:dir)
+  let head = gitdir . '/HEAD'
+  if empty(gitdir) || !filereadable(head)
+    return ''
+  endif
+  let branch = matchstr(get(readfile(head), 0, ''), '^ref: refs/heads/\zs.*')
+  return len(branch) ? branch : 'HEAD'
+endfunction
+
+function! s:git_origin_branch(spec)
+  if len(a:spec.branch)
+    return a:spec.branch
+  endif
+
+  " The file may not be present if this is a local repository
+  let gitdir = s:git_dir(a:spec.dir)
+  let origin_head = gitdir.'/refs/remotes/origin/HEAD'
+  if len(gitdir) && filereadable(origin_head)
+    return matchstr(get(readfile(origin_head), 0, ''),
+                  \ '^ref: refs/remotes/origin/\zs.*')
+  endif
+
+  " The command may not return the name of a branch in detached HEAD state
+  let result = s:lines(s:system('git symbolic-ref --short HEAD', a:spec.dir))
+  return v:shell_error ? '' : result[-1]
+endfunction
+
 if s:is_win
   function! s:plug_call(fn, ...)
     let shellslash = &shellslash
@@ -179,7 +267,7 @@ function! s:define_commands()
   endif
   if has('win32')
   \ && &shellslash
-  \ && (&shell =~# 'cmd\(\.exe\)\?$' || &shell =~# 'powershell\(\.exe\)\?$')
+  \ && (&shell =~# 'cmd\(\.exe\)\?$' || s:is_powershell(&shell))
     return s:err('vim-plug does not support shell, ' . &shell . ', when shellslash is set.')
   endif
   if !has('nvim')
@@ -419,7 +507,7 @@ if s:is_win
     let batchfile = s:plug_tempname().'.bat'
     call writefile(s:wrap_cmds(a:cmd), batchfile)
     let cmd = plug#shellescape(batchfile, {'shell': &shell, 'script': 0})
-    if &shell =~# 'powershell\(\.exe\)\?$'
+    if s:is_powershell(&shell)
       let cmd = '& ' . cmd
     endif
     return [batchfile, cmd]
@@ -890,7 +978,7 @@ function! s:chsh(swap)
     set shell=sh
   endif
   if a:swap
-    if &shell =~# 'powershell\(\.exe\)\?$' || &shell =~# 'pwsh$'
+    if s:is_powershell(&shell)
       let &shellredir = '2>&1 | Out-File -Encoding UTF8 %s'
     elseif &shell =~# 'sh' || &shell =~# 'cmd\(\.exe\)\?$'
       set shellredir=>%s\ 2>&1
@@ -2130,7 +2218,7 @@ function! plug#shellescape(arg, ...)
   let script = get(opts, 'script', 1)
   if shell =~# 'cmd\(\.exe\)\?$'
     return s:shellesc_cmd(a:arg, script)
-  elseif shell =~# 'powershell\(\.exe\)\?$' || shell =~# 'pwsh$'
+  elseif s:is_powershell(shell)
     return s:shellesc_ps1(a:arg)
   endif
   return s:shellesc_sh(a:arg)
@@ -2182,7 +2270,7 @@ function! s:system(cmd, ...)
         return system(a:cmd)
       endif
       let cmd = join(map(copy(a:cmd), 'plug#shellescape(v:val, {"shell": &shell, "script": 0})'))
-      if &shell =~# 'powershell\(\.exe\)\?$'
+      if s:is_powershell(&shell)
         let cmd = '& ' . cmd
       endif
     else
