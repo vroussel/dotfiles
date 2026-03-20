@@ -19,7 +19,7 @@ function fish_title
             if test "$command" = fish
                 set command
             end
-            echo -- $ssh (string sub -l 20 -- $command) pwd=(pwd)
+            echo -- $ssh (string sub -l 20 -- $command) cwd=(pwd)
         end
     end
 end

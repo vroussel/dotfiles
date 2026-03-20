@@ -84,7 +84,7 @@ fi
 unset color_prompt force_color_prompt
 
 #dynamic window title
-window_title="pwd=\$PWD"
+window_title="cwd=\$PWD"
 PS1="\[\033]0;${window_title}\a\]$PS1" #window title
 
 ## If this is an xterm set the title to user@host:dir
