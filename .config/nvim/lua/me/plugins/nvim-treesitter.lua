@@ -7,6 +7,7 @@ return {
     },
     branch = "main",
     build = ":TSUpdate",
+    lazy = false,
     config = function()
         vim.g._ts_force_sync_parsing = true
         local treesitter = require("nvim-treesitter")
