@@ -29,6 +29,7 @@ return {
                 "ansible-lint", -- used by ansiblels
                 "shellcheck",
                 "mypy",
+                "markdownlint",
             },
         })
     end,
