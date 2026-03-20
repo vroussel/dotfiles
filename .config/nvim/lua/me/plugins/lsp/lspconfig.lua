@@ -13,7 +13,7 @@ return {
 	config = function()
 		-- vim.lsp.set_log_level(0)
 		-- require("vim.lsp.log").set_format_func(vim.inspect)
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+
 		local mason_lspconfig = require("mason-lspconfig")
 		mason_lspconfig.setup({
 			automatic_installation = true,
@@ -82,9 +82,6 @@ return {
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 			end, opts)
 
-			-- opts.desc = "Format buffer or selection"
-			-- keymap.set({"n", "v"}, "<leader>fo", function() vim.lsp.buf.format { async = true } end, opts)
-
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
 		end
@@ -92,7 +89,6 @@ return {
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
