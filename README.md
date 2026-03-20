@@ -13,3 +13,9 @@ https://www.ackama.com/blog/posts/the-best-way-to-store-your-dotfiles-a-bare-git
 ## Share Vim and Neovim conf
 $ ln -s ~/.vim ~/.local/share/nvim/site
 $ ln -s ~/.vimrc ~/.config/nvim/init.vim
+
+## Extra steps
+pip install --user python-lsp-server[rope,pyflakes,mccabe,pycodestyle,pydocstyle]
+pip install --user python-lsp-black pyls-flake8 pyls-isort
+pacman -S fzf
+pacman -S fd
