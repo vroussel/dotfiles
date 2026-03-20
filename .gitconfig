@@ -15,11 +15,6 @@
 [alias]
     st = status
     co = checkout
-    ci = commit
-    sw = switch
-    rs = restore
-    pl = pull
-    ps = push
 
 #delta
 [include]
