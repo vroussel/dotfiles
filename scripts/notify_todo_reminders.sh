@@ -6,7 +6,7 @@ DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$(id -u)/bus
 export DBUS_SESSION_BUS_ADDRESS
 
 function notify() {
-    dunstify "$1"
+    notify-send -t 0 "$1"
 }
 
 freq="$1"
