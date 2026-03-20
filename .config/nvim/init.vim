@@ -122,7 +122,7 @@ augroup END
 
 augroup python formatting
     autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
-    autocmd FileType python nnoremap <buffer> <Leader>iso :%!isort -<CR>
+    autocmd FileType python nnoremap <buffer> <Leader>fi :%!isort -<CR>
 augroup END
 
 augroup lightbulb
@@ -193,17 +193,16 @@ endfunction
 
 
 "===== Mapping =====
-" Fzf
-nmap <leader><tab> <plug>(fzf-maps-n)
-nnoremap <C-P> :Files<CR>
-nnoremap <leader>fif :Ag<CR>
-nnoremap <leader>fw :Ag <c-r><c-w><CR>
-nnoremap <leader>f<S-w> :Ag <c-r><c-a><CR>
-nnoremap <leader>fib :Lines<CR>
-nnoremap <leader>b :Buffers<CR>
-nnoremap <leader>o :History<CR>
-nnoremap <leader>/ :History/<CR>
-nnoremap <leader>: :History:<CR>
+nnoremap <leader><tab> :Telescope keymaps<CR>
+nnoremap <leader>ff :Telescope find_files<CR>
+nnoremap <leader>fg :Telescope live_grep<CR>
+nnoremap <leader>fz :Rg<CR>
+nnoremap <leader>fw :Telescope grep_string<CR>
+nnoremap <leader>b :Telescope buffers<CR>
+nnoremap <leader>o :Telescope oldfiles<CR>
+nnoremap <leader>/ :Telescope search_history<CR>
+nnoremap <leader>: :Telescope command_history<CR>
+nnoremap <leader>tr :Telescope resume<CR>
 
 " Custom
 nnoremap <F2> :call ToggleDebugMode()<CR>
@@ -217,7 +216,7 @@ nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
 
 " Trailing spaces
-nnoremap <leader>tr :%s/\s\+$//g<CR>
+nnoremap <leader>ts :%s/\s\+$//g<CR>
 
 " Search for selected text in visual mode
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
@@ -392,20 +391,21 @@ local on_attach = function(client, bufnr)
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<leader>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
+  buf_set_keymap('n', '<leader>gt', '<Cmd>Telescope lsp_type_definitions<CR>', opts)
+  buf_set_keymap('n', '<leader>gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
+  buf_set_keymap('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', '<leader>sig', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<leader>ref', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
+  buf_set_keymap("x", "<leader>ca", '<esc><cmd>Telescope lsp_range_code_action<CR>', opts)
   buf_set_keymap('n', '<leader>dia', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity_limit = "Error"})<CR>', opts)
   buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity_limit = "Error"})<CR>', opts)
-  buf_set_keymap('n', '<leader>lld', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>lle', '<cmd>lua vim.diagnostic.set_loclist({severity_limit= "Error"})<CR>', opts)
+  buf_set_keymap('n', '<leader>lsd', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
+  buf_set_keymap('n', '<leader>lse', '<cmd>lua vim.diagnostic.setqflist({severity_limit= "Error"})<CR>', opts)
   buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   if vim.inspect(client.name) ~= "\"pylsp\"" then
       buf_set_keymap("x", "<leader>fo", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
