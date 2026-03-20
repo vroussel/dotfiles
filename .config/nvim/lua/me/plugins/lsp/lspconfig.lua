@@ -192,6 +192,6 @@ return {
 			},
 		})
 
-		require("lspconfig").perlnavigator.setup({})
+		lspconfig["perlnavigator"].setup({})
 	end,
 }
