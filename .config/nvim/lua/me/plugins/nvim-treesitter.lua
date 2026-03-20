@@ -33,6 +33,8 @@ return {
 				"python",
 				"rust",
 				"vimdoc",
+				"vue",
+				"javascript",
 				"regex",
 			},
 			-- incremental_selection = {
