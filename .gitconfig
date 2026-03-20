@@ -8,6 +8,9 @@
 	name = Valentin Roussel
 	email = valentin.rssl@gmail.com
 
+[core]
+	editor = nvim
+
 [alias]
 	co = checkout
     st = status
