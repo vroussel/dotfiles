@@ -234,7 +234,7 @@ bindsym $mod+equal [title="^(?!^scratch$|.*Zeal|^todolist).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
 
 bindsym $mod+g exec $HOME/bin/vim_scratch.sh primary
-bindsym $mod+Shift+g exec $HOME/bin/vim_scratch.sh clipboard
+bindsym $mod+Shift+g exec $HOME/bin/vim_scratch.sh
 
 bindsym $mod+z [title="^.*Zeal$"] scratchpad show
 exec --no-startup-id zeal
