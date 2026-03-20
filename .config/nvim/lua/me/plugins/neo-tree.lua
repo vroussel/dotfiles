@@ -5,25 +5,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
-		{
-			"s1n7ax/nvim-window-picker",
-			name = "window-picker",
-			event = "VeryLazy",
-			version = "2.*",
-			config = function()
-				require("window-picker").setup({
-					hint = "floating-big-letter",
-					filter_rules = {
-						autoselect_one = true,
-						include_current = false,
-						bo = {
-							-- if the file type is one of following, the window will be ignored
-							filetype = { "NvimTree", "neo-tree", "notify", "aerial" },
-						},
-					},
-				})
-			end,
-		},
+		"s1n7ax/nvim-window-picker",
 	},
 	config = function()
 		vim.keymap.set("n", "<c-n>", "<cmd>Neotree toggle<CR>")
