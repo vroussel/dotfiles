@@ -30,6 +30,7 @@ vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
 
 vim.o.signcolumn = "yes"
+vim.o.statuscolumn = " %s %l "
 
 vim.o.laststatus = 3
 
