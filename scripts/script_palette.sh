@@ -40,13 +40,10 @@ scripts=$(find "$scripts_dir" -mindepth 1 -executable)
 declare -A map
 for s in $scripts; do
     pretty_name="$(basename "${s%.*}" | tr '\-_' ' ')"
-    echo "$s"
-    echo "$pretty_name"
     map["$pretty_name"]="$s"
 done
 
 
 pick=$(printf "%s\n" "${!map[@]}" | "$menu" "Script palette") || exit 0
 script="${map["$pick"]}"
-echo "$script"
 "$script"
