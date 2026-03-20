@@ -1,19 +1,15 @@
 # dotfiles
 Yet another dotfiles repo
 
-#TODO script symlink creation
+Based on
+https://www.ackama.com/blog/posts/the-best-way-to-store-your-dotfiles-a-bare-git-repository-explained
 
-## List of files:
- - i3/config            => ~/.config/i3/config
- - terminator/config    => ~/.config/terminator/config
- - i3/i3_*              => ~/.i3/
- - vim/.vimrc           => ~/.vimrc
- - vim/colors           => ~/.vim/colors
- - vim/autoload         => ~/.vim/autoload
- - git/.gitconfig       => ~/.gitconfig
- - i3blocks/config      => ~/.config/i3blocks/config
- - i3blocks/blocklets   => ~/.config/i3blocks/blocklets
- - xmodmap/.Xmodmap     => ~/.Xmodmap
+##Installing
+1. echo "dotfiles" >> .gitignore
+2. git clone <remote-git-repo-url> $HOME/dotfiles
+3. alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME'
+4. config config --local status.showUntrackedFiles no
+5. config checkout $HOME
 
 ## Share Vim and Neovim conf
 $ ln -s ~/.vim ~/.local/share/nvim/site
