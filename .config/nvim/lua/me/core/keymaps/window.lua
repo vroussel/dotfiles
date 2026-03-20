@@ -25,4 +25,3 @@ vim.keymap.set("n", "<a-L>", "<c-w>L")
 
 -- open in new tab
 vim.keymap.set("n", "<a-T>", "<c-w>T")
-vim.keymap.set("n", "<a-p>", "<c-w>p")
