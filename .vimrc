@@ -99,6 +99,8 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>ntf :NERDTreeFind<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
+nmap [f [m
+nmap ]f ]m
 
 " Trailing spaces
 nnoremap <leader>tr :%s/\s\+$//g<CR>
