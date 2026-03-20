@@ -133,7 +133,6 @@ return {
 		lspconfig["volar"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
 		})
 
 		--lspconfig["svelte"].setup{
