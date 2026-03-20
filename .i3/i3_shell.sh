@@ -21,12 +21,7 @@ fi
 
 cwd=${_pwd:-$(echo $HOME)}
 if [ -n "$_ssh" ]; then
-    pre_cmd=""
-    if [ -n "$_sudo" ]; then
-        pre_cmd+="sudo tmp_bashrc=\"\\\${tmp_bashrc}\" tmp_vimrc=\"\\\${tmp_vimrc}\" -u $_sudo /bin/bash --rcfile \\\${tmp_bashrc};"
-    fi
-    pre_cmd+="cd $cwd"
-    xfce4-terminal -x bash -c "SSHS_BASH_CMD=\"$pre_cmd\" sshs $_ssh; bash"
+    xfce4-terminal -x bash -c "SSHS_CWD=\"$cwd\" SSHS_SUDO_USER=\"$_sudo\" sshs $_ssh; bash"
 else
     xfce4-terminal --working-directory "$cwd"
 fi
