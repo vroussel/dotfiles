@@ -52,33 +52,33 @@ nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
 
 " manage window without c-w
-nmap <A-h> <C-w>h
-nmap <A-j> <C-w>j
-nmap <A-k> <C-w>k
-nmap <A-l> <C-w>l
+nmap h <C-w>h
+nmap j <C-w>j
+nmap k <C-w>k
+nmap l <C-w>l
 "-
-nmap <A-v> <C-w>v
-nmap <A-x> <C-w>s
-nmap <A-q> <C-w>q
-nmap <A-o> <C-w>o
+nmap v <C-w>v
+nmap x <C-w>s
+nmap q <C-w>q
+nmap o <C-w>o
 "-
-nmap <C-A-k> <C-w>5+
-nmap <C-A-j> <C-w>5-
-nmap <C-A-h> <C-w>10<
-nmap <C-A-l> <C-w>10>
-nmap <A-m> <C-w>_<C-w>|
-nmap <A-=> <C-w>=
+nmap <c-k> <C-w>5+
+nmap <c-j> <C-w>5-
+nmap <c-h> <C-w>10<
+nmap <c-l> <C-w>10>
+nmap m <C-w>_<C-w>|
+nmap = <C-w>=
 "-
-nmap <a-H> <c-w>H
-nmap <a-J> <c-w>J
-nmap <a-K> <c-w>K
-nmap <a-L> <c-w>L
-nmap <a-T> <c-w>T
+nmap H <c-w>H
+nmap J <c-w>J
+nmap K <c-w>K
+nmap L <c-w>L
+nmap T <c-w>T
 
 
 " Insert line in normal mode
-nmap [<space> m`o<Esc>``
-nmap ]<space> m`O<Esc>``
+nmap ]<space> m`o<Esc>``
+nmap [<space> m`O<Esc>``
 
 " Paste last yanked item
 noremap <Leader>p "0p
