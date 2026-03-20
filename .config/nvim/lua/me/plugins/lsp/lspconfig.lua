@@ -167,27 +167,10 @@ return {
 			settings = {
 				pylsp = {
 					plugins = {
-						autopep8 = {
-							enabled = false,
-						},
-						flake8 = {
-							enabled = false,
-						},
-						mccabe = {
-							enabled = false,
-						},
-						pycodestyle = {
-							enabled = false,
-						},
-						pyflakes = {
-							enabled = false,
-						},
-						pylint = {
-							enabled = false,
-						},
-						yapf = {
-							enabled = false,
-						},
+						-- I use black for formatting:
+						autopep8 = { enabled = false },
+						yapf = { enabled = false },
+						rope_autoimport = { enabled = true },
 					},
 				},
 			},
