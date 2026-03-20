@@ -17,14 +17,17 @@
     st = status
 
 #delta
+[include]
+    path = /home/valentin/.config/delta/themes.gitconfig
+
 [interactive]
     diffFilter = delta --color-only
 
 [delta]
     navigate = true    # use n and N to move between diff sections
+    features = arctic-fox
+    line-numbers = false
+    keep-plus-minus-markers = true
 
 [merge]
     conflictstyle = diff3
-
-[diff]
-    colorMoved = default

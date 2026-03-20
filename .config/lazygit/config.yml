@@ -8,7 +8,7 @@ promptToReturnFromSubprocess: false
 git:
   paging:
     colorArg: always
-    pager: delta --diff-so-fancy --dark --paging=never
+    pager: delta --diff-so-fancy --paging=never
 
 customCommands:
   - key: b
