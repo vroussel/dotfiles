@@ -12,19 +12,23 @@ opts.desc = "Show line diagnostics"
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
 
 opts.desc = "Go to previous diagnostic"
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, opts)
 
 opts.desc = "Go to next diagnostic"
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, opts)
 
 opts.desc = "Go to previous error"
 vim.keymap.set("n", "[e", function()
-    vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({ count = -1, float = true, severity = vim.diagnostic.severity.ERROR })
 end, opts)
 
 opts.desc = "Go to next error"
 vim.keymap.set("n", "]e", function()
-    vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR })
+    vim.diagnostic.jump({ count = 1, float = true, severity = vim.diagnostic.severity.ERROR })
 end, opts)
 
 -- Toggle diagnostic appearance
@@ -50,7 +54,7 @@ local update_diag_conf = function()
         virtual_text = diag_option_value(virtual_text),
         signs = diag_option_value(signs),
         underline = diag_option_value(underline),
-        virtual_lines = virtual_lines,
+        virtual_lines = diag_option_value(virtual_lines),
     })
 end
 
