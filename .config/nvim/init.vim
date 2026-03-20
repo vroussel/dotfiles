@@ -170,6 +170,7 @@ endfunction
 
 
 "===== Mapping =====
+" Telescope / fzf
 nnoremap <leader><tab> :Telescope keymaps<CR>
 nnoremap <leader>ff :Telescope find_files<CR>
 nnoremap <leader>fg :Telescope live_grep<CR>
@@ -210,8 +211,6 @@ xnoremap & :&&<CR>
 " use tjump instead of tag with C-]
 nnoremap <c-]> g<c-]>
 vnoremap <c-]> g<c-]>
-nnoremap g<c-]> <c-]>
-vnoremap g<c-]> <c-]>
 
 " switch pane without ctrl-w
 nmap <C-h> <C-w>h
@@ -458,10 +457,13 @@ EOF
 " split vimrc ?
 " user guide
 " blogs
-" telescope?
 " configure formatters (clang, python, etc)
 " snippets
 " TJ videos
+" shade
+" diaglist
+" https://github.com/rockerBOO/awesome-neovim#neovim-lua-development
+" https://neovimcraft.com/
 
 "lua << EOF
 "vim.lsp.set_log_level("debug")
