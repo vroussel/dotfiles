@@ -1,0 +1,20 @@
+#!/bin/sh
+val=$(pamixer --get-volume-human | sed 's/%//')
+color="#ffffff";
+
+if [ "$val" == "muted" ]; then
+    val=$(pamixer --get-volume | sed 's/%//')
+    color="#a0a0a0";
+fi
+
+if [ "$val" -lt 25 ]; then
+    ret=""
+elif [ "$val" -lt 50 ]; then
+    ret=""
+else
+    ret=""
+fi
+
+echo $ret
+echo $ret
+echo $color
