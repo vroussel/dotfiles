@@ -13,6 +13,7 @@ return {
 	config = function()
 		-- vim.lsp.set_log_level(0)
 		-- require("vim.lsp.log").set_format_func(vim.inspect)
+		vim.lsp.inlay_hint.enable(true)
 
 		local mason_lspconfig = require("mason-lspconfig")
 		mason_lspconfig.setup({
