@@ -101,7 +101,7 @@ Plug 'ludovicchabant/vim-gutentags'
 " Misc
 Plug 'https://github.com/nacitar/a.vim'
 Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'https://github.com/mbbill/undotree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -120,6 +120,8 @@ call plug#end()
 set termguicolors
 colorscheme dracula
 lua << EOF
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 require('incline').setup()
 require("lualine").setup({
     options = {
@@ -168,6 +170,16 @@ require('nvim-lightbulb').setup({
 })
 vim.cmd[[highlight LightbulbSignYellow guifg=Yellow ctermfg=Yellow]]
 vim.fn.sign_define('LightBulbSign', { text = "", texthl = "LightbulbSignYellow", linehl="", numhl="" })
+
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 EOF
 "=================
 
@@ -236,8 +248,8 @@ nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 imap jk <Esc>
 
 " Plugins
-nnoremap <C-n> :NERDTreeToggle<CR>
-nnoremap <leader>ntf :NERDTreeFind<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>ntf :NvimTreeFindFile<CR>
 nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
 nnoremap <leader>se :LuaSnipEdit<CR>
