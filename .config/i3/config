@@ -89,6 +89,7 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
+bindsym $mod+y sticky toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -125,6 +126,8 @@ bindsym $mod+Shift+0 move container to workspace number 10
 
 bindsym $mod+greater exec $HOME/bin/i3/focus_tab.sh right
 bindsym $mod+less exec $HOME/bin/i3/focus_tab.sh left
+bindsym $mod+Shift+greater workspace next
+bindsym $mod+Shift+less workspace prev
 
 # reload the configuration file
 bindsym $mod+c reload
