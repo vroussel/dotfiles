@@ -252,7 +252,7 @@ imap jk <Esc>
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>ntf :NvimTreeFindFile<CR>
 nnoremap <C-\> :TagbarToggle<CR>
-nnoremap <F11> :UndotreeToggle<CR>
+nnoremap <C-/> :UndotreeToggle<CR>
 nnoremap <leader>se :LuaSnipEdit<CR>
 nnoremap <F10> :lua require('incline').toggle()<CR>
 let g:qfenter_keymap = {}
@@ -438,9 +438,10 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>gi', '<Cmd>Telescope lsp_implementations<CR>', opts)
   buf_set_keymap('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', '<leader>sig', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap("x", "<leader>ca", '<esc><cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
+  buf_set_keymap("x", "<leader>ca", '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', '<leader>dia', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
@@ -448,10 +449,8 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = "Error"})<CR>', opts)
   buf_set_keymap('n', '<leader>lsd', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
   buf_set_keymap('n', '<leader>lse', '<cmd>lua vim.diagnostic.setqflist({severity = "Error"})<CR>', opts)
-  buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  if vim.inspect(client.name) ~= "\"pylsp\"" then
-      buf_set_keymap("x", "<leader>fo", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-  end
+  buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.format { async = true }<CR>", opts)
+  buf_set_keymap("x", "<leader>fo", "<cmd>lua vim.lsp.buf.format { async = true }<CR><ESC>", opts)
 
   require'lsp_signature'.on_attach({
       extra_trigger_chars = {"(", ","},
