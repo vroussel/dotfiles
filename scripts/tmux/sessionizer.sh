@@ -38,7 +38,7 @@ workspace() {
         tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe"
         tmux new-window -d -c "$path" -n nvim -t "$session:" \
             && tmux send-keys -t "$session:nvim" "nvim --listen \$NVIM" C-m
-        tmux new-window -d -c "$path" -n lazygit -t "$session:" -n \
+        tmux new-window -d -c "$path" -n lazygit -t "$session:" \
             && tmux send-keys -t "$session:lazygit" 'lazygit --use-config-file ~/.config/lazygit/config.tmux_project.yml' C-m
         tmux new-window -d -c "$path" -n term -t "$session:"
         tmux kill-window -t "$session:dummy"
@@ -78,10 +78,10 @@ conf() {
         tmux new-session -d -s "$session" -n dummy -e "NVIM=$pipe"
         tmux new-window -d -c "$path" -n nvim -t "$session:" \
             && tmux send-keys -t "$session:nvim" "nvim --listen \$NVIM $target" C-m
-        tmux new-window -d -n lazygit -t "$session:" -n \
+        tmux new-window -d -n lazygit -t "$session:" \
             && tmux send-keys -t "$session:lazygit" "lazygit \
                 --use-config-file $HOME/.config/lazygit/config.tmux_project.yml \
-                --git-dir=$HOME/dotfiles/.git/ \
+                --git-dir=$HOME/ws/dotfiles/.git/ \
                 --work-tree=$HOME" \
                 C-m
         tmux kill-window -t "$session:dummy"
