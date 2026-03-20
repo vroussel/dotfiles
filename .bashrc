@@ -65,6 +65,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+################
+# PROMPT / PS1 #
+
+# Git
+GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWSTASHSTATE=1
+source ~/bin/git-prompt.sh
+
 RED="$(echo -en "\033[1;31m")"
 GREEN="$(echo -en "\033[1;32m")"
 BLUE="$(echo -en "\033[1;34m")"
