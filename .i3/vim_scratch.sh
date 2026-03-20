@@ -16,5 +16,5 @@ elif [ "$1" = "arg" ]; then
     echo -n "$2" > ${tmp_file}
 fi
 
-xfce4-terminal -T "__vim_scratch" -e "nvim -c startinsert ${tmp_file}"
+xfce4-terminal --disable-server -T "__vim_scratch" -e "nvim -c 'set nofixeol | startinsert' ${tmp_file}"
 xclip -selection clipboard < $tmp_file
