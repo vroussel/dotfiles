@@ -3,6 +3,11 @@
 
 [url "https://github.com/"]
     insteadOf = gh:
+
 [user]
 	name = Valentin Roussel
 	email = valentin.rssl@gmail.com
+
+[alias]
+	co = checkout
+    st = status
