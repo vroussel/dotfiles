@@ -3,10 +3,10 @@
 
 local opts = { noremap = true, silent = true }
 opts.desc = "Show workspace diagnostics"
-vim.keymap.set("n", "<leader><leader>D", "<cmd>Telescope diagnostics<CR>", opts)
+vim.keymap.set("n", "<leader><leader>D", "<cmd>FzfLua lsp_workspace_diagnostics<CR>", opts)
 
 opts.desc = "Show buffer diagnostics"
-vim.keymap.set("n", "<leader><leader>d", "<cmd>Telescope diagnostics bufnr=0<CR>", opts)
+vim.keymap.set("n", "<leader><leader>d", "<cmd>FzfLua lsp_document_diagnostics<CR>", opts)
 
 opts.desc = "Show line diagnostics"
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)

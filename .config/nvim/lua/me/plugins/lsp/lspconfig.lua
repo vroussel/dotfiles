@@ -32,11 +32,12 @@ return {
 				vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
 			end
 
-			map("n", "gr", vim.lsp.buf.references, "Show LSP references")
-			map("n", "gd", vim.lsp.buf.declaration, "Go to declaration")
-			map("n", "gi", vim.lsp.buf.implementation, "Show LSP implementations")
-			map("n", "gD", vim.lsp.buf.type_definition, "Show LSP type definitions")
-			map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "See available code actions")
+			local fzf = require("fzf-lua")
+			map("n", "gr", fzf.lsp_references, "Show LSP references")
+			map("n", "gd", fzf.lsp_declarations, "Go to declaration")
+			map("n", "gi", fzf.lsp_implementations, "Show LSP implementations")
+			map("n", "gD", fzf.lsp_typedefs, "Show LSP type definitions")
+			map({ "n", "v" }, "<leader>ca", fzf.lsp_code_actions, "See available code actions")
 			map("n", "<leader>rn", vim.lsp.buf.rename, "Smart rename")
 			map("n", "K", vim.lsp.buf.hover, "Show documentation")
 
