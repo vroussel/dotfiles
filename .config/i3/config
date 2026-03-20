@@ -42,6 +42,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
 bindsym XF86Favorites exec --no-startup-id shuf -e ~/wallpapers/* -n 1 | xargs feh --bg-fill
 exec --no-startup-id ~/.fehbg
 
+exec --no-startup-id autorandr --change
+
 exec --no-startup-id dex --autostart --search-paths $HOME/.config/autostart
 
 # Use Mouse+$mod to drag floating windows to their wanted position
