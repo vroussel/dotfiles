@@ -274,6 +274,8 @@ cmp.setup({
       end,
     },
     mapping = {
+      ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+      ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
@@ -381,15 +383,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>gr', '<cmd>Telescope lsp_references<CR>', opts)
   buf_set_keymap('n', '<leader>sig', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<leader>ca', '<cmd>Telescope lsp_code_actions<CR>', opts)
-  buf_set_keymap("x", "<leader>ca", '<esc><cmd>Telescope lsp_range_code_action<CR>', opts)
+  buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap("x", "<leader>ca", '<esc><cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   buf_set_keymap('n', '<leader>dia', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity_limit = "Error"})<CR>', opts)
-  buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity_limit = "Error"})<CR>', opts)
+  buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = "Error"})<CR>', opts)
+  buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = "Error"})<CR>', opts)
   buf_set_keymap('n', '<leader>lsd', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
-  buf_set_keymap('n', '<leader>lse', '<cmd>lua vim.diagnostic.setqflist({severity_limit= "Error"})<CR>', opts)
+  buf_set_keymap('n', '<leader>lse', '<cmd>lua vim.diagnostic.setqflist({severity = "Error"})<CR>', opts)
   buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   if vim.inspect(client.name) ~= "\"pylsp\"" then
       buf_set_keymap("x", "<leader>fo", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
