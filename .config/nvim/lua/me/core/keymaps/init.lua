@@ -9,8 +9,8 @@ require("me.core.keymaps.lsp")
 
 vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("i", "jk", "<esc>")
-vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
-vim.keymap.set("n", "<leader>M", "<cmd>Mason<cr>", { desc = "Open Mason" })
+vim.keymap.set("n", "<leader><leader>l", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
+vim.keymap.set("n", "<leader><leader>m", "<cmd>Mason<cr>", { desc = "Open Mason" })
 vim.keymap.set("n", "<bs>", "<c-^>")
 
 -- Insert lines before/after current without leaving normal mode
