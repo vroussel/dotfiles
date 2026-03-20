@@ -295,7 +295,20 @@ local on_attach = function(client, bufnr)
 
 end
 
-require'lspconfig'.pylsp.setup{on_attach = on_attach}
+require'lspconfig'.pylsp.setup{
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    enabled = false,
+                }
+            }
+        }
+    },
+    on_attach = on_attach
+
+}
+
 require'lspconfig'.clangd.setup{
     on_attach = on_attach
 }
