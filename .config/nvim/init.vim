@@ -54,32 +54,20 @@ let mapleader=" "
 
 "===== Plugins =====
 call plug#begin(stdpath('data') . '/plugged')
-Plug 'https://github.com/nacitar/a.vim'
-Plug 'https://github.com/tpope/vim-fugitive'
-Plug 'https://github.com/scrooloose/nerdtree'
-Plug 'https://github.com/mbbill/undotree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'majutsushi/tagbar'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'smbl64/vim-black-macchiato'
-Plug 'tpope/vim-abolish'
-Plug 'kana/vim-textobj-user'
-Plug 'Julian/vim-textobj-variable-segment'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
-
+" Telescope / fzf
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
+" LSP / completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'onsails/lspkind-nvim'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
 
+" Completion
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
@@ -87,13 +75,31 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
 
-Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-Plug 'nvim-treesitter/playground'
-
+" Visual stuff
 Plug 'dracula/vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
+
+" Tags
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
+
+" Misc
+Plug 'https://github.com/nacitar/a.vim'
+Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'https://github.com/scrooloose/nerdtree'
+Plug 'https://github.com/mbbill/undotree'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'smbl64/vim-black-macchiato'
+Plug 'tpope/vim-abolish'
+Plug 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-variable-segment'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+"Plug 'nvim-treesitter/playground'
 call plug#end()
 "===================
 
