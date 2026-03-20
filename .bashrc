@@ -65,8 +65,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+RED="$(echo -e "\033[1;31m")"
+GREEN="$(echo -e "\033[1;32m")"
+BLUE="$(echo -e "\033[1;34m")"
+RESET="$(echo -e "\033[0m")"
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\] \$ '
+    PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\w\[${RESET}\]\$(__git_ps1)\[${RESET}\] \$([ \$? == 0 ] || echo '\[${RED}\]')\$ \[${RESET}\]"
 else
     PS1='${debian_chroot:+($debian_chroot)}\w\$ '
 fi
@@ -178,6 +182,3 @@ bind '"\ej": menu-complete'
 bind '"\ek": menu-complete-backward'
 bind '"\e[5~": history-search-backward'
 bind '"\e[6~": history-search-forward'
-
-
-#$ en rouge si $? != 0
