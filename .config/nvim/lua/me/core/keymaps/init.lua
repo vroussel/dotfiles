@@ -20,13 +20,13 @@ vim.keymap.set("n", "[<leader>", function()
 end, { expr = true })
 
 -- Paste last yanked item
-vim.keymap.set("n", "<Leader>p", "0p")
-vim.keymap.set("n", "<Leader>P", "0P")
+vim.keymap.set({ "n", "v" }, "<Leader>p", [["0p]])
+vim.keymap.set({ "n", "v" }, "<Leader>P", [["0P]])
 
 -- Paste/yank with system clipboard
-vim.keymap.set("n", "<Leader><leader>p", "+p")
-vim.keymap.set("n", "<Leader><leader>P", "+P")
-vim.keymap.set({ "n", "v" }, "<Leader><leader>y", "+y")
+vim.keymap.set({ "n", "v" }, "<Leader><leader>p", [["+p]])
+vim.keymap.set({ "n", "v" }, "<Leader><leader>P", [["+P]])
+vim.keymap.set({ "n", "v" }, "<Leader><leader>y", [["+y]])
 
 -- xml formatting
 vim.keymap.set("n", "<leader>xml", ":.!xmlstarlet fo<CR>")
