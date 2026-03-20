@@ -20,9 +20,6 @@ vim.o.splitbelow = true
 
 vim.o.title = true
 
--- Swap file write frequency
--- This does not affect CursorHold and CursorHoldI,
--- (see fix-cursor-hold.lua)
 vim.o.updatetime = 200
 
 vim.o.colorcolumn = "100"
