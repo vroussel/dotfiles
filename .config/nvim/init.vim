@@ -471,6 +471,22 @@ require'lspconfig'.cmake.setup{
     on_attach = on_attach,
     capabilities = capabilities
 }
+require'lspconfig'.ansiblels.setup{
+    settings = {
+        ansible = {
+            completion = {
+                provideRedirectModules = false
+            },
+            ansibleLint = {
+                enabled = true
+            }
+        }
+    },
+    filetypes = { "yaml", "yaml.ansible" },
+    on_attach = on_attach
+}
+
+require'lspconfig'.tailwindcss.setup{}
 
 
 require "nvim-treesitter.configs".setup { highlight = {enable = true } }
