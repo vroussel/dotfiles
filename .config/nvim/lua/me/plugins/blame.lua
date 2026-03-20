@@ -22,5 +22,10 @@ return {
 				end
 			end,
 		})
+
+		vim.keymap.set("n", "<leader>gb", "<cmd>BlameToggle<cr>")
 	end,
+	opts = {
+		commit_detail_view = "vsplit",
+	},
 }
