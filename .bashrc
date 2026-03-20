@@ -66,9 +66,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\] \$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1)\[\033[00m\] \$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -120,3 +120,64 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 # ------------
 source "/usr/share/fzf/key-bindings.bash"
 source "/usr/share/bash-completion/completions/todo"
+complete -F _todo t
+
+stty -ixon
+shopt -s checkjobs
+
+function _edit_wo_executing() {
+    local editor="${EDITOR:-vim}"
+    tmpf="$(mktemp)"
+    printf '%s\n' "$READLINE_LINE" > "$tmpf"
+    "$editor" "$tmpf"
+    READLINE_LINE="$(<"$tmpf")"
+    READLINE_POINT="${#READLINE_LINE}"
+    rm "$tmpf"
+}
+
+function dedup(){
+    declare -a new=() copy=("${DIRSTACK[@]:1}")
+    declare -A seen
+    local v i
+    seen[$PWD]=1
+    for v in "${copy[@]}"
+    do if [ -z "${seen[$v]}" ]
+       then new+=("$v")
+            seen[$v]=1
+       fi
+    done
+    dirs -c
+    for ((i=${#new[@]}-1; i>=0; i--))
+    do      builtin pushd -n "${new[i]}" >/dev/null
+    done
+}
+
+function cd()
+{
+  if [ $# -eq 0 ]; then
+    DIR="${HOME}"
+  else
+    DIR="$1"
+  fi
+
+  builtin pushd "${DIR}" > /dev/null
+  dedup
+}
+
+alias d='dirs -v'
+for index in {0..9}; do alias "$index"="cd +${index}"; done; unset index;
+
+bind -x '"\C-x\C-e":_edit_wo_executing'
+bind "set skip-completed-text on"
+bind "set completion-ignore-case on"
+bind "set completion-map-case on"
+bind 'set show-all-if-unmodified on'
+bind 'set colored-completion-prefix on'
+bind 'set colored-stats'
+bind '"\ej": menu-complete'
+bind '"\ek": menu-complete-backward'
+bind '"\e[5~": history-search-backward'
+bind '"\e[6~": history-search-forward'
+
+
+#$ en rouge si $? != 0
