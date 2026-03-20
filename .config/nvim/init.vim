@@ -15,6 +15,7 @@ set updatetime=500
 set hidden
 set colorcolumn=100
 set signcolumn=yes
+set laststatus=3
 
 " folding
 set foldlevel=99
@@ -82,6 +83,9 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'dracula/vim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'SmiteshP/nvim-gps'
+Plug 'b0o/incline.nvim'
 
 " Tags
 Plug 'majutsushi/tagbar'
@@ -103,12 +107,22 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 call plug#end()
 "===================
 
-
 "===== Theme =====
 set termguicolors
 colorscheme dracula
-lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y[%{&fileencoding?&fileencoding:&encoding}]    [%L,%3.p%%] %5.l:%-5.v'
-
+lua << EOF
+require('incline').setup()
+require("nvim-gps").setup()
+local gps = require("nvim-gps")
+require("lualine").setup({
+	sections = {
+			lualine_c = {
+                { 'filename', path = 3},
+                { gps.get_location, cond = gps.is_available },
+			}
+	}
+})
+EOF
 "=================
 
 
@@ -156,15 +170,6 @@ function! s:VSetSearch(cmdtype)
     norm! gv"sy
     let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
     let @s = temp
-endfunction
-
-function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
-endfunction
-
-function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 "================
 
