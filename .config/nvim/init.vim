@@ -86,6 +86,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'b0o/incline.nvim'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Tags
 Plug 'majutsushi/tagbar'
@@ -110,6 +111,8 @@ call plug#end()
 "===== Theme =====
 set termguicolors
 colorscheme dracula
+highlight IndentBlanklineSpaceChar guifg=#666666 gui=nocombine
+highlight IndentBlanklineChar guifg=#666666 gui=nocombine
 lua << EOF
 require('incline').setup()
 require("lualine").setup({
