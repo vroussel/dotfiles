@@ -193,11 +193,6 @@ function! SmartRelativeNumber(val)
     endif
 endfunction
 
-augroup pythonfile
-    autocmd!
-    autocmd BufWritePre *.py Black
-augroup END
-
 call SmartRelativeNumber(1)
 
 
