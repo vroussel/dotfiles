@@ -234,7 +234,7 @@ if __name__ == "__main__":
                 try:
                     path = Path(root, d)
                     os.rmdir(path)
-                    logging.info("Removed {path.as_posix()}")
+                    logging.info(f"Removed {path.as_posix()}")
                 except OSError:
                     pass
 
