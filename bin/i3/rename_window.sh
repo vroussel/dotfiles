@@ -1,5 +1,4 @@
 #!/bin/bash
-WS=$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).num')
 user_input=$(i3-input -F "nop %s" | grep -Po --binary-files=text '(?<=output = ).*' | tr "[:lower:]" "[:upper:]")
 
 if [ $? -ne 0 ]; then
@@ -7,7 +6,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ -z "$user_input" ]; then
-    i3-msg "rename workspace to \"$WS\""
+    i3-msg "title_format %title"
 else
-    i3-msg "rename workspace to \"$WS: <big><b>$user_input</b></big>\""
+    i3-msg "title_format <big><b>[$user_input]</b></big> %title"
 fi
