@@ -182,10 +182,14 @@ bindsym $mod+minus [title="^scratch"] scratchpad show
 exec --no-startup-id i3-sensible-terminal -T scratch
 for_window [title="^scratch"] move scratchpad
 
-bindsym $mod+equal [title="^(?!scratch).*$"] scratchpad show
+bindsym $mod+equal [title="^(?!^scratch$|.*Zeal).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
 
 bindsym $mod+g exec $HOME/.i3/vim_scratch.sh
 for_window [class=Xfce4-terminal title="^__vim_scratch"] floating enable
+
+bindsym $mod+z [title="^.*Zeal$"] scratchpad show
+exec --no-startup-id zeal
+for_window [title="^.*Zeal$"] move scratchpad
 
 exec --no-startup-id $HOME/.i3/xmodmap_if_typematrix.sh
