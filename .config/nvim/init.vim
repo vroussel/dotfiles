@@ -141,6 +141,12 @@ augroup trailing
     autocmd!
     autocmd BufNewFile,BufRead * :match ExtraWhitespace /\s\+$/
 augroup END
+
+augroup relativenumbertoggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &number == 1 | set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &number == 1 | set norelativenumber
+augroup END
 "========================
 
 
@@ -150,41 +156,6 @@ function! s:VSetSearch(cmdtype)
     norm! gv"sy
     let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
     let @s = temp
-endfunction
-
-"Disable relative numbers if not focused
-function! SmartRelativeNumber(val)
-    let g:num_blacklist = ['nerdtree', 'tagbar']
-    if a:val == 1
-        augroup relativenumbertoggle
-            autocmd!
-            autocmd BufEnter,FocusGained,InsertLeave * if index(g:num_blacklist,&ft) == -1 | set relativenumber
-            autocmd BufLeave,FocusLost,InsertEnter   * if index(g:num_blacklist,&ft) == -1 | set norelativenumber
-        augroup END
-    else
-        augroup relativenumbertoggle
-            autocmd!
-        augroup END
-        augroup! relativenumbertoggle
-    endif
-endfunction
-
-"Debug mode (enable mouse + disable relative line numbers)
-function! ToggleDebugMode()
-    if !exists("b:debugmode")
-        let b:debugmode = 0
-    endif
-    if b:debugmode == 0
-        call SmartRelativeNumber(0)
-        set norelativenumber
-        set mouse=a
-        let b:debugmode = 1
-    else
-        call SmartRelativeNumber(1)
-        set relativenumber
-        set mouse=""
-        let b:debugmode = 0
-    endif
 endfunction
 
 function! GitBranch()
@@ -216,7 +187,6 @@ nnoremap <leader>df :diffget //2<CR>
 nnoremap <leader>dj :diffget //2<CR>
 
 " Custom
-nnoremap <F2> :call ToggleDebugMode()<CR>
 nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
 imap jk <Esc>
 
@@ -483,9 +453,6 @@ telescope.setup({
 
 EOF
 "=====================
-
-call SmartRelativeNumber(1)
-
 
 " check help for all plugins
 " split vimrc ?
