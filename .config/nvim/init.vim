@@ -462,6 +462,11 @@ telescope.setup({
         preview = {
             treesitter = false,
         },
+        mappings = {
+            i = {
+                ["<esc>"] = actions.close
+            },
+        },
     },
 })
 
