@@ -13,11 +13,8 @@ return {
         lint.linters_by_ft = {
             sh = { "shellcheck" },
             python = { "mypy" },
-            markdown = { "rumdl" },
             ["yaml.ansible"] = { "ansible_lint" },
         }
-
-        lint.linters["markdownlint"].args = { "--stdin", "--disable", "MD013" }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
         vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
