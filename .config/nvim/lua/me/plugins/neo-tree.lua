@@ -37,6 +37,7 @@ return {
 					["<c-v>"] = "vsplit_with_window_picker",
 					["<cr>"] = "open_with_window_picker",
 					["w"] = "open",
+					["/"] = "noop",
 				},
 			},
 		})
