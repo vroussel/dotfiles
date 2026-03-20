@@ -1,0 +1,8 @@
+
+partial alphanumeric_keys
+xkb_symbols "basic"
+{
+    key <AB11> { [ backslash, bar ]};
+    key <MUHE> { [ Super_L ]};
+    key <HENK> { [ Super_L ]};
+};

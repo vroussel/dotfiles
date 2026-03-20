@@ -1,4 +1,3 @@
 #!/bin/sh
 
-setxkbmap us,fr -option "grp:switch" -option "shift:both_capslock"
-xmodmap ~/.Xmodmap
+xkbcomp -I$HOME/.config/xkb $HOME/.config/xkb/keymap/qwerty-fr-tm $DISPLAY
