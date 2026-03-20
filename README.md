@@ -11,4 +11,6 @@ https://www.ackama.com/blog/posts/the-best-way-to-store-your-dotfiles-a-bare-git
 4. config checkout $HOME
 
 ## Python lsp stuff
-$ python3 -m pip install --user black black-macchiato python-lsp-black python-lsp-server pyls-isort
+$ sudo pacman -S python-lsp-server python-lsp-black
+$ aur sync python-pyls-isort
+$ sudo pacman -S python-pyls-isort
