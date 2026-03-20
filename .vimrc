@@ -1,7 +1,7 @@
 "===== Settings =====
 " Misc
 syntax enable
-colorscheme badwolf
+colorscheme gruvbox
 set nocompatible
 set ttyfast
 set nopaste
@@ -61,6 +61,9 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'psf/black'
+
+Plug 'arcticicestudio/nord-vim'
+Plug 'gruvbox-community/gruvbox'
 call plug#end()
 "===================
 
