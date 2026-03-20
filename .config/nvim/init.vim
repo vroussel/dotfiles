@@ -246,6 +246,7 @@ nnoremap <leader>dj :diffget //2<CR>
 
 " Custom
 nnoremap <F12> :!ctags -R --fields=+Smt *<cr>
+nnoremap <silent> <esc> :noh<cr>
 imap jk <Esc>
 
 " Plugins
