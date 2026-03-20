@@ -4,7 +4,10 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
         local fzf = require("fzf-lua")
-        fzf.setup({ "telescope" })
+        fzf.setup({
+            "telescope",
+            oldfiles = { cwd_only = true, include_current_session = true },
+        })
 
         vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Find files" })
         vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Find grep" })
