@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $# == 2 && $2 == [a-zA-Z] ]]; then
+    $TODO_SH command ls "($2)"
+else
+    $TODO_SH command "$@"
+fi
