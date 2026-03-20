@@ -64,8 +64,8 @@ export TODO_ACTIONS_DIR="$HOME/.todo/actions.d"
 
 # There is highlighting for projects, contexts, dates, and item numbers.
 #
-# export COLOR_PROJECT=$RED
-# export COLOR_CONTEXT=$RED
+export COLOR_PROJECT=$RED
+export COLOR_CONTEXT=$RED
 # export COLOR_DATE=$BLUE
 # export COLOR_NUMBER=$LIGHT_GRAY
 
