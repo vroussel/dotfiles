@@ -311,11 +311,15 @@ cmp.setup({
       ["<Tab>"] = cmp.mapping(function(fallback)
          if luasnip.expand_or_jumpable() then
            luasnip.expand_or_jump()
+         else
+           fallback()
          end
        end, { "i", "s" }),
       ["<S-Tab>"] = cmp.mapping(function(fallback)
         if luasnip.jumpable(-1) then
           luasnip.jump(-1)
+         else
+           fallback()
         end
       end, { "i", "s" })
     },
@@ -381,7 +385,7 @@ local on_attach = function(client, bufnr)
 
   require'lsp_signature'.on_attach({
       extra_trigger_chars = {"(", ","},
-      floating_window = true,
+      floating_window = false,
       toggle_key = '<C-h>',
       hi_parameter = 'IncSearch'
   })
