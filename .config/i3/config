@@ -186,6 +186,7 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id autorandr --change
 exec --no-startup-id dex --autostart --search-paths $HOME/.config/autostart
 exec --no-startup-id picom -b
+exec_always --no-startup-id xrdb -merge ~/.urxvt/.Xresources
 exec_always --no-startup-id ~/.i3/kb_layout.sh
 
 bindsym $mod+Escape exec --no-startup-id loginctl lock-session
@@ -196,7 +197,7 @@ bindsym $mod+grave exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
 
 bindsym $mod+minus [title="^scratch"] scratchpad show
-exec --no-startup-id i3-sensible-terminal -T scratch
+exec --no-startup-id urxvt-fixed-title -T scratch
 for_window [title="^scratch"] move scratchpad
 
 bindsym $mod+equal [title="^(?!^scratch$|.*Zeal|^todolist).*$"] scratchpad show
@@ -211,7 +212,7 @@ exec --no-startup-id zeal
 for_window [title="^.*Zeal$"] move scratchpad
 
 bindsym $mod+t [title="^todolist$"] scratchpad show
-exec --no-startup-id i3-sensible-terminal -T todolist -x bash -c 'todo.sh ls; exec bash'
+exec --no-startup-id urxvt-fixed-title -T todolist -e bash -c 'todo-txt ls; exec bash'
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
 
