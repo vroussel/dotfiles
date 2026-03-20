@@ -68,10 +68,10 @@ bindsym $mod+k focus up
 bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 0 ppt
+bindsym $mod+Shift+j move down 0 ppt
+bindsym $mod+Shift+k move up 0 ppt
+bindsym $mod+Shift+l move right 0 ppt
 
 # split in horizontal orientation
 bindsym $mod+n split h
@@ -141,15 +141,15 @@ bindsym --whole-window $mod+button2 floating toggle
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-        bindsym h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 1
-        bindsym k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 1
-        bindsym j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 1
-        bindsym l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 1
+        bindsym h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 10 px or 1 ppt
+        bindsym k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 10 px or 1 ppt
+        bindsym j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 10 px or 1 ppt
+        bindsym l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 10 px or 1 ppt
 
-        bindsym Ctrl+h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 10
-        bindsym Ctrl+k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 10
-        bindsym Ctrl+j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 10
-        bindsym Ctrl+l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 10
+        bindsym Ctrl+h exec --no-startup-id /$HOME/bin/i3/resize_window.sh left 100 px or 10 ppt
+        bindsym Ctrl+k exec --no-startup-id /$HOME/bin/i3/resize_window.sh up 100 px or 10 ppt
+        bindsym Ctrl+j exec --no-startup-id /$HOME/bin/i3/resize_window.sh down 100 px or 10 ppt
+        bindsym Ctrl+l exec --no-startup-id /$HOME/bin/i3/resize_window.sh right 100 px or 10 ppt
 
         # change focus
         bindsym $mod+h focus left
@@ -160,6 +160,31 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+
+        bindsym equal move position center
+
+        bindsym $mod+i mode "move"
+}
+
+#move floating window
+mode "move" {
+        bindsym h move left 1 ppt
+        bindsym j move down 1 ppt
+        bindsym k move up 1 ppt
+        bindsym l move right 1 ppt
+
+        bindsym Ctrl+h move left 10 ppt
+        bindsym Ctrl+j move down 10 ppt
+        bindsym Ctrl+k move up 10 ppt
+        bindsym Ctrl+l move right 10 ppt
+
+        bindsym equal move position center
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+
+        bindsym $mod+i mode "resize"
 }
 
 bindsym $mod+i mode "resize"
