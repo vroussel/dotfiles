@@ -21,8 +21,6 @@ return {
             ensure_installed = {
                 "rust_analyzer",
                 "lua_ls",
-                "perlnavigator",
-                "dockerls",
                 "neocmake",
                 "clangd",
                 "tailwindcss",
