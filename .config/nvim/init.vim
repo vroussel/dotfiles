@@ -17,7 +17,7 @@ set colorcolumn=100
 
 " folding
 set foldlevel=99
-set foldmethod=manual
+set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 " autocompletion
