@@ -1,0 +1,3 @@
+#!/bin/bash
+
+"$HOME/scripts/music_sort.py" -t /run/media/valentin/disk "$@"
