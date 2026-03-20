@@ -185,3 +185,5 @@ bindsym $mod+Shift+equal move scratchpad
 
 bindsym $mod+g exec $HOME/.i3/vim_scratch.sh
 for_window [class=Xfce4-terminal title="^__vim_scratch"] floating enable
+
+exec --no-startup-id $HOME/.i3/xmodmap_if_typematrix.sh
