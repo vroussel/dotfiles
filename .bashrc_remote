@@ -124,7 +124,8 @@ function sudo()
 
 function yank()
 {
-    base64 -w 0 | xargs printf $'\e]52;c;%s\a' > /dev/tty
+    printf $'\e]52;c;%s\a' "$(base64 -w 0)" > /dev/tty
+
 }
 export -f yank
 
