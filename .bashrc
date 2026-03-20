@@ -107,3 +107,15 @@ export GCC_COLORS='error=01;31:warning=01;33:note=01;34:caret=05;32:locus=0;32:q
 
 alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
 alias todo=todo.sh
+
+#source /usr/share/doc/fzf/examples/key-bindings.bash
+export FZF_DEFAULT_COMMAND='fdfind --type f'
+
+## FZF
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/valentin/.vim/plugged/fzf/shell/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/valentin/.vim/plugged/fzf/shell/key-bindings.bash"
