@@ -14,6 +14,7 @@ return {
             sh = { "shellcheck" },
             python = { "mypy" },
             markdown = { "markdownlint" },
+            ["yaml.ansible"] = { "ansible_lint" },
         }
 
         lint.linters["markdownlint"].args = { "--stdin", "--disable", "MD013" }
