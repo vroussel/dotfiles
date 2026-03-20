@@ -8,6 +8,8 @@ return {
 				lua = { "stylua" },
 				vue = { "prettierd" },
 				cmake = { "gersemi" },
+				c = { "clang-format" },
+				cpp = { "clang-format" },
 			},
 		})
 

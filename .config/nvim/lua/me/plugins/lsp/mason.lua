@@ -23,6 +23,7 @@ return {
 				"stylua",
 				"prettierd",
 				"gersemi",
+				"clang-format",
 
 				-- linters
 				"ansible-lint", -- used by ansiblels
