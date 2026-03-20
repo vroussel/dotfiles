@@ -23,4 +23,4 @@ else
     cmd+="$bash_cmd"
 fi
 
-/bin/ssh -t "$@" "$cmd"
+exec /bin/ssh -t "$@" "$cmd"
