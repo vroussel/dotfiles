@@ -2,7 +2,7 @@
 
 WS_DIR="$HOME/ws"
 
-repo=$(cd "$WS_DIR" && find . -type d -name .git -prune -printf "%h\n" | cut -c 3- | sort | fzf --border --border-label "Switch project" --tmux --tac) || exit 0
+repo=$(cd "$WS_DIR" && find . -maxdepth 3 -type d -name .git -prune -printf "%h\n" | cut -c 3- | sort | fzf --border --border-label "Switch project" --tmux --tac) || exit 0
 session="$repo"
 path="$WS_DIR/$repo"
 
