@@ -66,6 +66,8 @@ Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'smbl64/vim-black-macchiato'
 Plug 'tpope/vim-abolish'
+Plug 'kana/vim-textobj-user'
+Plug 'Julian/vim-textobj-variable-segment'
 
 
 Plug 'neovim/nvim-lspconfig'
