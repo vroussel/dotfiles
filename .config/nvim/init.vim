@@ -68,23 +68,26 @@ Plug 'smbl64/vim-black-macchiato'
 Plug 'tpope/vim-abolish'
 Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
 
 
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
 Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'rafamadriz/friendly-snippets'
+
 
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'kosayoda/nvim-lightbulb'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'nvim-treesitter/playground'
+Plug 'onsails/lspkind-nvim'
 
 Plug 'dracula/vim'
 call plug#end()
@@ -282,55 +285,75 @@ nnoremap S i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^
 lua << EOF
 
 -- Setup nvim-cmp.
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 local cmp = require'cmp'
 local luasnip = require("luasnip")
+local lspkind = require('lspkind')
 
 cmp.setup({
-    completion = {
-        autocomplete = false
-    },
     snippet = {
-      -- REQUIRED - you must specify a snippet engine
       expand = function(args)
-         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+         require('luasnip').lsp_expand(args.body)
       end,
     },
     mapping = {
       ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-y>'] = cmp.mapping.confirm {
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+      },
       ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
       }),
-      ['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ["<Tab>"] = cmp.mapping(function(fallback)
+      ["<C-j>"] = cmp.mapping(function()
          if luasnip.expand_or_jumpable() then
            luasnip.expand_or_jump()
-         else
-           fallback()
          end
        end, { "i", "s" }),
-      ["<S-Tab>"] = cmp.mapping(function(fallback)
+      ["<C-k>"] = cmp.mapping(function()
         if luasnip.jumpable(-1) then
           luasnip.jump(-1)
-         else
-           fallback()
         end
-      end, { "i", "s" })
+      end, { "i", "s" }),
+      ["<C-l>"] = cmp.mapping(function()
+        if luasnip.choice_active() then
+          luasnip.change_choice(1)
+        end
+      end, { "i", "s" }),
+      ['<C-s>'] = cmp.mapping.complete({
+        config = {
+          sources = {
+            { name = 'luasnip' }
+          }
+        }
+      })
     },
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-       { name = 'luasnip' }, -- For luasnip users.
+      { name = 'nvim_lsp', keyword_length = 3 },
+      { name = 'nvim_lua', keyword_length = 3 },
+      { name = 'luasnip', keyword_length = 3 },
+      { name = 'path' },
     }, {
-      { name = 'buffer' },
-    })
+      { name = 'buffer', keyword_length = 5 },
+    }),
+    experimental = {
+        ghost_text = true,
+    },
+    formatting = {
+      format = lspkind.cmp_format({
+        maxwidth = 50,
+        with_text = true,
+        menu = {
+            buffer = "[buf]",
+            nvim_lsp = "[LSP]",
+            nvim_lua = "[api]",
+            path = "[path]",
+            luasnip = "[snip]",
+        },
+      })
+    }
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -349,11 +372,17 @@ sources = cmp.config.sources({
 })
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+luasnip.config.set_config {
+    history = true,
+    updateevents = "TextChanged,TextChangedI",
+    region_check_events = "InsertEnter",
+	delete_check_events = "TextChanged,InsertLeave",
+}
+
 require("luasnip/loaders/from_vscode").load()
 
 
-
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 local nvim_lsp = require('lspconfig')
 
 -- Use an on_attach function to only map the following keys 
@@ -366,20 +395,21 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', '<leader>gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', '<leader>h', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', '<leader>sh', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<leader>gtd', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<leader>sig', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   buf_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<leader>ld', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '[e', '<cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit = "Error"})<CR>', opts)
-  buf_set_keymap('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next({severity_limit = "Error"})<CR>', opts)
-  buf_set_keymap('n', '<leader>lld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<leader>lle', '<cmd>lua vim.lsp.diagnostic.set_loclist({severity_limit= "Error"})<CR>', opts)
+  buf_set_keymap('n', '<leader>ref', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<leader>dia', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity_limit = "Error"})<CR>', opts)
+  buf_set_keymap('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity_limit = "Error"})<CR>', opts)
+  buf_set_keymap('n', '<leader>lld', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<leader>lle', '<cmd>lua vim.diagnostic.set_loclist({severity_limit= "Error"})<CR>', opts)
   buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   if vim.inspect(client.name) ~= "\"pylsp\"" then
       buf_set_keymap("x", "<leader>fo", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
@@ -432,6 +462,7 @@ call SmartRelativeNumber(1)
 " telescope?
 " configure formatters (clang, python, etc)
 " snippets
+" TJ videos
 
 "lua << EOF
 "vim.lsp.set_log_level("debug")
