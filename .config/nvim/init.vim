@@ -13,7 +13,7 @@ set splitright
 set splitbelow
 set title
 set timeoutlen=300
-set updatetime=500
+set updatetime=50
 set hidden
 set colorcolumn=100
 set signcolumn=yes
@@ -106,6 +106,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'Julian/vim-textobj-variable-segment'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'yssl/QFEnter'
+Plug 'antoinemadec/FixCursorHold.nvim'
 "Plug 'nvim-treesitter/playground'
 call plug#end()
 "===================
