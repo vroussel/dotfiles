@@ -1,67 +1,67 @@
 -- quickfix
 vim.keymap.set("n", "[q", function()
-	vim.cmd("cprev")
+	pcall(vim.cmd["cprev"])
 end)
 
 vim.keymap.set("n", "[Q", function()
-	vim.cmd("cfirst")
+	pcall(vim.cmd["cfirst"])
 end)
 
 vim.keymap.set("n", "]q", function()
-	vim.cmd("cnext")
+	pcall(vim.cmd["cnext"])
 end)
 
 vim.keymap.set("n", "]Q", function()
-	vim.cmd("clast")
+	pcall(vim.cmd["clast"])
 end)
 
 -- buffers
 vim.keymap.set("n", "[b", function()
-	vim.cmd("bprev")
+	pcall(vim.cmd["bprev"])
 end)
 
 vim.keymap.set("n", "[B", function()
-	vim.cmd("bfirst")
+	pcall(vim.cmd["bfirst"])
 end)
 
 vim.keymap.set("n", "]b", function()
-	vim.cmd("bnext")
+	pcall(vim.cmd["bnext"])
 end)
 
 vim.keymap.set("n", "]B", function()
-	vim.cmd("blast")
+	pcall(vim.cmd["blast"])
 end)
 
 -- arguments
 vim.keymap.set("n", "[a", function()
-	vim.cmd("prev")
+	pcall(vim.cmd["prev"])
 end)
 
 vim.keymap.set("n", "[A", function()
-	vim.cmd("first")
+	pcall(vim.cmd["first"])
 end)
 
 vim.keymap.set("n", "]a", function()
-	vim.cmd("next")
+	pcall(vim.cmd["next"])
 end)
 
 vim.keymap.set("n", "]A", function()
-	vim.cmd("last")
+	pcall(vim.cmd["last"])
 end)
 
 -- location list
 vim.keymap.set("n", "[l", function()
-	vim.cmd("lprev")
+	pcall(vim.cmd["lprev"])
 end)
 
 vim.keymap.set("n", "[L", function()
-	vim.cmd("lfirst")
+	pcall(vim.cmd["lfirst"])
 end)
 
 vim.keymap.set("n", "]l", function()
-	vim.cmd("lnext")
+	pcall(vim.cmd["lnext"])
 end)
 
 vim.keymap.set("n", "]L", function()
-	vim.cmd("llast")
+	pcall(vim.cmd["llast"])
 end)
