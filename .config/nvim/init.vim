@@ -1,6 +1,8 @@
 "===== Settings =====
 " Misc
-syntax enable
+if !exists('g:syntax_on') "Avoid weird brackets in nerdtree when resourcing conf
+	syntax enable
+endif
 set cursorline
 set scrolloff=5
 set sidescrolloff=5
