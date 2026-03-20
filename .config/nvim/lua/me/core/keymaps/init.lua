@@ -5,6 +5,7 @@ require("me.core.keymaps.diagnostics")
 require("me.core.keymaps.dotfiles")
 require("me.core.keymaps.unimpaired")
 require("me.core.keymaps.window")
+require("me.core.keymaps.lsp")
 
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
