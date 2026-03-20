@@ -2,6 +2,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
 	lazy = true,
+	enabled = false,
 	config = function()
 		local treesitter = require("nvim-treesitter.configs")
 
