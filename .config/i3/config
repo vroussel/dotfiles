@@ -179,5 +179,9 @@ bindsym $mod+u exec i3-input -F 'unmark %s' -l 1 -P 'Unmark: '
 bindsym $mod+minus [title="^scratch"] scratchpad show
 exec --no-startup-id i3-sensible-terminal -T scratch
 for_window [title="^scratch"] move scratchpad
+
 bindsym $mod+equal [title="^(?!scratch).*$"] scratchpad show
 bindsym $mod+Shift+equal move scratchpad
+
+bindsym $mod+g exec $HOME/.i3/vim_scratch.sh
+for_window [class=Xfce4-terminal title="^__vim_scratch"] floating enable
