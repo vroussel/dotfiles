@@ -46,7 +46,7 @@ return {
                 "ansible-lint", -- used by ansiblels
                 "shellcheck",
                 "mypy",
-                "markdownlint",
+                "rumdl",
                 "ansible-lint",
             },
         })
