@@ -23,7 +23,7 @@ block = "net"
 format = " $icon {$signal_strength $ssid $frequency|Wired connection} via $device "
 [[block.click]]
 button = "left"
-cmd = "iwgtk"
+cmd = "$TERMINAL -T impala -e impala"
 
 [[block]]
 block = "disk_space"
@@ -78,7 +78,7 @@ format = " $icon $name{ $percentage|} "
 "71..100" = "good"
 [[block.click]]
 button = "left"
-cmd = "blueman-manager"
+cmd = "$TERMINAL -T bluetui -e bluetui"
 
 [[block]]
 block = "time"
