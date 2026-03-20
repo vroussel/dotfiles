@@ -305,6 +305,7 @@ function! StatuslineGit()
 endfunction
 
 lua vim.o.statusline='%#PmenuSel#%{StatuslineGit()}%#StatusLine# %f %m%r%h%w%=%y[%{&fileencoding?&fileencoding:&encoding}]    [%L,%3.p%%] %5.l:%-5.v'
+set colorcolumn=100
 
 " folding
 " check help for all plugins
