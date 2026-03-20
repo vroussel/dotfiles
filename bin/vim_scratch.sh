@@ -16,5 +16,5 @@ elif [ "$1" = "arg" ]; then
     echo -n "$2" > ${tmp_file}
 fi
 
-alacritty.sh -o ipc_socket=false -T "__vim_scratch" -e nvim -c 'set nofixeol | startinsert' ${tmp_file}
+alacritty -o ipc_socket=false -T "__vim_scratch" -e nvim -c 'set nofixeol | startinsert' ${tmp_file}
 xclip -selection clipboard < $tmp_file
