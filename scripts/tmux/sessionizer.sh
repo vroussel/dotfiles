@@ -54,6 +54,7 @@ conf() {
     declare -A confs=(
         ["nvim"]="$CONF_DIR/nvim"
         ["i3"]="$CONF_DIR/i3/config"
+        ["i3status-rust"]="$CONF_DIR/i3status-rust/config.toml"
         ["tmux"]="$CONF_DIR/tmux/tmux.conf"
         ["alacritty"]="$CONF_DIR/alacritty/alacritty.toml"
         ["bashrc"]="$HOME/.bashrc"
