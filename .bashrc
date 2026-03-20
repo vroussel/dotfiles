@@ -133,9 +133,14 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 
 # Key bindings
 # ------------
-source "/usr/share/fzf/key-bindings.bash"
-source "/usr/share/bash-completion/completions/todo.sh"
-complete -F _todo t
+if [ -f "/usr/share/fzf/key-bindings.bash" ]; then
+    source "/usr/share/fzf/key-bindings.bash"
+fi
+if [ -f "/usr/share/bash-completion/completions/todo.sh" ]; then
+    source "/usr/share/bash-completion/completions/todo.sh"
+    complete -F _todo t
+fi
+
 if [ -f "$HOME/.aliases" ]; then
     source "$HOME/.aliases"
 fi
