@@ -1,0 +1,3 @@
+alias config='/usr/bin/git --git-dir=$HOME/dotfiles/.git/ --work-tree=$HOME'
+alias t=todo.sh
+alias ll='ls -l'
