@@ -433,6 +433,7 @@ local on_attach = function(client, bufnr)
       extra_trigger_chars = {"(", ","},
       floating_window = false,
       toggle_key = '<C-h>',
+      hint_prefix = "ﮧ ",
       hi_parameter = 'IncSearch'
   })
 
