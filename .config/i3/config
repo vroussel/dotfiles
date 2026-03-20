@@ -210,6 +210,6 @@ exec --no-startup-id zeal
 for_window [title="^.*Zeal$"] move scratchpad
 
 bindsym $mod+t [title="^todolist$"] scratchpad show
-exec --no-startup-id i3-sensible-terminal -T todolist -x bash -c 'todo-txt ls; exec bash'
+exec --no-startup-id i3-sensible-terminal -T todolist -x bash -c 'todo.sh ls; exec bash'
 for_window [title="^todolist$"] move scratchpad
 for_window [title="^todolist$"] resize set 50 ppt 50 ppt
