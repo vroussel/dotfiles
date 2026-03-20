@@ -7,6 +7,7 @@ require("me.core.keymaps.unimpaired")
 require("me.core.keymaps.window")
 require("me.core.keymaps.lsp")
 
+vim.keymap.set("n", "<leader>w", ":w<CR>")
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>M", "<cmd>Mason<cr>", { desc = "Open Mason" })
