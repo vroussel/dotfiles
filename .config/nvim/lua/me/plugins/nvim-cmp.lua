@@ -42,10 +42,12 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "lazydev" },
+			}, {
 				{ name = "nvim_lsp" },
 				{ name = "snippy" },
-				{ name = "buffer" },
 				{ name = "path" },
+			}, {
+				{ name = "buffer" },
 			}),
 			formatting = {
 				format = lspkind.cmp_format({
