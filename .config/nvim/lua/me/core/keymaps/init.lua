@@ -1,9 +1,9 @@
+vim.keymap.set("n", "<Space>", "<Nop>")
+vim.g.mapleader = " "
+
 require("me.core.keymaps.diagnostics")
 require("me.core.keymaps.unimpaired")
 require("me.core.keymaps.window")
-
-vim.keymap.set("n", "<Space>", "<Nop>")
-vim.g.mapleader = " "
 
 vim.keymap.set("i", "jk", "<esc>")
 vim.keymap.set("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Open Lazy" })
