@@ -36,7 +36,7 @@ case "$menu_type" in
         ;;
 esac
 
-scripts=$(find "$scripts_dir" -mindepth 1 -executable)
+scripts=$(find "$scripts_dir" -mindepth 1 -executable -type f)
 declare -A map
 for s in $scripts; do
     pretty_name="$(basename "${s%.*}" | tr '\-_' ' ')"
