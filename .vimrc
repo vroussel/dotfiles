@@ -60,6 +60,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'smbl64/vim-black-macchiato'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
@@ -180,9 +181,6 @@ vnoremap <leader>xml :!xmlstarlet fo<CR>
 nnoremap <leader>jq :.!jq .<CR>
 vnoremap <leader>jq :!jq .<CR>
 
-" clear search highlighting with redraw
-noremap <C-L> :nohls<CR><C-L>
-
 " Open / close tabs
 nnoremap <leader>tn :tabnew<CR>
 nnoremap <leader>tc :tabclose<CR>
@@ -285,7 +283,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>lld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>lle', '<cmd>lua vim.lsp.diagnostic.set_loclist({severity_limit= "Error"})<CR>', opts)
   buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-  buf_set_keymap("x", "<leader>f", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  if vim.inspect(client.name) ~= "\"pylsp\"" then
+      buf_set_keymap("x", "<leader>f", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+  end
 
   require'lsp_signature'.on_attach({
       extra_trigger_chars = {"(", ","}
@@ -311,7 +311,9 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 augroup format_on_save
     autocmd!
     autocmd BufWritePre *.py,*.rs,CMakeLists.txt lua vim.lsp.buf.formatting_sync(nil, 1000)
+    autocmd FileType python xmap <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
 augroup END
+
 
 augroup lightbulb
     autocmd!
