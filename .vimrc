@@ -100,7 +100,7 @@ nnoremap <C-\> :TagbarToggle<CR>
 nnoremap <F11> :UndotreeToggle<CR>
 
 " Trailing spaces
-nnoremap <leader>t :%s/\s\+$//g<CR>
+nnoremap <leader>tr :%s/\s\+$//g<CR>
 highlight ExtraWhitespace ctermbg=red guibg=red
 au BufNewFile,BufRead * :match ExtraWhitespace /\s\+$/
 
@@ -281,9 +281,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']e', '<cmd>lua vim.lsp.diagnostic.goto_next({severity_limit = "Error"})<CR>', opts)
   buf_set_keymap('n', '<leader>lld', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap('n', '<leader>lle', '<cmd>lua vim.lsp.diagnostic.set_loclist({severity_limit= "Error"})<CR>', opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<leader>fo", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
   if vim.inspect(client.name) ~= "\"pylsp\"" then
-      buf_set_keymap("x", "<leader>f", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+      buf_set_keymap("x", "<leader>fo", "<esc><cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
 
   require'lsp_signature'.on_attach({
@@ -310,7 +310,10 @@ inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
 augroup format_on_save
     autocmd!
     autocmd BufWritePre *.py,*.rs,CMakeLists.txt lua vim.lsp.buf.formatting_sync(nil, 1000)
-    autocmd FileType python xmap <buffer> <Leader>f <plug>(BlackMacchiatoSelection)
+augroup END
+
+augroup python formatting
+    autocmd FileType python xmap <buffer> <Leader>fo <plug>(BlackMacchiatoSelection)
 augroup END
 
 
