@@ -11,6 +11,7 @@ import sys
 import subprocess
 from dataclasses import dataclass
 from typing import Optional
+import re
 
 try:
     import taglib
@@ -86,7 +87,7 @@ def partition_for_path(path: str) -> Optional[Partition]:
 
 
 def sanitize(str):
-    t = str.maketrans({"/": "_", ":": ".", "?": "", '"': "_", "*": "_"})
+    t = str.maketrans({"/": "_", ":": ".", "?": "", '"': "_", "*": "_", "Ξ": "xi"})
     return str.translate(t)
 
 
@@ -149,24 +150,34 @@ if __name__ == "__main__":
     for f in source_files:
         with taglib.File(f) as song:
             try:
-                grouping = song.tags.get("WORK")
-                if grouping:
-                    if len(grouping) > 1:
-                        raise RuntimeError(f"More than one grouping for file {f}")
-                    else:
-                        grouping = grouping[0]
+                grouping = None
+                for x in ["GROUPING", "WORK"]:
+                    try:
+                        grouping = song.tags.get(x)[0]
+                        break
+                    except TypeError:
+                        pass
 
                 artist = sanitize(song.tags["ALBUMARTIST"][0])
                 year = song.tags["ORIGINALYEAR"][0]
                 album = sanitize(song.tags["ALBUM"][0])
-                track, track_count = song.tags["TRACKNUMBER"][0].split("/")
+                try:
+                    track, track_count = song.tags["TRACKNUMBER"][0].split("/")
+                except ValueError:
+                    track = song.tags["TRACKNUMBER"][0]
+                    track_count = "99"  # dirty hack
                 title = sanitize(song.tags["TITLE"][0])
                 ext = f.suffix
-                disc = song.tags.get("DISCNUMBER")
+                disc = None
+                try:
+                    disc = re.findall(r"\d+", song.tags.get("DISCNUMBER")[0])[0]
+                except Exception:
+                    pass
                 if grouping == "Soundtracks":
                     path = Path(
                         "Soundtracks",
                         f"{album} ({artist} - {year})",
+                        f"Disc {disc}" if disc else "",
                         f"{track.zfill(len(track_count))} - {title}{ext}",
                     )
                 elif grouping is None or grouping == "Albums":
