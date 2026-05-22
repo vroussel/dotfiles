@@ -3,6 +3,7 @@ export TERMINAL="alacritty"
 export EDITOR=/usr/bin/nvim
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export PAGER=/sbin/less
+export VCPKG_ROOT="$HOME/.local/share/vcpkg"
 
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
