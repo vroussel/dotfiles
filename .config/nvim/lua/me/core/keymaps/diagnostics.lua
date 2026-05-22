@@ -40,12 +40,27 @@ local only_errors = false
 local virtual_lines = false
 
 local diag_option_value = function(state)
+    local conf = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = "󰠠 ",
+            [vim.diagnostic.severity.INFO] = " ",
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+        },
+        numhl = {
+            [vim.diagnostic.severity.WARN] = "WarningMsg",
+        },
+    }
+
     if not state then
         return false
     elseif only_errors then
-        return { severity = vim.diagnostic.severity.ERROR }
+        conf.insert("severity", vim.diagnostic.severity.ERROR)
     else
-        return true
+        return conf
     end
 end
 
