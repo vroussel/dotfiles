@@ -31,6 +31,7 @@ workspace() {
 
     path="$WS_DIR/$repo"
     session="$path"
+    session="${session//./_}"
 
     if ! tmux has-session -t "$session"; then
         temp_dir=$(mktemp -d /tmp/nvim.XXXXX)
@@ -72,6 +73,7 @@ conf() {
         path=$(dirname "$target")
     fi
     session="$pick"
+    session="${session//./_}"
 
     if ! tmux has-session -t "$session"; then
         temp_dir=$(mktemp -d /tmp/nvim.XXXXX)
