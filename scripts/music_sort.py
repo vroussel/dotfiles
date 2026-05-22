@@ -87,7 +87,20 @@ def partition_for_path(path: str) -> Optional[Partition]:
 
 
 def sanitize(str):
-    t = str.maketrans({"/": "_", ":": ".", "?": "", '"': "_", "*": "_", "Ξ": "xi"})
+    t = str.maketrans(
+        {
+            "/": "_",
+            ":": ".",
+            "?": "",
+            '"': "_",
+            "*": "_",
+            "Ξ": "xi",
+            "$": "S",
+            "|": "I",
+            "<": "_",
+            ">": "_",
+        }
+    )
     return str.translate(t)
 
 
@@ -106,6 +119,7 @@ if __name__ == "__main__":
     parser.add_argument("--tmp-root", type=dir_type, default=Path.home().as_posix())
     parser.add_argument("--device", type=dir_type, default=Path.home().as_posix())
     parser.add_argument("--overwrite", action="store_true")
+    parser.add_argument("--with-filters", action="store_true")
 
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--target-dir", "-t", type=dir_type)
@@ -126,11 +140,16 @@ if __name__ == "__main__":
 
     logging.basicConfig(level=logging.DEBUG)
 
-    source_files = [
-        p.resolve()
-        for p in Path(args.source_dir).glob("**/*")
-        if p.suffix in {".mp3", ".flac"}
-    ]
+    source_files = []
+    for root, dirs, files in os.walk(args.source_dir, topdown=True):
+        if args.with_filters and Path(root, ".filter").exists():
+            dirs.clear()
+            logging.info(f"Filtering {Path(root)}")
+            continue
+        for f in files:
+            p = Path(root, f)
+            if p.suffix in {".mp3", ".flac", ".m4a"}:
+                source_files.append(p.resolve())
 
     if source_dir == target_dir:
         tmp_dir = None
@@ -148,6 +167,7 @@ if __name__ == "__main__":
     progress = tqdm(total=len(source_files), unit="files")
 
     for f in source_files:
+        # logging.debug(f)
         with taglib.File(f) as song:
             try:
                 grouping = None
@@ -158,35 +178,43 @@ if __name__ == "__main__":
                     except TypeError:
                         pass
 
-                artist = sanitize(song.tags["ALBUMARTIST"][0])
-                year = song.tags["ORIGINALYEAR"][0]
-                album = sanitize(song.tags["ALBUM"][0])
-                try:
-                    track, track_count = song.tags["TRACKNUMBER"][0].split("/")
-                except ValueError:
-                    track = song.tags["TRACKNUMBER"][0]
-                    track_count = "99"  # dirty hack
+                artist = sanitize(song.tags["ARTIST"][0])
                 title = sanitize(song.tags["TITLE"][0])
                 ext = f.suffix
-                disc = None
-                try:
-                    disc = re.findall(r"\d+", song.tags.get("DISCNUMBER")[0])[0]
-                except Exception:
-                    pass
+                if grouping != "Mixes":
+                    album_artist = sanitize(song.tags["ALBUMARTIST"][0])
+                    year = song.tags["ORIGINALYEAR"][0]
+                    album = sanitize(song.tags["ALBUM"][0])
+                    try:
+                        track, track_count = song.tags["TRACKNUMBER"][0].split("/")
+                    except ValueError:
+                        track = song.tags["TRACKNUMBER"][0]
+                        track_count = "99"  # dirty hack
+                    disc = None
+                    try:
+                        disc = re.findall(r"\d+", song.tags.get("DISCNUMBER")[0])[0]
+                    except Exception:
+                        pass
                 if grouping == "Soundtracks":
                     path = Path(
                         "Soundtracks",
-                        f"{album} ({artist} - {year})",
+                        f"{album} ({album_artist} - {year})",
                         f"Disc {disc}" if disc else "",
                         f"{track.zfill(len(track_count))} - {title}{ext}",
                     )
                 elif grouping is None or grouping == "Albums":
                     path = Path(
                         "Albums",
-                        artist,
+                        album_artist,
                         f"{year} - {album}",
                         f"Disc {disc}" if disc else "",
                         f"{track.zfill(len(track_count))} - {title}{ext}",
+                    )
+                elif grouping == "Mixes":
+                    path = Path(
+                        "Mixes",
+                        f"{artist}",
+                        f"{title}{ext}",
                     )
                 else:
                     raise RuntimeError(f"Unknown grouping {grouping} for file {f}")
