@@ -9,8 +9,8 @@ return {
     config = function()
         require("oil").setup({
             keymaps = {
-                ["<C-v>"] = { "actions.select", opts = { close = true, vertical = true } },
-                ["<C-x>"] = { "actions.select", opts = { close = true, horizontal = true } },
+                ["<C-v>"] = { "actions.select", opts = { close = true, vertical = true }, mode = "n" },
+                ["<C-x>"] = { "actions.select", opts = { close = true, horizontal = true }, mode = "n" },
             },
         })
         vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
