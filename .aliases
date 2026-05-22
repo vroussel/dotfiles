@@ -2,3 +2,4 @@ alias config='/usr/bin/git --git-dir=$HOME/ws/dotfiles/.git/ --work-tree=$HOME'
 alias lazyconfig='lazygit --git-dir=$HOME/ws/dotfiles/.git/ --work-tree=$HOME'
 alias t=todo.sh
 alias ll='ls -l'
+alias ytdl_audio="yt-dlp -f bestaudio[ext=m4a] -x --add-metadata --embed-thumbnail --no-playlist -o $HOME/Music/to_sort/%\(title\)s.%\(ext\)s"
