@@ -63,6 +63,7 @@ conf() {
         ["home scripts"]="$HOME/scripts/"
         ["remote bashrc"]="$HOME/.bashrc_remote"
         ["remote vimrc"]="$HOME/.vimrc_remote"
+        ["todo.txt"]="$HOME/.todo"
     )
 
     pick=$(printf "%s\n" "${!confs[@]}" | menu "Pick conf") || exit 0
