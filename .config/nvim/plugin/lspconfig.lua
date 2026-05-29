@@ -53,9 +53,6 @@ vim.lsp.config("rust_analyzer", {
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
-            runtime = {
-                version = "LuaJIT",
-            },
             completion = {
                 callSnippet = "Replace",
             },
