@@ -65,6 +65,7 @@ conf() {
         ["remote vimrc"]="$HOME/.vimrc_remote"
         ["todo.txt"]="$HOME/.todo"
         ["rofi"]="$CONF_DIR/rofi/config.rasi"
+        ["dunst"]="$CONF_DIR/dunst/dunstrc"
     )
 
     pick=$(printf "%s\n" "${!confs[@]}" | menu "Pick conf") || exit 0
