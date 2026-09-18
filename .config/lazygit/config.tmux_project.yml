@@ -4,9 +4,9 @@ os:
   editAtLineAndWait: 'nvim +{{line}} {{filename}}'
 promptToReturnFromSubprocess: false
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --diff-so-fancy --paging=never
+      command: delta --diff-so-fancy --paging=never
   merging:
     args: "--no-ff"
 customCommands:
