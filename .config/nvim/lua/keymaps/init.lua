@@ -41,10 +41,3 @@ vim.keymap.set("n", "<leader>to", "<cmd>tabonly<cr>")
 
 -- Opposite of J, split line
 vim.keymap.set("n", "S", [[i<CR><ESC>k:sil! keepp s/\v +$//<CR>:set hls<CR>j^]])
-
--- Quick restart
-vim.keymap.set("n", "<leader>R", function()
-    local session = vim.fn.stdpath("state") .. "/restart_session.vim"
-    vim.cmd("mksession! " .. vim.fn.fnameescape(session))
-    vim.cmd("restart source " .. vim.fn.fnameescape(session))
-end, { desc = "Restart Neovim" })
