@@ -40,6 +40,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+vim.lsp.enable("rust_analyser")
 vim.lsp.config("rust_analyzer", {
     settings = {
         ["rust-analyzer"] = {
@@ -50,6 +51,7 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
+vim.lsp.enable("lua-language-server")
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
@@ -63,10 +65,12 @@ vim.lsp.config("lua_ls", {
     },
 })
 
+vim.lsp.enable("clangd")
 vim.lsp.config("clangd", {
     cmd = { "clangd", "--background-index", "--clang-tidy" },
 })
 
+vim.lsp.enable("pylsp")
 vim.lsp.config("pylsp", {
     settings = {
         pylsp = {
@@ -82,21 +86,7 @@ vim.lsp.config("pylsp", {
     },
 })
 
+vim.lsp.enable("ruff")
 vim.lsp.config("ruff", {})
 
-vim.lsp.config("neocmake", {
-    init_options = {
-        format = {
-            enable = false,
-        },
-        lint = {
-            enable = false,
-        },
-    },
-})
-
-vim.lsp.config("html", {
-    filetypes = { "html", "htmldjango" },
-})
-
-vim.lsp.config("tailwindcss", {})
+vim.lsp.enable("rumdl")

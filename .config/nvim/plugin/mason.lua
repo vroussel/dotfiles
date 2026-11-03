@@ -1,38 +1,38 @@
 vim.pack.add({
-    "https://github.com/williamboman/mason-lspconfig.nvim",
-    "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
     "https://github.com/mason-org/mason.nvim",
 })
 
 local mason = require("mason")
+local mason_registry = require("mason-registry")
 mason.setup({})
 
-local mason_lspconfig = require("mason-lspconfig")
-mason_lspconfig.setup({
-    ensure_installed = {
-        "rust_analyzer",
-        "lua_ls",
-        "neocmake",
-        "clangd",
-        "pylsp",
-        "ruff",
-    },
-})
+local wanted = {
+    -- LSP
+    "rust-analyzer",
+    "lua-language-server",
+    "neocmakelsp",
+    "rumdl",
 
-local mason_tool_installer = require("mason-tool-installer")
-mason_tool_installer.setup({
-    ensure_installed = {
-        -- formatters
-        "stylua",
-        "yamlfix",
-        "gersemi",
-        "clang-format",
+    -- Formatters
+    "stylua",
+    "yamlfix",
+    "gersemi",
+    "clang-format",
 
-        -- linters
-        "shellcheck",
-        "rumdl",
-        "ansible-lint",
-    },
-})
+    -- Linters
+    "shellcheck",
+    "ansible-lint",
+}
+
+local installed = {}
+for _, pkg in ipairs(mason_registry.get_installed_package_names()) do
+    installed[pkg] = true
+end
+
+for _, pkg in ipairs(wanted) do
+    if not installed[pkg] then
+        vim.cmd("MasonInstall " .. pkg)
+    end
+end
 
 vim.keymap.set("n", "<leader><leader>m", "<cmd>Mason<cr>", { desc = "Open Mason" })
