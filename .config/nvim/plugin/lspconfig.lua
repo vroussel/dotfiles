@@ -61,6 +61,10 @@ vim.lsp.config("lua_ls", {
             hint = {
                 enable = true,
             },
+            workspace = {
+                userThirdParty = { os.getenv("HOME") .. "/.local/share/luals/addons" },
+                checkThirdParty = "ApplyInMemory",
+            },
         },
     },
 })
