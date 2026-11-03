@@ -30,7 +30,7 @@ workspace() {
     ) || exit 0
 
     path="$WS_DIR/$repo"
-    session="$path"
+    session="$repo"
     session="${session//./_}"
 
     if ! tmux has-session -t "$session"; then
@@ -98,10 +98,58 @@ conf() {
 
 }
 
+session() {
+    unnamed="tmux list-sessions -F '#S' | grep '^[0-9]'"
+    named="tmux list-sessions -F '#S' | grep -v '^[0-9]'"
+
+    picked=$(eval "$named" | menu "Pick your session" --tmux 80% \
+    --bind "ctrl-l:reload($unnamed)" \
+    --bind "ctrl-h:reload($named)" \
+    --preview '
+        tmux list-windows -t {} -F "#{window_index}: #{window_name}#{?window_active, *,}"
+        echo
+        tmux capture-pane -ep -t {}:
+    ' \
+    ) || exit 0
+    tmux switch-client -t "$picked"
+}
+
+cleanup() {
+    cmd="tmux list-sessions -F '#S'"
+
+    picked=$(eval "$cmd" | menu "Pick your session" --tmux 80% \
+    --multi \
+    --bind "ctrl-l:reload($unnamed)" \
+    --bind "ctrl-h:reload($named)" \
+    --preview '
+        tmux list-windows -t {} -F "#{window_index}: #{window_name}#{?window_active, *,}"
+        echo
+        tmux capture-pane -ep -t {}:
+    ' \
+    ) || exit 0
+
+    confirm=$(printf 'Yes\nNo\n' | menu \
+        --prompt="Kill those sessions ? " \
+        --header="$picked" \
+        --header-border=double \
+        --header-first
+    ) || exit 0
+
+    if [ "$confirm" != "Yes" ]; then
+        exit 0
+    fi
+
+    echo "$picked" | while read -r session; do
+        tmux kill-session -t "$session"
+    done
+}
+
 if [ $# -eq 0 ]; then
     type=$(menu 'Choose kind' << "    EOF" | trim
         workspace
         conf
+        session
+        cleanup
     EOF
     ) || exit 0
 else
@@ -112,5 +160,7 @@ fi
 case "$type" in
     workspace) workspace ;;
     conf) conf ;;
+    session) session ;;
+    cleanup) cleanup ;;
     *) exit 0 ;;
 esac
