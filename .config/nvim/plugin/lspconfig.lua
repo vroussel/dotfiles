@@ -40,7 +40,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
-vim.lsp.enable("rust_analyser")
+vim.lsp.enable("rust_analyzer")
 vim.lsp.config("rust_analyzer", {
     settings = {
         ["rust-analyzer"] = {
@@ -51,7 +51,7 @@ vim.lsp.config("rust_analyzer", {
     },
 })
 
-vim.lsp.enable("lua-language-server")
+vim.lsp.enable("lua_ls")
 vim.lsp.config("lua_ls", {
     settings = {
         Lua = {
