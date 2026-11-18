@@ -2,6 +2,6 @@ tags
 compile_commands.json
 .cache
 .clangd
-build/
 .mypy_cache
 .ropeproject
+*.otter.*
