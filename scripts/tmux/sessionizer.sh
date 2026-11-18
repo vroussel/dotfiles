@@ -115,12 +115,14 @@ session() {
 }
 
 cleanup() {
-    cmd="tmux list-sessions -F '#S'"
+    unnamed="tmux list-sessions -F '#S' | grep '^[0-9]'"
+    all="tmux list-sessions -F '#S'"
 
-    picked=$(eval "$cmd" | menu "Pick your session" --tmux 80% \
+    picked=$(eval "$all" | menu "Pick your session" --tmux 80% \
     --multi \
     --bind "ctrl-l:reload($unnamed)" \
-    --bind "ctrl-h:reload($named)" \
+    --bind "ctrl-h:reload($all)" \
+    --bind "ctrl-a:select-all" \
     --preview '
         tmux list-windows -t {} -F "#{window_index}: #{window_name}#{?window_active, *,}"
         echo
