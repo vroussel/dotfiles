@@ -74,21 +74,8 @@ vim.lsp.config("clangd", {
     cmd = { "clangd", "--background-index", "--clang-tidy" },
 })
 
-vim.lsp.enable("pylsp")
-vim.lsp.config("pylsp", {
-    settings = {
-        pylsp = {
-            plugins = {
-                -- Disable eveything that can be handled by ruff
-                autopep8 = { enabled = false },
-                mccabe = { enabled = false },
-                pycodestyle = { enabled = false },
-                pyflakes = { enabled = false },
-                yapf = { enabled = false },
-            },
-        },
-    },
-})
+vim.lsp.enable("ty")
+vim.lsp.config("ty", {})
 
 vim.lsp.enable("ruff")
 vim.lsp.config("ruff", {})
