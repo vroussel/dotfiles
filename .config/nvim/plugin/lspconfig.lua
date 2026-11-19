@@ -81,3 +81,9 @@ vim.lsp.enable("ruff")
 vim.lsp.config("ruff", {})
 
 vim.lsp.enable("rumdl")
+vim.lsp.enable("neocmake")
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+vim.lsp.config("neocmake", {
+    capabilities = capabilities,
+})
